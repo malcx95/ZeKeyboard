@@ -1,1 +1,5 @@
-// TODO not yet implemented
+/*
+ * The main function of the program.
+ * TODO add parameters
+ */
+void iterate();

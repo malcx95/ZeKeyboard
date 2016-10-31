@@ -1,1 +1,7 @@
-// TODO not yet implemented
+
+struct LED {
+
+    // TODO not yet implemented
+
+};
+
