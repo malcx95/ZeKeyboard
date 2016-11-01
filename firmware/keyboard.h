@@ -4,7 +4,6 @@
 #include <Arduino.h>
 #include "backlight.h"
 #include <stdint.h>
-#include "list.h"
 
 namespace Ze {
 
@@ -15,11 +14,13 @@ namespace Ze {
     const int MODIFIER_SUPER = -5;
     const int MODIFIER_FN = -6;
 
+    const uint8_t ROWS = 5;
+    const uint8_t COLS = 14; 
 
     struct Key {
 
-        Key(int code, LED* led);
-        LED* led;
+        Key(int code, led_t led);
+        led_t led;
         int code;
         bool is_modifier() const;
     
@@ -37,6 +38,15 @@ namespace Ze {
         private:
     
     };
+
+    // const Key KEYS[ROWS][COLS] = {
+    //     {},
+    //     {},
+    //     {},
+    //     {},
+    //     {},
+    //     {}
+    // };
 
 };
 
