@@ -20,8 +20,8 @@ const led_t LED_7 =           8;
 const led_t LED_8 =           9;
 const led_t LED_9 =           10;
 const led_t LED_0 =           11;
-const led_t LED_PLUS =        12;
-const led_t LED_APOSTROPHE =  13;
+const led_t LED_MINUS =       12;
+const led_t LED_EQUALS =      13;
 const led_t LED_BACKSPACE =   14;
 
 //*****************************
@@ -39,15 +39,15 @@ const led_t LED_U =           24;
 const led_t LED_I =           25;
 const led_t LED_O =           26;
 const led_t LED_P =           27;
-const led_t LED_AA =          28;
-const led_t LED_TILDE =       29;
-const led_t LED_ASTERISK =    30;
+const led_t LED_LEFT_BRACE =  28;
+const led_t LED_RIGHT_BRACE = 29;
+const led_t LED_BACKSLASH =   30;
 
 //*****************************
 // ROW 3
 //*****************************
 
-const led_t LED_CAPS_FN =     33;
+const led_t LED_FN =          33;
 const led_t LED_A =           34;
 const led_t LED_S =           35;
 const led_t LED_D =           36;
@@ -57,8 +57,8 @@ const led_t LED_H =           39;
 const led_t LED_J =           40;
 const led_t LED_K =           41;
 const led_t LED_L =           42;
-const led_t LED_OO =          43;
-const led_t LED_AE =          44;
+const led_t LED_SEMICOLON =   43;
+const led_t LED_QUOTE =       44;
 const led_t LED_ENTER =       45;
 
 //*****************************
@@ -66,7 +66,7 @@ const led_t LED_ENTER =       45;
 //*****************************
 
 const led_t LED_LEFT_SHIFT =  49;
-const led_t LED_LESS_MORE =   50;
+const led_t LED_ASTERISK =    50;
 const led_t LED_Z =           51;
 const led_t LED_X =           52;
 const led_t LED_C =           53;
@@ -76,7 +76,7 @@ const led_t LED_N =           56;
 const led_t LED_M =           57;
 const led_t LED_COMMA =       58;
 const led_t LED_PERIOD =      59;
-const led_t LED_DASH =        60;
+const led_t LED_SLASH =       60;
 const led_t LED_RIGHT_SHIFT = 61;
 
 //*****************************
@@ -84,7 +84,7 @@ const led_t LED_RIGHT_SHIFT = 61;
 //*****************************
 
 const led_t LED_CTRL =        64;
-const led_t LED_LEFT_SUPER =  65;
+const led_t LED_GUI =         65;
 const led_t LED_LEFT_ALT =    66;
 const led_t LED_SPACE_LEFT =  67;
 const led_t LED_SPACE_MAIN =  68;
