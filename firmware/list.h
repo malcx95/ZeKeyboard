@@ -24,7 +24,7 @@ class List {
 
         void remove(const X& elem);
 
-        unsigned size() const;
+        unsigned length() const;
 
         /*
          * Indexes the list. Should not be used
@@ -42,8 +42,8 @@ class List {
 
         X* current;
 
-        ListElem* start;
-        ListElem* end;
+        ListElem<X>* start;
+        ListElem<X>* end;
 
 };
 

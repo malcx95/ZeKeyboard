@@ -1,12 +1,14 @@
 #include "list.h"
 
-List::List() {
+template<typename X>
+List<X>::List() {
     start = nullptr;
     end = nullptr;
 }
 
-List::add(const X& elem) {
-    ListElem* el = new ListElem;
+template<typename X>
+void List<X>::add(const X& elem) {
+    ListElem<X>* el = new ListElem<X>();
     el->value = elem;
     el->next = nullptr;
 
@@ -19,7 +21,8 @@ List::add(const X& elem) {
     }
 }
 
-unsigned List::size() {
+template<typename X>
+unsigned List<X>::length() const {
     return size;
 }
 
