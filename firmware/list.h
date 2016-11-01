@@ -1,3 +1,5 @@
+#ifndef LIST_H
+#define LIST_H
 // Simple linked list implementation
 
 template<typename T>
@@ -47,3 +49,4 @@ class List {
 
 };
 
+#endif

@@ -1,6 +1,10 @@
 #include "keyboard.h"
-// TODO not yet implemented
 
-bool Ze::Key::is_modifier() {
+Ze::Key::Key(int code, LED* led) {
+    this->code = code;
+    this->led = led;
+}
+
+bool Ze::Key::is_modifier() const {
     return this->code < 0;
 }

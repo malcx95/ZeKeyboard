@@ -1,3 +1,5 @@
+#ifndef BACKLIGHT_H
+#define BACKLIGHT_H
 
 struct LED {
 
@@ -5,3 +7,4 @@ struct LED {
 
 };
 
+#endif

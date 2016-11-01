@@ -1,3 +1,6 @@
+#ifndef KEYBOARD_H
+#define KEYBOARD_H
+
 #include <Arduino.h>
 #include "backlight.h"
 #include <stdint.h>
@@ -5,17 +8,20 @@
 
 namespace Ze {
 
-    const int MODIFIER_SHIFT = -1;
-    const int MODIFIER_CTRL = -2;
-    const int MODIFIER_ALT = -3;
-    const int MODIFIER_SUPER = -4;
-    const int MODIFIER_FN = -5;
+    const int LESS_THAN_MORE_THAN = -1;
+    const int MODIFIER_SHIFT = -2;
+    const int MODIFIER_CTRL = -3;
+    const int MODIFIER_ALT = -4;
+    const int MODIFIER_SUPER = -5;
+    const int MODIFIER_FN = -6;
+
 
     struct Key {
 
+        Key(int code, LED* led);
         LED* led;
         int code;
-        bool is_modifier();
+        bool is_modifier() const;
     
     };
 
@@ -33,3 +39,5 @@ namespace Ze {
     };
 
 };
+
+#endif
