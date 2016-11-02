@@ -6,7 +6,7 @@
 typedef uint8_t led_t;
 
 //*********************************
-// ROW 1
+// ROW 0
 //*********************************
 
 const led_t LED_ESC =         1;
@@ -25,7 +25,7 @@ const led_t LED_EQUAL =       13;
 const led_t LED_BACKSPACE =   14;
 
 //*****************************
-// ROW 2
+// ROW 1
 //*****************************
 
 const led_t LED_TAB =         17;
@@ -44,7 +44,7 @@ const led_t LED_RIGHT_BRACE = 29;
 const led_t LED_BACKSLASH =   30;
 
 //*****************************
-// ROW 3
+// ROW 2
 //*****************************
 
 const led_t LED_FN =          33;
@@ -62,7 +62,7 @@ const led_t LED_QUOTE =       44;
 const led_t LED_ENTER =       45;
 
 //*****************************
-// ROW 4
+// ROW 3
 //*****************************
 
 const led_t LED_LEFT_SHIFT =  49;
@@ -80,11 +80,11 @@ const led_t LED_SLASH =       60;
 const led_t LED_RIGHT_SHIFT = 61;
 
 //*****************************
-// ROW 5
+// ROW 4
 //*****************************
 
 const led_t LED_CTRL =        64;
-const led_t LED_GUI =         65;
+const led_t LED_SUPER =       65;
 const led_t LED_LEFT_ALT =    66;
 const led_t LED_SPACE_LEFT =  67;
 const led_t LED_SPACE_MAIN =  68;
