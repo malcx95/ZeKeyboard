@@ -43,7 +43,7 @@ namespace Ze {
     //     {Key(KEY_ESC, LED_ESC), Key(KEY_1, LED_1), Key(KEY_2, LED_2), Key(KEY_3, LED_3), 
     //         Key(KEY_4, LED_4), Key(KEY_5, LED_5), Key(KEY_6, LED_6), Key(KEY_7, LED_7),
     //         Key(KEY_8, LED_8), Key(KEY_9, LED_9), Key(KEY_0, LED_0), Key(KEY_MINUS, LED_MINUS), 
-    //         Key(KEY_EQUAL, LED_BACKSPACE), Key(KEY_BACKSPACE, LED_BACKSPACE)},
+    //         Key(KEY_EQUAL, LED_EQUAL), Key(KEY_BACKSPACE, LED_BACKSPACE)},
     // TODO finish
     //     {},
     //     {},

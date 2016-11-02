@@ -21,7 +21,7 @@ const led_t LED_8 =           9;
 const led_t LED_9 =           10;
 const led_t LED_0 =           11;
 const led_t LED_MINUS =       12;
-const led_t LED_EQUALS =      13;
+const led_t LED_EQUAL =       13;
 const led_t LED_BACKSPACE =   14;
 
 //*****************************
