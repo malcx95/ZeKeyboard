@@ -1,28 +1,60 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
-#include <Arduino.h>
 #include "backlight.h"
 #include <stdint.h>
 
 namespace Ze {
 
-    const int LESS_THAN_MORE_THAN = -1;
-    const int KEY_SHIFT = -2;
-    const int KEY_CTRL = -3;
-    const int KEY_ALT = -4;
+    const int KEY_DUMMY = 0;
+
+    // Codes for modifiers, but aren't actual
+    // keycodes for the modifiers, but exist to
+    // make things more efficient. Do not change
+    // these.
+    const int KEY_SHIFT = -1;
+    const int KEY_CTRL = -2;
+    const int KEY_ALT = -3;
+    const int KEY_ALTGR = -4;
     const int KEY_SUPER = -5;
+
+    // Again, this keycode is not sent, but used
+    // to control behavior of other keys
     const int KEY_FN = -6;
 
     const uint8_t ROWS = 5;
     const uint8_t COLS = 14; 
+    const uint8_t NUM_MODIFIERS = 5;
 
     struct Key {
+        
+        /*
+         * Initializes dummy key
+         */
+        Key();
 
+        /*
+         * Initializes key
+         */
         Key(int code, led_t led);
+
+        /*
+         * Checks whether this key is a modifier key.
+         */
+        bool is_modifier() const;
+
+        /*
+         * Checks whether this key is a dummy key.
+         */
+        bool is_dummy() const;
+
+        /*
+         * Checks whether this key is the FN key.
+         */
+        bool is_fn() const;
+
         led_t led;
         int code;
-        bool is_modifier() const;
     
     };
 
@@ -36,14 +68,31 @@ namespace Ze {
             void update();
 
         private:
+
+            const int MODIFIER_MAP[NUM_MODIFIERS] = {
+
+                MODIFIERKEY_SHIFT,
+                MODIFIERKEY_CTRL,
+                MODIFIERKEY_LEFT_ALT,
+                MODIFIERKEY_RIGHT_ALT,
+                MODIFIERKEY_GUI
+
+            };
+
+            /*
+             * Gets the real modifier code for a modifier key.
+             * Does not translate the FN-key, and the modifier
+             * must be negative.
+             */
+            int translate_modifier(const int modifier) const;
     
     };
 
     const Key KEYS[ROWS][COLS] = {
 
-        //*****************************************************************************
+        //******************************************
         // ROW 0
-        //*****************************************************************************
+        //******************************************
         
         {
             Key(KEY_ESC, LED_ESC), 
@@ -62,9 +111,9 @@ namespace Ze {
             Key(KEY_BACKSPACE, LED_BACKSPACE)
         },
 
-        //*****************************************************************************
+        //******************************************
         // ROW 1
-        //*****************************************************************************
+        //******************************************
 
         {
             Key(KEY_TAB, LED_TAB),
@@ -83,9 +132,9 @@ namespace Ze {
             Key(KEY_BACKSLASH, LED_BACKSLASH)
         },
 
-        //*****************************************************************************
+        //******************************************
         // ROW 2
-        //*****************************************************************************
+        //******************************************
         
         {
             Key(KEY_FN, LED_FN),
@@ -99,17 +148,18 @@ namespace Ze {
             Key(KEY_K, LED_K), 
             Key(KEY_L, LED_L), 
             Key(KEY_SEMICOLON, LED_SEMICOLON), 
+            Key(), // dummy
             Key(KEY_QUOTE, LED_QUOTE),
             Key(KEY_ENTER, LED_ENTER)
         },
 
-        //*****************************************************************************
+        //******************************************
         // ROW 3
-        //*****************************************************************************
+        //******************************************
         
         {
             Key(KEY_SHIFT, LED_LEFT_SHIFT),
-            Key(KEYPAD_ASTERISK, LED_ASTERISK),
+            Key(KEY_NON_US_BS, LED_LESS_MORE),
             Key(KEY_Z, LED_Z),
             Key(KEY_X, LED_X),
             Key(KEY_C, LED_C),
@@ -120,27 +170,29 @@ namespace Ze {
             Key(KEY_COMMA, LED_COMMA),
             Key(KEY_PERIOD, LED_PERIOD),
             Key(KEY_SLASH, LED_SLASH),
-            Key(KEY_SHIFT, LED_RIGHT_SHIFT)
+            Key(KEY_SHIFT, LED_RIGHT_SHIFT),
+            Key() // dummy
         },
 
-        //*****************************************************************************
+        //******************************************
         // ROW 4
-        //*****************************************************************************
+        //******************************************
         
         {
             Key(KEY_CTRL, LED_CTRL),
             Key(KEY_SUPER, LED_SUPER),
-            Key(KEY_ALT, LED_LEFT_ALT),
+            Key(KEY_ALT, LED_ALT),
+            Key(), // dummy
+            Key(), // dummy
+            Key(), // dummy
             Key(KEY_SPACE, LED_SPACE_MAIN),
-            Key(KEY_ALT, LED_),
-            Key(KEY_, LED_),
-            Key(KEY_, LED_),
-            Key(KEY_, LED_),
-            Key(KEY_, LED_),
-            Key(KEY_, LED_),
-            Key(KEY_, LED_),
-            Key(KEY_, LED_),
-            Key(KEY_, LED_),
+            Key(), // dummy
+            Key(), // dummy
+            Key(), // dummy
+            Key(KEY_ALTGR, LED_ALTGR),
+            Key(KEY_MEDIA_PLAY_PAUSE, LED_PLAY_PAUSE),
+            Key(KEY_MEDIA_VOLUME_INC, LED_VOL_UP),
+            Key(KEY_MEDIA_VOLUME_DEC, LED_VOL_DOWN)
         }
     };
 
