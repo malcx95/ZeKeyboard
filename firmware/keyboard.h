@@ -3,6 +3,7 @@
 
 #include "backlight.h"
 #include <stdint.h>
+#include <Arduino.h>
 
 namespace Ze {
 
@@ -22,8 +23,8 @@ namespace Ze {
     // to control behavior of other keys
     const int KEY_FN = -6;
 
-    const uint8_t ROWS = 5;
-    const uint8_t COLS = 14; 
+    const uint8_t NUM_ROWS = 5;
+    const uint8_t NUM_COLS = 14; 
     const uint8_t NUM_MODIFIERS = 5;
 
     struct Key {
@@ -81,9 +82,13 @@ namespace Ze {
     class Keyboard {
 
         public:
-
-            Keyboard();
-            ~Keyboard();
+            
+            /*
+             * Initializes the keyboard, by initializing
+             * the ports to the switches. Does not initialize
+             * the backlighting.
+             */
+            void init();
 
             void update();
 
@@ -99,6 +104,15 @@ namespace Ze {
 
             };
 
+            const uint8_t ROW_PINS[NUM_ROWS] = {8, 9, 10, 11, 12};
+            const uint8_t COL_PINS[NUM_COLS] = {
+                0,  1,  2,
+                13, 14, 15, 
+                16, 17, 18,
+                19, 20, 21,
+                22, 23
+            };
+
             /*
              * Gets the real modifier code for a modifier key.
              * Does not translate the FN-key, and the modifier
@@ -108,7 +122,7 @@ namespace Ze {
     
     };
 
-    const Key KEYS[ROWS][COLS] = {
+    const Key KEYS[NUM_ROWS][NUM_COLS] = {
 
         //******************************************
         // ROW 0
