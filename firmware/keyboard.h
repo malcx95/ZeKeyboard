@@ -29,14 +29,19 @@ namespace Ze {
     struct Key {
         
         /*
-         * Initializes dummy key
+         * Initializes dummy key.
          */
         Key();
 
         /*
-         * Initializes key
+         * Initializes key without second function.
          */
         Key(int code, led_t led);
+
+        /*
+         * Initializes key with main and second function.
+         */
+        Key(int main, int second, led_t led);
 
         /*
          * Checks whether this key is a modifier key.
@@ -53,8 +58,23 @@ namespace Ze {
          */
         bool is_fn() const;
 
+        /*
+         * The associated LED with this key.
+         */
         led_t led;
+
+        /* 
+         * The keycode for the main function of this key.
+         */
         int code;
+
+        /*
+         * The keycode for the second function of this key,
+         * that is, the function this key will have when 
+         * the FN-key is pressed. If this key has no second
+         * function, this is set as KEY_DUMMY.
+         */
+        int second;
     
     };
 
@@ -96,16 +116,16 @@ namespace Ze {
         
         {
             Key(KEY_ESC, LED_ESC), 
-            Key(KEY_1, LED_1),
-            Key(KEY_2, LED_2),
-            Key(KEY_3, LED_3),
-            Key(KEY_4, LED_4), 
-            Key(KEY_5, LED_5),
-            Key(KEY_6, LED_6), 
-            Key(KEY_7, LED_7),
-            Key(KEY_8, LED_8),
-            Key(KEY_9, LED_9),
-            Key(KEY_0, LED_0), 
+            Key(KEY_1, KEY_F1, LED_1),
+            Key(KEY_2, KEY_F2, LED_2),
+            Key(KEY_3, KEY_F3, LED_3),
+            Key(KEY_4, KEY_F4, LED_4), 
+            Key(KEY_5, KEY_F5, LED_5),
+            Key(KEY_6, KEY_F6, LED_6), 
+            Key(KEY_7, KEY_F7, LED_7),
+            Key(KEY_8, KEY_F8, LED_8),
+            Key(KEY_9, KEY_F9, LED_9),
+            Key(KEY_0, KEY_F10, LED_0), 
             Key(KEY_MINUS, LED_MINUS), 
             Key(KEY_EQUAL, LED_EQUAL),
             Key(KEY_BACKSPACE, LED_BACKSPACE)
@@ -143,10 +163,10 @@ namespace Ze {
             Key(KEY_D, LED_D), 
             Key(KEY_F, LED_F), 
             Key(KEY_G, LED_G), 
-            Key(KEY_H, LED_H), 
-            Key(KEY_J, LED_J), 
-            Key(KEY_K, LED_K), 
-            Key(KEY_L, LED_L), 
+            Key(KEY_H, KEY_LEFT, LED_H), 
+            Key(KEY_J, KEY_DOWN, LED_J), 
+            Key(KEY_K, KEY_UP, LED_K), 
+            Key(KEY_L, KEY_RIGHT, LED_L), 
             Key(KEY_SEMICOLON, LED_SEMICOLON), 
             Key(), // dummy
             Key(KEY_QUOTE, LED_QUOTE),
@@ -191,8 +211,8 @@ namespace Ze {
             Key(), // dummy
             Key(KEY_ALTGR, LED_ALTGR),
             Key(KEY_MEDIA_PLAY_PAUSE, LED_PLAY_PAUSE),
-            Key(KEY_MEDIA_VOLUME_INC, LED_VOL_UP),
-            Key(KEY_MEDIA_VOLUME_DEC, LED_VOL_DOWN)
+            Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_NEXT_TRACK, LED_VOL_UP),
+            Key(KEY_MEDIA_VOLUME_DEC, KEY_MEDIA_PREV_TRACK, LED_VOL_DOWN)
         }
     };
 

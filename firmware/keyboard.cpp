@@ -8,6 +8,13 @@ Ze::Key::Key() {
 Ze::Key::Key(int code, led_t led) {
     this->code = code;
     this->led = led;
+    this->second = KEY_DUMMY;
+}
+
+Ze::Key::Key(int code, int second, led_t led) {
+    this->code = code;
+    this->led = led;
+    this->second = second;
 }
 
 bool Ze::Key::is_modifier() const {
