@@ -26,6 +26,7 @@ namespace Ze {
     const uint8_t NUM_ROWS = 5;
     const uint8_t NUM_COLS = 14; 
     const uint8_t NUM_MODIFIERS = 5;
+    const uint8_t MAX_NUM_KEYS = 6;
 
     struct Key {
         
@@ -79,7 +80,7 @@ namespace Ze {
     
     };
 
-    class Keyboard {
+    class Board {
 
         public:
             
@@ -105,7 +106,8 @@ namespace Ze {
             };
 
             const uint8_t ROW_PINS[NUM_ROWS] = {8, 9, 10, 11, 12};
-            const uint8_t COL_PINS[NUM_COLS] = {
+            const uint8_t COL_PINS[NUM_COLS] = 
+            {
                 0,  1,  2,
                 13, 14, 15, 
                 16, 17, 18,
@@ -113,12 +115,38 @@ namespace Ze {
                 22, 23
             };
 
+            bool fn_pressed;
+
+            uint8_t num_keys_pressed;
+
+            /*
+             * The keys that are being pressed in the
+             * current iteration.
+             */
+            Key* curr_pressed_keys[MAX_NUM_KEYS];
+
+            /*
+             * The keys to be sent.
+             */
+            Key* keys_to_send[MAX_NUM_KEYS];
+
+            /*
+             * The actual keycodes to be sent;
+             */
+            int codes_to_send[MAX_NUM_KEYS];
+
+            int test_counter;
+
             /*
              * Gets the real modifier code for a modifier key.
              * Does not translate the FN-key, and the modifier
              * must be negative.
              */
             int translate_modifier(const int modifier) const;
+
+            void reset_pressed_keys();
+
+            void send_keys();
     
     };
 
