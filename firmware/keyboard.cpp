@@ -68,7 +68,8 @@ void Ze::Board::reset_pressed_keys() {
 }
 
 void Ze::Board::update() {
-    
+    reset_pressed_keys();
+    current_modifier = 0;
 }
 
 void Ze::Board::send_keys() {
@@ -89,7 +90,7 @@ void Ze::Board::send_keys() {
     Keyboard.set_key5(codes_to_send[4]);
     Keyboard.set_key6(codes_to_send[5]);
     
-    // TODO add modifiers
+    Keyboard.set_modifier(current_modifier);
 
     Keyboard.send_now();
 }

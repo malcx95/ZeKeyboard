@@ -126,7 +126,11 @@ namespace Ze {
             Key* curr_pressed_keys[MAX_NUM_KEYS];
 
             /*
-             * The keys to be sent.
+             * The keys to be sent. We need this
+             * to make sure that the same key is
+             * not in one instance sent as for instance
+             * key 1, and then key 2. 
+             * TODO is this really necessary?
              */
             Key* keys_to_send[MAX_NUM_KEYS];
 
@@ -134,6 +138,8 @@ namespace Ze {
              * The actual keycodes to be sent;
              */
             int codes_to_send[MAX_NUM_KEYS];
+
+            int current_modifier;
 
             int test_counter;
 
