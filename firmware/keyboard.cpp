@@ -1,5 +1,6 @@
 #include "keyboard.h"
 
+
 Ze::Key::Key() {
     this->code = KEY_DUMMY;
     this->led = LED_DUMMY;
@@ -25,6 +26,14 @@ bool Ze::Key::is_dummy() const {
     return code == KEY_DUMMY || led == LED_DUMMY;
 }
 
+bool Ze::Key::operator==(const Key& other) const {
+    return code == other.code && second == other.second;
+}
+
+bool Ze::Key::operator!=(const Key& other) const {
+    return !(*this == other);
+}
+
 bool Ze::Key::is_fn() const {
     return code == KEY_FN;
 }
@@ -36,6 +45,30 @@ bool Ze::Key::has_second() const {
 int Ze::Board::translate_modifier(const int modifier) const {
     if (modifier >= 0) return -1;
     return MODIFIER_MAP[-1 * modifier - 1];
+}
+
+// for debugging
+void Ze::Board::print_key_arrays() {
+    
+    Serial.println("-------------------------");
+
+    for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
+        Serial.print(curr_pressed_keys[i].code);
+        Serial.print(" ");
+    }
+    Serial.println("");
+
+    for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
+        Serial.print(keys_to_send[i].code);
+        Serial.print(" ");
+    }
+    Serial.println("");
+
+    for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
+        Serial.print(codes_to_send[i]);
+        Serial.print(" ");
+    }
+    Serial.println("");
 }
 
 void Ze::Board::init() {
@@ -57,8 +90,8 @@ void Ze::Board::init() {
 
     // Initialize the key buffers to nullptrs
     for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
-        curr_pressed_keys[i] = nullptr;
-        keys_to_send[i] = nullptr;
+        curr_pressed_keys[i] = Key();
+        keys_to_send[i] = Key();
         codes_to_send[i] = 0;
     }
 
@@ -67,7 +100,7 @@ void Ze::Board::init() {
 
 void Ze::Board::reset_pressed_keys() {
     for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
-        curr_pressed_keys[i] = nullptr;
+        curr_pressed_keys[i] = Key();
     }
 }
 
@@ -75,13 +108,29 @@ void Ze::Board::update() {
     reset_pressed_keys();
     current_modifier = 0;
 
+    // TODO scan the keys
+
+    //*******************
+    // TEST
+    //*******************
+
+    test_counter++;
+
+    curr_pressed_keys[0] = KEYS[1][3];
+
+    //*******************
+    
+    
+    update_keys_to_send();
+    send_keys();
+    
 }
 
 void Ze::Board::remove_released_keys() {
     for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
-        Key* k = keys_to_send[i];
+        Key k = keys_to_send[i];
 
-        if (k != nullptr) {
+        if (!k.is_dummy()) {
 
             bool found = false;
             for (uint8_t j = 0; j < MAX_NUM_KEYS; ++j) {
@@ -96,7 +145,7 @@ void Ze::Board::remove_released_keys() {
             // been released. Remove it from keys 
             // to send.
             if (!found) {
-                keys_to_send[i] = nullptr;
+                keys_to_send[i] = Key();
                 codes_to_send[i] = KEY_DUMMY;
             }
         }
@@ -106,21 +155,21 @@ void Ze::Board::remove_released_keys() {
 void Ze::Board::update_keys_to_send() {
     remove_released_keys();
     for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
-        Key* k = curr_pressed_keys[i];
-        if (k != nullptr) {
-            // TODO add things here
+        Key k = curr_pressed_keys[i];
+        if (!k.is_dummy()) {
+            try_place_key(k);
         }
     }
 }
 
-bool Ze::Board::try_place_key(Key* k) {
+bool Ze::Board::try_place_key(Key& k) {
     uint8_t lowest_free_index = 0;
     bool found_lowest_index = false;
     for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
 
         // if this slot is empty and we haven't already found
         // a free slot
-        if (keys_to_send[i] != nullptr && !found_lowest_index) {
+        if (keys_to_send[i].is_dummy() && !found_lowest_index) {
             // save the slot
             lowest_free_index = i;
             found_lowest_index = true;
@@ -135,10 +184,10 @@ bool Ze::Board::try_place_key(Key* k) {
     
     uint8_t code;
 
-    if (k->has_second() && fn_pressed) {
-        code = k->second;
+    if (k.has_second() && fn_pressed) {
+        code = k.second;
     } else {
-        code = k->code;
+        code = k.code;
     }
 
     keys_to_send[lowest_free_index] = k;
@@ -159,6 +208,8 @@ void Ze::Board::send_keys() {
     // that key is still held down. Or
     // we ignore this problem and see if
     // it causes annoyance.
+    //
+    print_key_arrays();
 
     Keyboard.set_key1(codes_to_send[0]);
     Keyboard.set_key2(codes_to_send[1]);

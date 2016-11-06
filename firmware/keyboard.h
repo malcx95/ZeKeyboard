@@ -65,6 +65,10 @@ namespace Ze {
          */
         bool has_second() const;
 
+        bool operator==(const Key& other) const;
+
+        bool operator!=(const Key& other) const;
+
         /*
          * The associated LED with this key.
          */
@@ -129,7 +133,7 @@ namespace Ze {
              * current iteration. The keys always
              * occupy the lowes possible index.
              */
-            Key* curr_pressed_keys[MAX_NUM_KEYS];
+            Key curr_pressed_keys[MAX_NUM_KEYS];
 
             /*
              * The keys to be sent. We need this
@@ -137,7 +141,7 @@ namespace Ze {
              * not in one instance sent as for instance
              * key 1, and then key 2. 
              */
-            Key* keys_to_send[MAX_NUM_KEYS];
+            Key keys_to_send[MAX_NUM_KEYS];
 
             /*
              * The actual keycodes to be sent;
@@ -147,6 +151,8 @@ namespace Ze {
             int current_modifier;
 
             int test_counter;
+            
+            void print_key_arrays();
 
             /*
              * Gets the real modifier code for a modifier key.
@@ -155,8 +161,16 @@ namespace Ze {
              */
             int translate_modifier(const int modifier) const;
 
+            /*
+             * Removes the keys from the keys_to_send
+             * and codes_to_send arrays that are no
+             * longer being pressed.
+             */
             void remove_released_keys();
 
+            /*
+             * Clears curr_pressed_keys.
+             */
             void reset_pressed_keys();
 
             /*
@@ -166,8 +180,14 @@ namespace Ze {
              * false if the array was full
              * or the key had already been placed.
              */
-            bool try_place_key(Key* k);
+            bool try_place_key(Key& k);
 
+            /*
+             * Updates the keys_to_send
+             * and codes_to_send arrays, 
+             * based on an up to date
+             * curr_pressed_keys array.
+             */
             void update_keys_to_send();
 
             void send_keys();

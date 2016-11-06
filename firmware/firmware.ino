@@ -1,11 +1,21 @@
 #include "keyboard.h"
 
+Ze::Board keyboard;
+
 void setup() {
-  // put your setup code here, to run once:
+
+    keyboard.init();
+
+    Serial.begin(9600);
+
+    delay(16);
 
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+
+    keyboard.update();
+
+    delay(2000);
 
 }
