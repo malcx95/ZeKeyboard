@@ -61,6 +61,11 @@ namespace Ze {
         bool is_fn() const;
 
         /*
+         * Checks whether this key has a second function.
+         */
+        bool has_second() const;
+
+        /*
          * The associated LED with this key.
          */
         led_t led;
@@ -121,7 +126,8 @@ namespace Ze {
 
             /*
              * The keys that are being pressed in the
-             * current iteration.
+             * current iteration. The keys always
+             * occupy the lowes possible index.
              */
             Key* curr_pressed_keys[MAX_NUM_KEYS];
 
@@ -130,7 +136,6 @@ namespace Ze {
              * to make sure that the same key is
              * not in one instance sent as for instance
              * key 1, and then key 2. 
-             * TODO is this really necessary?
              */
             Key* keys_to_send[MAX_NUM_KEYS];
 
@@ -150,7 +155,20 @@ namespace Ze {
              */
             int translate_modifier(const int modifier) const;
 
+            void remove_released_keys();
+
             void reset_pressed_keys();
+
+            /*
+             * Places a key into a free spot in the
+             * keys_to_send and codes_to_send arrays.
+             * Returns true if the key was placed,
+             * false if the array was full
+             * or the key had already been placed.
+             */
+            bool try_place_key(Key* k);
+
+            void update_keys_to_send();
 
             void send_keys();
     

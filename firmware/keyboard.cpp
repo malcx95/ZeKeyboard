@@ -29,6 +29,10 @@ bool Ze::Key::is_fn() const {
     return code == KEY_FN;
 }
 
+bool Ze::Key::has_second() const {
+    return second != KEY_DUMMY;
+}
+
 int Ze::Board::translate_modifier(const int modifier) const {
     if (modifier >= 0) return -1;
     return MODIFIER_MAP[-1 * modifier - 1];
@@ -70,6 +74,79 @@ void Ze::Board::reset_pressed_keys() {
 void Ze::Board::update() {
     reset_pressed_keys();
     current_modifier = 0;
+
+}
+
+void Ze::Board::remove_released_keys() {
+    for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
+        Key* k = keys_to_send[i];
+
+        if (k != nullptr) {
+
+            bool found = false;
+            for (uint8_t j = 0; j < MAX_NUM_KEYS; ++j) {
+                if (k == curr_pressed_keys[j]) {
+                    found = true;
+                    break;
+                }
+            }
+
+            // if the key was not found in the 
+            // curr_pressed_keys array, it has
+            // been released. Remove it from keys 
+            // to send.
+            if (!found) {
+                keys_to_send[i] = nullptr;
+                codes_to_send[i] = KEY_DUMMY;
+            }
+        }
+    }
+}
+
+void Ze::Board::update_keys_to_send() {
+    remove_released_keys();
+    for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
+        Key* k = curr_pressed_keys[i];
+        if (k != nullptr) {
+            // TODO add things here
+        }
+    }
+}
+
+bool Ze::Board::try_place_key(Key* k) {
+    uint8_t lowest_free_index = 0;
+    bool found_lowest_index = false;
+    for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
+
+        // if this slot is empty and we haven't already found
+        // a free slot
+        if (keys_to_send[i] != nullptr && !found_lowest_index) {
+            // save the slot
+            lowest_free_index = i;
+            found_lowest_index = true;
+        } else if (keys_to_send[i] == k) {
+            // key is already sent, don't do anything
+            return false;
+        }
+    }
+
+    // the array was full
+    if (!found_lowest_index) return false;
+    
+    uint8_t code;
+
+    if (k->has_second() && fn_pressed) {
+        code = k->second;
+    } else {
+        code = k->code;
+    }
+
+    keys_to_send[lowest_free_index] = k;
+
+    codes_to_send[lowest_free_index] = code;
+
+    return true;
+
 }
 
 void Ze::Board::send_keys() {
