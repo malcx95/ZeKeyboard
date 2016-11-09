@@ -28,6 +28,8 @@ namespace Ze {
     const uint8_t NUM_MODIFIERS = 5;
     const uint8_t MAX_NUM_KEYS = 6;
 
+    const uint8_t READ_DELAY = 5;
+
     struct Key {
         
         /*
@@ -189,6 +191,8 @@ namespace Ze {
              * curr_pressed_keys array.
              */
             void update_keys_to_send();
+
+            void scan_keys();
 
             void send_keys();
     

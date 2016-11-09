@@ -106,10 +106,12 @@ void Ze::Board::reset_pressed_keys() {
 
 void Ze::Board::update() {
     reset_pressed_keys();
+    num_keys_pressed = 0;
     current_modifier = 0;
+    fn_pressed = false;
 
-    // TODO scan the keys
-
+    scan_keys();
+    
     //*******************
     // TEST
     //*******************
@@ -124,6 +126,46 @@ void Ze::Board::update() {
     update_keys_to_send();
     send_keys();
     
+}
+
+void Ze::Board::scan_keys() {
+
+    for (uint8_t row = 0; row < NUM_ROWS; ++row) {
+
+        // TODO are we done here???
+        digitalWrite(ROW_PINS[row], LOW);
+        delayMicroseconds(READ_DELAY);
+
+        for (uint8_t col = 0; col < NUM_COLS; ++i) {
+            if (!KEYS[row][col].is_dummy()) {
+                
+                if (digitalRead(COL_PINS[col]) == LOW) {
+                    // non dummy key is pressed
+                    
+                    Key pressed = KEYS[row][col];
+
+                    if (pressed.is_fn()) {
+
+                        this->fn_pressed = true;
+
+                    } else if (pressed.is_modifier()) {
+
+                        current_modifier |= translate_modifier(pressed->code);
+
+                    } else {
+                        
+                        // if we already have six keys pressed, we need not continue
+                        if (num_keys_pressed == MAX_NUM_KEYS) return;
+
+                        curr_pressed_keys[num_keys_pressed] = pressed;
+                        num_keys_pressed++;
+                        
+                    }
+                }
+            }
+        }
+        digitalWrite(ROW_PINS[row], HIGH);
+    }
 }
 
 void Ze::Board::remove_released_keys() {
