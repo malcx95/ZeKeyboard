@@ -166,9 +166,6 @@ void Ze::Board::scan_keys() {
         }
         digitalWrite(ROW_PINS[row], HIGH);
     }
-    if (num_keys_pressed != 0) {
-        Serial.println(num_keys_pressed);
-    }
 }
 
 void Ze::Board::remove_released_keys() {
@@ -244,17 +241,6 @@ bool Ze::Board::try_place_key(Key& k) {
 }
 
 void Ze::Board::send_keys() {
-
-    // TODO update codes to send
-    // We need some way of making sure that
-    // when a 2:nd function is used, that 
-    // it doesn't send the main code
-    // after the FN-key is released if
-    // that key is still held down. Or
-    // we ignore this problem and see if
-    // it causes annoyance.
-    //
-    print_key_arrays();
 
     Keyboard.set_key1(codes_to_send[0]);
     Keyboard.set_key2(codes_to_send[1]);
