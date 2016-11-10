@@ -13,19 +13,20 @@ namespace Ze {
     // keycodes for the modifiers, but exist to
     // make things more efficient. Do not change
     // these.
-    const int KEY_SHIFT = -1;
+    const int KEY_LSHIFT = -1;
     const int KEY_CTRL = -2;
     const int KEY_ALT = -3;
     const int KEY_ALTGR = -4;
     const int KEY_SUPER = -5;
+    const int KEY_RSHIFT = -6;
 
     // Again, this keycode is not sent, but used
     // to control behavior of other keys
-    const int KEY_FN = -6;
+    const int KEY_FN = -7;
 
     const uint8_t NUM_ROWS = 5;
     const uint8_t NUM_COLS = 14; 
-    const uint8_t NUM_MODIFIERS = 5;
+    const uint8_t NUM_MODIFIERS = 6;
     const uint8_t MAX_NUM_KEYS = 6;
 
     const uint8_t READ_DELAY = 5;
@@ -108,11 +109,12 @@ namespace Ze {
 
             const int MODIFIER_MAP[NUM_MODIFIERS] = {
 
-                MODIFIERKEY_SHIFT,
+                MODIFIERKEY_LEFT_SHIFT,
                 MODIFIERKEY_CTRL,
                 MODIFIERKEY_LEFT_ALT,
                 MODIFIERKEY_RIGHT_ALT,
-                MODIFIERKEY_GUI
+                MODIFIERKEY_GUI,
+                MODIFIERKEY_RIGHT_SHIFT
 
             };
 
@@ -120,7 +122,7 @@ namespace Ze {
             const uint8_t COL_PINS[NUM_COLS] = 
             {
                 0,  1,  2,
-                13, 14, 15, 
+                29, 14, 15, 
                 16, 17, 18,
                 19, 20, 21,
                 22, 23
@@ -258,8 +260,8 @@ namespace Ze {
             Key(KEY_K, KEY_UP, LED_K), 
             Key(KEY_L, KEY_RIGHT, LED_L), 
             Key(KEY_SEMICOLON, LED_SEMICOLON), 
-            Key(), // dummy
             Key(KEY_QUOTE, LED_QUOTE),
+            Key(), // dummy
             Key(KEY_ENTER, LED_ENTER)
         },
 
@@ -268,7 +270,7 @@ namespace Ze {
         //******************************************
         
         {
-            Key(KEY_SHIFT, LED_LEFT_SHIFT),
+            Key(KEY_LSHIFT, LED_LEFT_SHIFT),
             Key(KEY_NON_US_BS, LED_LESS_MORE),
             Key(KEY_Z, LED_Z),
             Key(KEY_X, LED_X),
@@ -280,7 +282,7 @@ namespace Ze {
             Key(KEY_COMMA, LED_COMMA),
             Key(KEY_PERIOD, LED_PERIOD),
             Key(KEY_SLASH, LED_SLASH),
-            Key(KEY_SHIFT, LED_RIGHT_SHIFT),
+            Key(KEY_RSHIFT, LED_RIGHT_SHIFT),
             Key() // dummy
         },
 

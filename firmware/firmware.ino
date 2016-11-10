@@ -16,6 +16,6 @@ void loop() {
 
     keyboard.update();
 
-    delay(2000);
+    delay(16);
 
 }

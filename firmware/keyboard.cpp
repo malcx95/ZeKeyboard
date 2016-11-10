@@ -19,7 +19,7 @@ Ze::Key::Key(int code, int second, led_t led) {
 }
 
 bool Ze::Key::is_modifier() const {
-    return this->code < -1;
+    return this->code < 0;
 }
 
 bool Ze::Key::is_dummy() const {
@@ -116,9 +116,9 @@ void Ze::Board::update() {
     // TEST
     //*******************
 
-    test_counter++;
+    // test_counter++;
 
-    curr_pressed_keys[0] = KEYS[1][3];
+    // curr_pressed_keys[0] = KEYS[1][3];
 
     //*******************
     
@@ -136,7 +136,7 @@ void Ze::Board::scan_keys() {
         digitalWrite(ROW_PINS[row], LOW);
         delayMicroseconds(READ_DELAY);
 
-        for (uint8_t col = 0; col < NUM_COLS; ++i) {
+        for (uint8_t col = 0; col < NUM_COLS; ++col) {
             if (!KEYS[row][col].is_dummy()) {
                 
                 if (digitalRead(COL_PINS[col]) == LOW) {
@@ -150,7 +150,7 @@ void Ze::Board::scan_keys() {
 
                     } else if (pressed.is_modifier()) {
 
-                        current_modifier |= translate_modifier(pressed->code);
+                        current_modifier |= translate_modifier(pressed.code);
 
                     } else {
                         
@@ -165,6 +165,9 @@ void Ze::Board::scan_keys() {
             }
         }
         digitalWrite(ROW_PINS[row], HIGH);
+    }
+    if (num_keys_pressed != 0) {
+        Serial.println(num_keys_pressed);
     }
 }
 
