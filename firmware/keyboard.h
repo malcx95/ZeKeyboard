@@ -54,6 +54,11 @@ namespace Ze {
         bool is_modifier() const;
 
         /*
+         * Checks whether this key is a media key.
+         */
+        bool is_media() const;
+
+        /*
          * Checks whether this key is a dummy key.
          */
         bool is_dummy() const;
@@ -153,6 +158,10 @@ namespace Ze {
             int codes_to_send[MAX_NUM_KEYS];
 
             int current_modifier;
+
+            Key pressed_media;
+
+            int current_media;
 
             int test_counter;
             
