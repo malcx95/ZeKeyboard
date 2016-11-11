@@ -312,8 +312,8 @@ namespace Ze {
             Key(), // dummy
             Key(KEY_ALTGR, LED_ALTGR),
             Key(KEY_MEDIA_PLAY_PAUSE, LED_PLAY_PAUSE),
-            Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_NEXT_TRACK, LED_VOL_UP),
-            Key(KEY_MEDIA_VOLUME_DEC, KEY_MEDIA_PREV_TRACK, LED_VOL_DOWN)
+            Key(KEY_MEDIA_VOLUME_DEC, KEY_MEDIA_PREV_TRACK, LED_VOL_DOWN),
+            Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_NEXT_TRACK, LED_VOL_UP)
         }
     };
 
