@@ -54,6 +54,11 @@ namespace Ze {
         bool is_modifier() const;
 
         /*
+         * Checks whether this key is a media key.
+         */
+        bool is_media() const;
+
+        /*
          * Checks whether this key is a dummy key.
          */
         bool is_dummy() const;
@@ -153,6 +158,10 @@ namespace Ze {
             int codes_to_send[MAX_NUM_KEYS];
 
             int current_modifier;
+
+            Key pressed_media;
+
+            int current_media;
 
             int test_counter;
             
@@ -303,8 +312,8 @@ namespace Ze {
             Key(), // dummy
             Key(KEY_ALTGR, LED_ALTGR),
             Key(KEY_MEDIA_PLAY_PAUSE, LED_PLAY_PAUSE),
-            Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_NEXT_TRACK, LED_VOL_UP),
-            Key(KEY_MEDIA_VOLUME_DEC, KEY_MEDIA_PREV_TRACK, LED_VOL_DOWN)
+            Key(KEY_MEDIA_VOLUME_DEC, KEY_MEDIA_PREV_TRACK, LED_VOL_DOWN),
+            Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_NEXT_TRACK, LED_VOL_UP)
         }
     };
 

@@ -22,6 +22,10 @@ bool Ze::Key::is_modifier() const {
     return this->code < 0;
 }
 
+bool Ze::Key::is_media() const {
+    return (0xFF00 & this->code) == 0xE400;
+}
+
 bool Ze::Key::is_dummy() const {
     return code == KEY_DUMMY || led == LED_DUMMY;
 }
@@ -87,6 +91,7 @@ void Ze::Board::init() {
 
     fn_pressed = false;
     num_keys_pressed = 0;
+    current_media = 0;
 
     // Initialize the key buffers to nullptrs
     for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
@@ -94,8 +99,6 @@ void Ze::Board::init() {
         keys_to_send[i] = Key();
         codes_to_send[i] = 0;
     }
-
-    test_counter = 0;
 }
 
 void Ze::Board::reset_pressed_keys() {
@@ -108,20 +111,10 @@ void Ze::Board::update() {
     reset_pressed_keys();
     num_keys_pressed = 0;
     current_modifier = 0;
+    pressed_media = Key();
     fn_pressed = false;
 
     scan_keys();
-    
-    //*******************
-    // TEST
-    //*******************
-
-    // test_counter++;
-
-    // curr_pressed_keys[0] = KEYS[1][3];
-
-    //*******************
-    
     
     update_keys_to_send();
     send_keys();
@@ -132,7 +125,7 @@ void Ze::Board::scan_keys() {
 
     for (uint8_t row = 0; row < NUM_ROWS; ++row) {
 
-        // TODO are we done here???
+        // set this row to low
         digitalWrite(ROW_PINS[row], LOW);
         delayMicroseconds(READ_DELAY);
 
@@ -151,6 +144,10 @@ void Ze::Board::scan_keys() {
                     } else if (pressed.is_modifier()) {
 
                         current_modifier |= translate_modifier(pressed.code);
+
+                    } else if (pressed.is_media()) {
+                        
+                        pressed_media = pressed;
 
                     } else {
                         
@@ -202,6 +199,16 @@ void Ze::Board::update_keys_to_send() {
             try_place_key(k);
         }
     }
+
+    if (!pressed_media.is_dummy()) {
+        if (pressed_media.has_second() && fn_pressed) {
+            current_media = pressed_media.second;
+        } else {
+            current_media = pressed_media.code;
+        }
+    } else {
+        current_media = 0;
+    }
 }
 
 bool Ze::Board::try_place_key(Key& k) {
@@ -248,8 +255,10 @@ void Ze::Board::send_keys() {
     Keyboard.set_key4(codes_to_send[3]);
     Keyboard.set_key5(codes_to_send[4]);
     Keyboard.set_key6(codes_to_send[5]);
-    
+
     Keyboard.set_modifier(current_modifier);
+
+    Keyboard.set_media(current_media);
 
     Keyboard.send_now();
 }
