@@ -11,12 +11,12 @@ const led_t LED_DUMMY = 0;
 // ROW 0
 //*********************************
 
-const led_t LED_ESC =         1;
-const led_t LED_1 =           2;
-const led_t LED_2 =           3;
-const led_t LED_3 =           4;
-const led_t LED_4 =           5;
-const led_t LED_5 =           6;
+const led_t LED_ESC =         0;
+const led_t LED_1 =           1;
+const led_t LED_2 =           6;
+const led_t LED_3 =           3;
+const led_t LED_4 =           4;
+const led_t LED_5 =           5;
 const led_t LED_6 =           7;
 const led_t LED_7 =           8;
 const led_t LED_8 =           9;
