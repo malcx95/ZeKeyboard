@@ -1,4 +1,5 @@
 #include "keyboard.h"
+#include "Tlc5940.h"
 
 Ze::Board keyboard;
 Tlc5940 tlc;
