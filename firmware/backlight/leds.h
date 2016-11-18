@@ -1,7 +1,5 @@
-#ifndef BACKLIGHT_H
-#define BACKLIGHT_H
-
-#include "Tlc5940.h"
+#ifndef LEDS_H
+#define LEDS_H
 
 typedef uint8_t led_t;
 
@@ -96,4 +94,4 @@ const led_t LED_PLAY_PAUSE =  71;
 const led_t LED_VOL_UP =      72;
 const led_t LED_VOL_DOWN =    73;
 
-#endif
+#endif /* ifndef LEDS_H */
