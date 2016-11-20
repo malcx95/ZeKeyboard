@@ -43,7 +43,7 @@ const led_t LED_O =           26;
 const led_t LED_P =           27;
 const led_t LED_LEFT_BRACE =  28;
 const led_t LED_RIGHT_BRACE = 29;
-const led_t LED_BACKSLASH =   30;
+const led_t LED_BACKSLASH =   2;
 
 //*****************************
 // ROW 2
