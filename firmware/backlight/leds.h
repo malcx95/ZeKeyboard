@@ -57,11 +57,11 @@ const led_t LED_F =           37;
 const led_t LED_G =           38;
 const led_t LED_H =           39;
 const led_t LED_J =           40;
-const led_t LED_K =           41;
-const led_t LED_L =           42;
-const led_t LED_SEMICOLON =   43;
-const led_t LED_QUOTE =       44;
-const led_t LED_ENTER =       45;
+const led_t LED_K =           42;
+const led_t LED_L =           43;
+const led_t LED_SEMICOLON =   44;
+const led_t LED_QUOTE =       45;
+const led_t LED_ENTER =       41;
 
 //*****************************
 // ROW 3

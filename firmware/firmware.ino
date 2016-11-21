@@ -9,11 +9,11 @@ void setup() {
     keyboard.init();
 
     tlc.init();
-    delay(100);
+    delay(300);
     tlc.setAll(4095);
-    delay(100);
+    delay(300);
     tlc.update();
-    delay(100);
+    delay(300);
 
     Serial.begin(9600);
 
