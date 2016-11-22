@@ -1,7 +1,7 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
-#include "backlight.h"
+#include "backlight/backlight.h"
 #include <stdint.h>
 #include <Arduino.h>
 

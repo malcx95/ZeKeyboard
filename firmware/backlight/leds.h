@@ -1,7 +1,7 @@
-#ifndef BACKLIGHT_H
-#define BACKLIGHT_H
+#ifndef LEDS_H 
+#define LEDS_H 
 
-#include "Tlc5940.h"
+#include <stdint.h>
 
 typedef uint8_t led_t;
 
