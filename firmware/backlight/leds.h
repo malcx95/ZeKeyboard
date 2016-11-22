@@ -1,7 +1,7 @@
-#ifndef BACKLIGHT_H
-#define BACKLIGHT_H
+#ifndef LEDS_H
+#define LEDS_H
 
-#include "Tlc5940.h"
+#include <stdint.h>
 
 typedef uint8_t led_t;
 
@@ -11,12 +11,12 @@ const led_t LED_DUMMY = 0;
 // ROW 0
 //*********************************
 
-const led_t LED_ESC =         1;
-const led_t LED_1 =           2;
-const led_t LED_2 =           3;
-const led_t LED_3 =           4;
-const led_t LED_4 =           5;
-const led_t LED_5 =           6;
+const led_t LED_ESC =         0;
+const led_t LED_1 =           1;
+const led_t LED_2 =           6;
+const led_t LED_3 =           3;
+const led_t LED_4 =           4;
+const led_t LED_5 =           5;
 const led_t LED_6 =           7;
 const led_t LED_7 =           8;
 const led_t LED_8 =           9;
@@ -43,7 +43,7 @@ const led_t LED_O =           26;
 const led_t LED_P =           27;
 const led_t LED_LEFT_BRACE =  28;
 const led_t LED_RIGHT_BRACE = 29;
-const led_t LED_BACKSLASH =   30;
+const led_t LED_BACKSLASH =   2;
 
 //*****************************
 // ROW 2
@@ -57,11 +57,11 @@ const led_t LED_F =           37;
 const led_t LED_G =           38;
 const led_t LED_H =           39;
 const led_t LED_J =           40;
-const led_t LED_K =           41;
-const led_t LED_L =           42;
-const led_t LED_SEMICOLON =   43;
-const led_t LED_QUOTE =       44;
-const led_t LED_ENTER =       45;
+const led_t LED_K =           42;
+const led_t LED_L =           43;
+const led_t LED_SEMICOLON =   44;
+const led_t LED_QUOTE =       45;
+const led_t LED_ENTER =       41;
 
 //*****************************
 // ROW 3
@@ -96,4 +96,4 @@ const led_t LED_PLAY_PAUSE =  71;
 const led_t LED_VOL_UP =      72;
 const led_t LED_VOL_DOWN =    73;
 
-#endif
+#endif /* ifndef LEDS_H */
