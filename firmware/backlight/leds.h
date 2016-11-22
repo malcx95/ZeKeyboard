@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 
-typedef uint8_t led_t;
 
 const led_t LED_DUMMY = 0;
 

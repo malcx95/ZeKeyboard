@@ -19,7 +19,7 @@ void setup() {
 
     delay(200);
     
-    tlc.setAll(2000);
+    tlc.setAll(1000);
     
     delay(200);
 

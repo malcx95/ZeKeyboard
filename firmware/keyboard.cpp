@@ -3,18 +3,15 @@
 
 Ze::Key::Key() {
     this->code = KEY_DUMMY;
-    this->led = LED_DUMMY;
 }
 
-Ze::Key::Key(int code, led_t led) {
+Ze::Key::Key(int code) {
     this->code = code;
-    this->led = led;
     this->second = KEY_DUMMY;
 }
 
-Ze::Key::Key(int code, int second, led_t led) {
+Ze::Key::Key(int code, int second) {
     this->code = code;
-    this->led = led;
     this->second = second;
 }
 
@@ -27,7 +24,7 @@ bool Ze::Key::is_media() const {
 }
 
 bool Ze::Key::is_dummy() const {
-    return code == KEY_DUMMY || led == LED_DUMMY;
+    return code == KEY_DUMMY;
 }
 
 bool Ze::Key::operator==(const Key& other) const {
