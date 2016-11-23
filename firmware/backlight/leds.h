@@ -1,11 +1,6 @@
 #ifndef LEDS_H 
 #define LEDS_H 
 
-#include <stdint.h>
-
-
-const led_t LED_DUMMY = 0;
-
 //*********************************
 // ROW 0
 //*********************************
@@ -94,5 +89,6 @@ const led_t LED_ALTGR =       70;
 const led_t LED_PLAY_PAUSE =  71;
 const led_t LED_VOL_UP =      72;
 const led_t LED_VOL_DOWN =    73;
+
 
 #endif

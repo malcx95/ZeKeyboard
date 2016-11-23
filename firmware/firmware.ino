@@ -7,6 +7,7 @@
 #include <tlc_progmem_utils.h>
 
 #include "keyboard.h"
+#include "backlight/backlight.h"
 
 Ze::Board keyboard;
 Tlc5940 tlc;
