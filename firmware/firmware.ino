@@ -1,16 +1,9 @@
-#include <Tlc5940.h>
-#include <tlc_shifts.h>
-#include <tlc_animations.h>
-#include <tlc_config.h>
-#include <tlc_fades.h>
-#include <tlc_servos.h>
-#include <tlc_progmem_utils.h>
-
+#include "backlight.h"
 #include "keyboard.h"
-#include "backlight/backlight.h"
 
 Ze::Board keyboard;
 Tlc5940 tlc;
+Backlight backlight;
 
 void setup() {
 
@@ -28,9 +21,13 @@ void setup() {
 
     keyboard.init();
 
+    backlight.init(&tlc, &keyboard);
+
+
     Serial.begin(9600);
 
     delay(16);
+    //backlight.print_grid();
 
 }
 

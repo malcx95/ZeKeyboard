@@ -62,8 +62,8 @@ const led_t LED_ENTER =       45;
 // ROW 3
 //*****************************
 
-const led_t LED_LEFT_SHIFT =  49;
-const led_t LED_LESS_MORE =   50;
+const led_t LED_LSHIFT =      49;
+const led_t LED_NON_US_BS =   50;
 const led_t LED_Z =           51;
 const led_t LED_X =           52;
 const led_t LED_C =           53;
@@ -74,7 +74,7 @@ const led_t LED_M =           57;
 const led_t LED_COMMA =       58;
 const led_t LED_PERIOD =      59;
 const led_t LED_SLASH =       60;
-const led_t LED_RIGHT_SHIFT = 61;
+const led_t LED_RSHIFT =      61;
 
 //*****************************
 // ROW 4
