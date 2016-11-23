@@ -1,5 +1,6 @@
 #ifndef LEDS_H 
 #define LEDS_H 
+typedef uint8_t led_t;
 
 //*********************************
 // ROW 0
