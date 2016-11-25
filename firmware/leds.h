@@ -1,5 +1,8 @@
 #ifndef LEDS_H 
 #define LEDS_H 
+
+#include <stdint.h>
+
 typedef uint8_t led_t;
 
 //*********************************

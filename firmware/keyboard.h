@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <Arduino.h>
+#include "constants.h"
 
 namespace Ze {
 
@@ -23,8 +24,6 @@ namespace Ze {
     // to control behavior of other keys
     const int KEY_FN = -7;
 
-    const uint8_t NUM_ROWS = 5;
-    const uint8_t NUM_COLS = 14; 
     const uint8_t NUM_MODIFIERS = 6;
     const uint8_t MAX_NUM_KEYS = 6;
 

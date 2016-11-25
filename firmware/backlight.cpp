@@ -1,8 +1,10 @@
 #include "backlight.h"
+#include "styles/standard.h"
 
 Backlight::Backlight() {
     this->tlc = nullptr;
     this->keyboard = nullptr;
+    this->style = BacklightStyle::STANDARD;
 }
 
 void Backlight::init(Tlc5940* tlc, Ze::Board* keyboard) {
@@ -19,11 +21,6 @@ void Backlight::init(Tlc5940* tlc, Ze::Board* keyboard) {
 }
 
 
-
-bool LED::is_dummy() const {
-    return this->port == LED_DUMMY;
-}
-
 void Backlight::print_grid() {
     Serial.println("-------------------------");
 
@@ -38,5 +35,22 @@ void Backlight::print_grid() {
         Serial.println("");
     }
     Serial.println("");
+}
+
+void Backlight::setup(BacklightStyle style) {
+    this->style = style;
+    switch (style) {
+        case STANDARD:
+            standard_setup(this->leds);
+            break;
+    }
+}
+
+void Backlight::update() {
+    switch (style) {
+        case STANDARD:
+            standard_update(this->leds, this->tlc, this->keyboard);
+            break;
+    }
 }
 

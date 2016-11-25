@@ -4,25 +4,16 @@
 #include <Arduino.h>
 #include <Tlc5940.h>
 #include "leds.h"
+#include "led.h"
 #include "keyboard.h"
-
-struct LED {
-
-//    LED(led_t port);
-
-    bool is_dummy() const;
-
-    led_t port;
-
-    uint16_t brightness;
-
-};
+#include "constants.h"
 
 class Backlight {
 
     public:
 
         Backlight();
+
         void init(Tlc5940* tlc, Ze::Board* keyboard);
 
         /*
@@ -30,7 +21,17 @@ class Backlight {
          */
         void print_grid();
 
+        /*
+         * Sets up a background style
+         */
+        void setup(BacklightStyle style);
+
+
+        void update();
+
     private:
+
+        BacklightStyle style;
 
         Tlc5940* tlc;
 
@@ -39,8 +40,6 @@ class Backlight {
         LED leds[Ze::NUM_ROWS][Ze::NUM_COLS];
 
 };
-
-const led_t LED_DUMMY = 100;
 
 const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
 {
