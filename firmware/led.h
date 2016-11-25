@@ -14,7 +14,10 @@ struct LED {
 
     led_t port;
 
-    uint16_t brightness;
+    /*
+     * Brightness value (0 - 1)
+     */
+    float brightness;
 
 };
 

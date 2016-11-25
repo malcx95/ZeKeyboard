@@ -1,5 +1,6 @@
 #include "backlight.h"
 #include "keyboard.h"
+#include "constants.h"
 
 Ze::Board keyboard;
 Tlc5940 tlc;
@@ -23,6 +24,7 @@ void setup() {
 
     backlight.init(&tlc, &keyboard);
 
+    backlight.setup(BacklightStyle::STANDARD);
 
     Serial.begin(9600);
 

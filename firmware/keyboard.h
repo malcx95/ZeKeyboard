@@ -25,7 +25,6 @@ namespace Ze {
     const int KEY_FN = -7;
 
     const uint8_t NUM_MODIFIERS = 6;
-    const uint8_t MAX_NUM_KEYS = 6;
 
     const uint8_t READ_DELAY = 5;
 
@@ -102,6 +101,8 @@ namespace Ze {
             void init();
 
             void update();
+
+            Key* get_curr_pressed_keys();
 
         private:
 
