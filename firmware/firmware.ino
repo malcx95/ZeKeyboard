@@ -1,21 +1,9 @@
 #include "backlight.h"
 #include "keyboard.h"
 #include "constants.h"
-#include "FastLED.h"
+#include <stdint.h>
+#include <FastLED.h>
 
-#define NUM_ROWS    5
-
-#define NUM_ROW0_LEDS   14
-#define NUM_ROW1_LEDS   14
-#define NUM_ROW2_LEDS   13
-#define NUM_ROW3_LEDS   13
-#define NUM_ROW4_LEDS   10
-
-#define ROW0_PIN    3
-#define ROW1_PIN    4
-#define ROW2_PIN    5
-#define ROW3_PIN    6
-#define ROW4_PIN    7
 
 Ze::Board keyboard;
 Backlight backlight;
@@ -26,7 +14,7 @@ CRGB row2[NUM_ROW2_LEDS];
 CRGB row3[NUM_ROW3_LEDS];
 CRGB row4[NUM_ROW4_LEDS];
 
-CRGB* rows[NUM_ROWS] = {
+CRGB* rows[Ze::NUM_ROWS] = {
     row0,
     row1,
     row2,
@@ -42,11 +30,15 @@ void setup() {
     FastLED.addLeds<WS2812B, ROW3_PIN>(row3, NUM_ROW3_LEDS);
     FastLED.addLeds<WS2812B, ROW4_PIN>(row4, NUM_ROW4_LEDS);
 
+    FastLED.clear();
+
     delay(50);
+
+    FastLED.show();
     
     keyboard.init();
 
-    backlight.init(&keyboard);
+    backlight.init(&keyboard, rows);
 
     backlight.setup(BacklightStyle::STANDARD);
 

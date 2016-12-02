@@ -2,14 +2,12 @@
 #define BACKLIGHT_H
 
 #include <Arduino.h>
-#include <Tlc5940.h>
 #include "leds.h"
 #include "led.h"
 #include "keyboard.h"
 #include "constants.h"
 #include "standard.h"
-
-const float MAX_BRIGHTNESS = 4095.0;
+#include <FastLED.h>
 
 class Backlight {
 
@@ -17,7 +15,7 @@ class Backlight {
 
         Backlight();
 
-        void init(Ze::Board* keyboard);
+        void init(Ze::Board* keyboard, CRGB** rows);
 
         /*
          * Prints the grid for debugging.
@@ -37,6 +35,8 @@ class Backlight {
         BacklightStyle style;
 
         Ze::Board* keyboard;
+
+        CRGB** rows;
 
         LED leds[Ze::NUM_ROWS][Ze::NUM_COLS];
 

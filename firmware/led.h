@@ -5,19 +5,37 @@
 #include <stdint.h>
 
 const led_t LED_DUMMY = 100;
+const uint8_t MAX_BYTE = 255;
 
 struct LED {
 
-//    LED(led_t port);
+    /*
+     * Brightness value (0.0 - 1.0)
+     */
+    float brightness;
 
-    bool is_dummy() const;
+    /*
+     * Red value (0.0 - 1.0)
+     */
+    float r;
+
+    /*
+     * Green value (0.0 - 1.0)
+     */
+    float g;
+
+    /*
+     * Blue value (0.0 - 1.0)
+     */
+    float b;
 
     led_t port;
 
-    /*
-     * Brightness value (0 - 1)
-     */
-    float brightness;
+    void init();
+
+    bool is_dummy() const;
+
+    uint32_t get_hex_code() const;
 
 };
 
