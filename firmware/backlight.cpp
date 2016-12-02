@@ -1,13 +1,11 @@
 #include "backlight.h"
 
 Backlight::Backlight() {
-    this->tlc = nullptr;
     this->keyboard = nullptr;
     this->style = BacklightStyle::STANDARD;
 }
 
-void Backlight::init(Tlc5940* tlc, Ze::Board* keyboard) {
-    this->tlc = tlc;
+void Backlight::init(Ze::Board* keyboard) {
     this->keyboard = keyboard;
     
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
@@ -47,6 +45,9 @@ void Backlight::setup(BacklightStyle style) {
 }
 
 void Backlight::update() {
+
+    // TODO update the leds 
+
     switch (style) {
         case STANDARD:
             standard_update(this->leds, this->keyboard);
@@ -57,9 +58,7 @@ void Backlight::update() {
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
             LED curr = leds[row][col];
-            tlc->set(curr.port, (uint16_t)(curr.brightness * MAX_BRIGHTNESS));
         }
     }
-    tlc->update();
 }
 

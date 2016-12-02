@@ -1,5 +1,6 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H value
+#include <stdint.h>
 
 namespace Ze {
 

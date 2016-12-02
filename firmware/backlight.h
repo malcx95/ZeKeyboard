@@ -17,7 +17,7 @@ class Backlight {
 
         Backlight();
 
-        void init(Tlc5940* tlc, Ze::Board* keyboard);
+        void init(Ze::Board* keyboard);
 
         /*
          * Prints the grid for debugging.
@@ -35,8 +35,6 @@ class Backlight {
     private:
 
         BacklightStyle style;
-
-        Tlc5940* tlc;
 
         Ze::Board* keyboard;
 

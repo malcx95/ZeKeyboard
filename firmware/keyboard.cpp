@@ -104,6 +104,10 @@ void Ze::Board::reset_pressed_keys() {
     }
 }
 
+Ze::Key* Ze::Board::get_curr_pressed_keys() {
+    return this->curr_pressed_keys;
+}
+
 void Ze::Board::update() {
     reset_pressed_keys();
     num_keys_pressed = 0;

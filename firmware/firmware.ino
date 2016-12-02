@@ -1,28 +1,30 @@
 #include "backlight.h"
 #include "keyboard.h"
 #include "constants.h"
+#include "FastLED.h"
+
+#define ROW1_LEDS   14
+#define ROW2_LEDS   14
+#define ROW3_LEDS   13
+#define ROW4_LEDS   13
+#define ROW5_LEDS   10
 
 Ze::Board keyboard;
-Tlc5940 tlc;
 Backlight backlight;
+
+CRGB row1[ROW1_LEDS];
+CRGB row2[ROW2_LEDS];
+CRGB row3[ROW3_LEDS];
+CRGB row4[ROW4_LEDS];
+CRGB row5[ROW5_LEDS];
 
 void setup() {
 
     delay(50);
     
-    tlc.init();
-
-    delay(200);
-    
-    tlc.setAll(1000);
-    
-    delay(200);
-
-    tlc.update();
-
     keyboard.init();
 
-    backlight.init(&tlc, &keyboard);
+    backlight.init(&keyboard);
 
     backlight.setup(BacklightStyle::STANDARD);
 
