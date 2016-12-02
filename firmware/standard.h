@@ -1,9 +1,9 @@
 #ifndef STANDARD_H
 #define STANDARD_H 
 
-#include "../constants.h"
-#include "../led.h"
-#include "../keyboard.h"
+#include "constants.h"
+#include "led.h"
+#include "keyboard.h"
 
 const float DEFAULT_BRIGHTNESS = 0.1;
 

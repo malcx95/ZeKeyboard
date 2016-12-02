@@ -7,7 +7,7 @@
 #include "led.h"
 #include "keyboard.h"
 #include "constants.h"
-#include "styles/standard.h"
+#include "standard.h"
 
 const float MAX_BRIGHTNESS = 4095.0;
 
