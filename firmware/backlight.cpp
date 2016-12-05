@@ -59,8 +59,7 @@ void Backlight::update() {
             LED curr = leds[row][col];
             if (!curr.is_dummy()) {
                 // set the color
-                uint32_t color = curr.get_hex_code();
-                rows[row][curr.port] = color;
+                rows[row][curr.port] = curr.get_hex_code();
             }
         }
     }

@@ -5,14 +5,11 @@
 #include <stdint.h>
 
 const led_t LED_DUMMY = 100;
-const uint8_t MAX_BYTE = 255;
+const float MAX_BYTE = 255.0;
+
+const float MAX_BRIGHTNESS = 1.0;
 
 struct LED {
-
-    /*
-     * Brightness value (0.0 - 1.0)
-     */
-    float brightness;
 
     /*
      * Red value (0.0 - 1.0)
