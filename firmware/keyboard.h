@@ -285,8 +285,8 @@ namespace Ze {
             Key(KEY_COMMA),
             Key(KEY_PERIOD),
             Key(KEY_SLASH),
-            Key(KEY_RSHIFT),
-            Key() // dummy
+            Key(), // dummy
+            Key(KEY_RSHIFT)
         },
 
         //******************************************

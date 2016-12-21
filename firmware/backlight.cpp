@@ -25,7 +25,7 @@ void Backlight::print_grid() {
 
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
-            uint16_t b = leds[row][col].brightness;
+            uint16_t b = leds[row][col].r;
             Serial.print(b);
             if (b < 10) {
                 Serial.print(" ");
