@@ -1,11 +1,11 @@
-//#include "backlight.h"
-//#include "keyboard.h"
-//#include "constants.h"
+#include "backlight.h"
+#include "keyboard.h"
+#include "constants.h"
 #include <stdint.h>
 #include <FastLED.h>
 
 
-//Ze::Board keyboard;
+Ze::Board keyboard;
 //Backlight backlight;
 
 //CRGB row0[NUM_ROW0_LEDS];
@@ -38,7 +38,6 @@ void setup() {
 
     FastLED.clear();
 
-    // TODO
     FastLED.setMaxPowerInVoltsAndMilliamps(5, 700);
 
     delay(50);
@@ -50,7 +49,7 @@ void setup() {
 
     FastLED.show();
     
-    // keyboard.init();
+    keyboard.init();
 
     // backlight.init(&keyboard, rows);
 
@@ -65,48 +64,49 @@ void setup() {
 
 void loop() {
 
-    for (uint8_t i = 0; i < 64; ++i) {
+    for (uint8_t i = 0; i < 16; ++i) {
         leds[i] = CRGB::Orange;
+        delay(1000);
+        FastLED.show();
     }
 
-    FastLED.show();
 
-    delay(1000);
-    for (uint8_t i = 0; i < 64; ++i) {
+    for (uint8_t i = 0; i < 16; ++i) {
         leds[i] = CRGB::Green;
+        delay(100);
+        FastLED.show();
     }
 
-    FastLED.show();
 
-    delay(1000);
-    for (uint8_t i = 0; i < 64; ++i) {
+    for (uint8_t i = 0; i < 16; ++i) {
         leds[i] = CRGB::Red;
+        delay(1000);
+        FastLED.show();
     }
 
-    FastLED.show();
 
-    delay(1000);
-    for (uint8_t i = 0; i < 64; ++i) {
+    for (uint8_t i = 0; i < 16; ++i) {
         leds[i] = CRGB::Blue;
+        delay(100);
+        FastLED.show();
     }
 
-    FastLED.show();
 
-    delay(1000);
-    for (uint8_t i = 0; i < 64; ++i) {
+    for (uint8_t i = 0; i < 16; ++i) {
         leds[i] = CRGB::Yellow;
+        delay(1000);
+        FastLED.show();
     }
 
-    FastLED.show();
 
-    delay(1000);
-    for (uint8_t i = 0; i < 64; ++i) {
+    for (uint8_t i = 0; i < 16; ++i) {
         leds[i] = CRGB::White;
+        delay(100);
+        FastLED.show();
     }
 
-    FastLED.show();
-    // keyboard.update();
+    //keyboard.update();
 
-    delay(1000);
+    delay(16);
 
 }
