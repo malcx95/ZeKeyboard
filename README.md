@@ -1,5 +1,5 @@
 # Ze-Keyboard
-60% backlit mechanical keyboard.
+60% RGB-backlit mechanical keyboard.
 
 ## Layout
 
@@ -9,6 +9,5 @@ you can find [here](https://github.com/TheZoq2/Keyboard).
 
 ## Backlight
 
-The backlight is controlled by five TLC5940 LED-driver IC:s, using
-[this library](https://github.com/PaulStoffregen/Tlc5940).
+The backlight consists of 64 Neopixels, using the FastLED library.
 
