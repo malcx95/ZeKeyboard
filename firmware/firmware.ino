@@ -64,48 +64,48 @@ void setup() {
 
 void loop() {
 
-    for (uint8_t i = 0; i < 64; ++i) {
-        leds[i] = CRGB::Purple;
-        delay(100);
-        FastLED.show();
-    }
+    // for (uint8_t i = 0; i < 64; ++i) {
+    //     leds[i] = CRGB::Purple;
+    //     delay(100);
+    //     FastLED.show();
+    // }
 
 
-    for (uint8_t i = 0; i < 64; ++i) {
-        leds[i] = CRGB::Green;
-        delay(100);
-        FastLED.show();
-    }
+    // for (uint8_t i = 0; i < 64; ++i) {
+    //     leds[i] = CRGB::Green;
+    //     delay(100);
+    //     FastLED.show();
+    // }
 
 
-    for (uint8_t i = 0; i < 64; ++i) {
-        leds[i] = CRGB::Red;
-        delay(100);
-        FastLED.show();
-    }
+    // for (uint8_t i = 0; i < 64; ++i) {
+    //     leds[i] = CRGB::Red;
+    //     delay(100);
+    //     FastLED.show();
+    // }
 
 
-    for (uint8_t i = 0; i < 64; ++i) {
-        leds[i] = CRGB::Blue;
-        delay(100);
-        FastLED.show();
-    }
+    // for (uint8_t i = 0; i < 64; ++i) {
+    //     leds[i] = CRGB::Blue;
+    //     delay(100);
+    //     FastLED.show();
+    // }
 
 
-    for (uint8_t i = 0; i < 64; ++i) {
-        leds[i] = CRGB::Yellow;
-        delay(100);
-        FastLED.show();
-    }
+    // for (uint8_t i = 0; i < 64; ++i) {
+    //     leds[i] = CRGB::Yellow;
+    //     delay(100);
+    //     FastLED.show();
+    // }
 
 
-    for (uint8_t i = 0; i < 64; ++i) {
-        leds[i] = CRGB::White;
-        delay(100);
-        FastLED.show();
-    }
+    // for (uint8_t i = 0; i < 64; ++i) {
+    //     leds[i] = CRGB::White;
+    //     delay(100);
+    //     FastLED.show();
+    // }
 
-    //keyboard.update();
+    keyboard.update();
 
     delay(16);
 
