@@ -38,12 +38,12 @@ namespace Ze {
         /*
          * Initializes key without second function.
          */
-        Key(int code);
+        Key(int code, uint8_t row, uint8_t col);
 
         /*
          * Initializes key with main and second function.
          */
-        Key(int main, int second);
+        Key(int main, int second, uint8_t row, uint8_t col);
 
         /*
          * Checks whether this key is a modifier key.
@@ -86,6 +86,10 @@ namespace Ze {
          * function, this is set as KEY_DUMMY.
          */
         int second;
+
+        uint8_t row;
+
+        uint8_t col;
     
     };
 
@@ -206,20 +210,20 @@ namespace Ze {
         //******************************************
         
         {
-            Key(KEY_ESC), 
-            Key(KEY_1, KEY_F1),
-            Key(KEY_2, KEY_F2),
-            Key(KEY_3, KEY_F3),
-            Key(KEY_4, KEY_F4), 
-            Key(KEY_5, KEY_F5),
-            Key(KEY_6, KEY_F6), 
-            Key(KEY_7, KEY_F7),
-            Key(KEY_8, KEY_F8),
-            Key(KEY_9, KEY_F9),
-            Key(KEY_0, KEY_F10), 
-            Key(KEY_MINUS), 
-            Key(KEY_EQUAL),
-            Key(KEY_BACKSPACE)
+            Key(KEY_ESC, 0, 0), 
+            Key(KEY_1, KEY_F1, 0, 1),
+            Key(KEY_2, KEY_F2, 0, 2),
+            Key(KEY_3, KEY_F3, 0, 3),
+            Key(KEY_4, KEY_F4, 0, 4), 
+            Key(KEY_5, KEY_F5, 0, 5),
+            Key(KEY_6, KEY_F6, 0, 6), 
+            Key(KEY_7, KEY_F7, 0, 7),
+            Key(KEY_8, KEY_F8, 0, 8),
+            Key(KEY_9, KEY_F9, 0, 9),
+            Key(KEY_0, KEY_F10, 0, 10), 
+            Key(KEY_MINUS, 0, 11), 
+            Key(KEY_EQUAL, 0, 12),
+            Key(KEY_BACKSPACE, 0, 13)
         },
 
         //******************************************
@@ -227,20 +231,20 @@ namespace Ze {
         //******************************************
 
         {
-            Key(KEY_TAB),
-            Key(KEY_Q), 
-            Key(KEY_W),
-            Key(KEY_E), 
-            Key(KEY_R),
-            Key(KEY_T), 
-            Key(KEY_Y),
-            Key(KEY_U), 
-            Key(KEY_I),
-            Key(KEY_O), 
-            Key(KEY_P),
-            Key(KEY_LEFT_BRACE),
-            Key(KEY_RIGHT_BRACE),
-            Key(KEY_BACKSLASH)
+            Key(KEY_TAB, 1, 0),
+            Key(KEY_Q, 1, 1), 
+            Key(KEY_W, 1, 2),
+            Key(KEY_E, 1, 3), 
+            Key(KEY_R, 1, 4),
+            Key(KEY_T, 1, 5), 
+            Key(KEY_Y, 1, 6),
+            Key(KEY_U, 1, 7), 
+            Key(KEY_I, 1, 8),
+            Key(KEY_O, 1, 9), 
+            Key(KEY_P, 1, 10),
+            Key(KEY_LEFT_BRACE, 1, 11),
+            Key(KEY_RIGHT_BRACE, 1, 12),
+            Key(KEY_BACKSLASH, 1, 13)
         },
 
         //******************************************
@@ -248,20 +252,20 @@ namespace Ze {
         //******************************************
         
         {
-            Key(KEY_FN),
-            Key(KEY_A), 
-            Key(KEY_S),
-            Key(KEY_D), 
-            Key(KEY_F), 
-            Key(KEY_G), 
-            Key(KEY_H, KEY_LEFT), 
-            Key(KEY_J, KEY_DOWN), 
-            Key(KEY_K, KEY_UP), 
-            Key(KEY_L, KEY_RIGHT), 
-            Key(KEY_SEMICOLON), 
-            Key(KEY_QUOTE),
+            Key(KEY_FN, 2, 0),
+            Key(KEY_A, 2, 1),
+            Key(KEY_S, 2, 2),
+            Key(KEY_D, 2, 3), 
+            Key(KEY_F, 2, 4), 
+            Key(KEY_G, 2, 5), 
+            Key(KEY_H, KEY_LEFT, 2, 6),
+            Key(KEY_J, KEY_DOWN, 2, 7),
+            Key(KEY_K, KEY_UP, 2, 8),
+            Key(KEY_L, KEY_RIGHT, 2, 9),
+            Key(KEY_SEMICOLON, 2, 10),
+            Key(KEY_QUOTE, 2, 11),
             Key(), // dummy
-            Key(KEY_ENTER)
+            Key(KEY_ENTER, 2, 13)
         },
 
         //******************************************
@@ -269,20 +273,20 @@ namespace Ze {
         //******************************************
         
         {
-            Key(KEY_LSHIFT),
-            Key(KEY_NON_US_BS),
-            Key(KEY_Z),
-            Key(KEY_X),
-            Key(KEY_C),
-            Key(KEY_V),
-            Key(KEY_B),
-            Key(KEY_N),
-            Key(KEY_M),
-            Key(KEY_COMMA),
-            Key(KEY_PERIOD),
-            Key(KEY_SLASH),
+            Key(KEY_LSHIFT, 3, 0),
+            Key(KEY_NON_US_BS, 3, 1),
+            Key(KEY_Z, 3, 2),
+            Key(KEY_X, 3, 3),
+            Key(KEY_C, 3, 4),
+            Key(KEY_V, 3, 5),
+            Key(KEY_B, 3, 6),
+            Key(KEY_N, 3, 7),
+            Key(KEY_M, 3, 8),
+            Key(KEY_COMMA, 3, 9),
+            Key(KEY_PERIOD, 3, 10),
+            Key(KEY_SLASH, 3, 11),
             Key(), // dummy
-            Key(KEY_RSHIFT)
+            Key(KEY_RSHIFT, 3, 13)
         },
 
         //******************************************
@@ -290,20 +294,20 @@ namespace Ze {
         //******************************************
         
         {
-            Key(KEY_CTRL),
-            Key(KEY_SUPER),
-            Key(KEY_ALT),
+            Key(KEY_CTRL, 4, 0),
+            Key(KEY_SUPER, 4, 1),
+            Key(KEY_ALT, 4, 2),
             Key(), // dummy
             Key(), // dummy
             Key(), // dummy
-            Key(KEY_SPACE),
+            Key(KEY_SPACE, 4, 6),
             Key(), // dummy
             Key(), // dummy
             Key(), // dummy
-            Key(KEY_ALTGR),
-            Key(KEY_MEDIA_PLAY_PAUSE),
-            Key(KEY_MEDIA_VOLUME_DEC, KEY_MEDIA_PREV_TRACK),
-            Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_NEXT_TRACK)
+            Key(KEY_ALTGR, 4, 10),
+            Key(KEY_MEDIA_PLAY_PAUSE, 4, 11),
+            Key(KEY_MEDIA_VOLUME_DEC, KEY_MEDIA_PREV_TRACK, 4, 12),
+            Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_NEXT_TRACK, 4, 13)
         }
     };
 

@@ -9,6 +9,8 @@ Backlight::Backlight() {
 void Backlight::init(Ze::Board* keyboard, CRGB* ledstrip) {
     this->keyboard = keyboard;
     this->ledstrip = ledstrip;
+    this->brightness = 1.0;
+    this->it = 0;
 
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
@@ -47,9 +49,11 @@ void Backlight::setup(BacklightStyle style) {
 
 void Backlight::update() {
 
+    this->it++;
+
     switch (style) {
         case STANDARD:
-            standard_update(this->leds, this->keyboard);
+            standard_update(this->leds, this->keyboard, this->it);
             break;
     }
 
@@ -66,6 +70,6 @@ void Backlight::update() {
     FastLED.show();
 }
 
-uint8_t translate_grid_to_strip(uint8_t row, uint8_t col) {
-    return 0;
+uint8_t Backlight::translate_grid_to_strip(uint8_t row, uint8_t col) {
+    return LED_GRID[row][col];
 }

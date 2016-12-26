@@ -6,7 +6,7 @@
 
 
 Ze::Board keyboard;
-//Backlight backlight;
+Backlight backlight;
 
 //CRGB row0[NUM_ROW0_LEDS];
 //CRGB row1[NUM_ROW1_LEDS];
@@ -43,23 +43,24 @@ void setup() {
     delay(50);
 
 
-    for (uint8_t i = 0; i < 64; ++i) {
-        leds[i].r = 1;
-        leds[i].g = 6;
-        leds[i].b = 3;
-    }
+    // for (uint8_t i = 0; i < 64; ++i) {
+    //     leds[i].r = 1;
+    //     leds[i].g = 6;
+    //     leds[i].b = 3;
+    // }
 
     FastLED.show();
     
     keyboard.init();
 
-    // backlight.init(&keyboard, rows);
+    backlight.init(&keyboard, leds);
 
-    // backlight.setup(BacklightStyle::STANDARD);
+    backlight.setup(BacklightStyle::STANDARD);
 
     Serial.begin(9600);
 
     delay(16);
+    
     //backlight.print_grid();
 
 }
@@ -108,6 +109,8 @@ void loop() {
     // }
 
     keyboard.update();
+    
+    backlight.update();
 
     delay(16);
 

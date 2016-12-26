@@ -5,13 +5,17 @@ Ze::Key::Key() {
     this->code = KEY_DUMMY;
 }
 
-Ze::Key::Key(int code) {
+Ze::Key::Key(int code, uint8_t row, uint8_t col) {
     this->code = code;
+    this->row = row;
+    this->col = col;
     this->second = KEY_DUMMY;
 }
 
-Ze::Key::Key(int code, int second) {
+Ze::Key::Key(int code, int second, uint8_t row, uint8_t col) {
     this->code = code;
+    this->row = row;
+    this->col = col;
     this->second = second;
 }
 
@@ -96,6 +100,7 @@ void Ze::Board::init() {
         keys_to_send[i] = Key();
         codes_to_send[i] = 0;
     }
+
 }
 
 void Ze::Board::reset_pressed_keys() {

@@ -1,5 +1,4 @@
 #include "led.h"
-#include <math.h>
 
 void LED::init() {
     this->port = LED_DUMMY;
