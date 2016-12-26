@@ -6,13 +6,16 @@
 #include "keyboard.h"
 #include <math.h>
 
-const float DEFAULT_BRIGHTNESS = 0.1;
+const float DEFAULT_BRIGHTNESS = 0.25;
 
-const float RED_SPEED = 2 * M_PI;
-const float GREEN_SPEED = 7;
+const float RED_SPEED = 2.1 * M_PI;
+const float GREEN_SPEED = 5.0;
 const float BLUE_SPEED = M_PI * M_PI;
+const float ROW_DIR_CHANGE_SPEED = M_PI / 3.0;
+const float COL_DIR_CHANGE_SPEED = 0.51;
 
-const float GLOBAL_SPEED_DIVISOR = 1000;
+const float GLOBAL_SPEED_DIVISOR = 500.0;
+const float PHASE_DIFFERENCE = 0.2;
 
 void standard_setup(LED leds[][Ze::NUM_COLS]);
 

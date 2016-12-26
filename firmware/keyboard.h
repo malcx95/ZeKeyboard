@@ -108,6 +108,8 @@ namespace Ze {
 
             Key* get_curr_pressed_keys();
 
+            uint8_t get_num_keys_pressed();
+
         private:
 
             const int MODIFIER_MAP[NUM_MODIFIERS] = {
@@ -131,12 +133,20 @@ namespace Ze {
 
             uint8_t num_keys_pressed;
 
+            uint8_t tot_num_keys_pressed;
+
             /*
              * The keys that are being pressed in the
-             * current iteration. The keys always
-             * occupy the lowes possible index.
+             * current iteration, which can be sent.
+             * The keys always occupy the lowes possible index.
              */
             Key curr_pressed_keys[MAX_NUM_KEYS];
+
+            /*
+             * Array of all currently pressed keys, even
+             * those that won't be sent.
+             */
+            Key all_pressed_keys[NUM_ROWS * NUM_COLS];
 
             /*
              * The keys to be sent. We need this

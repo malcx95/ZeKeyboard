@@ -91,8 +91,8 @@ const led_t LED_SPACE_MAIN =  58;
 const led_t LED_SPACE_RIGHT = 59;
 const led_t LED_ALTGR =       60;
 const led_t LED_PLAY_PAUSE =  61;
-const led_t LED_VOL_UP =      62;
-const led_t LED_VOL_DOWN =    63;
+const led_t LED_VOL_UP =      63;
+const led_t LED_VOL_DOWN =    62;
 
 
 #endif

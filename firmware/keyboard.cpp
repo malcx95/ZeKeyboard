@@ -92,6 +92,7 @@ void Ze::Board::init() {
 
     fn_pressed = false;
     num_keys_pressed = 0;
+    tot_num_keys_pressed = 0;
     current_media = 0;
 
     // Initialize the key buffers to nullptrs
@@ -101,21 +102,36 @@ void Ze::Board::init() {
         codes_to_send[i] = 0;
     }
 
+    // Initialize the all_pressed_keys array.
+    for (uint8_t i = 0; i < NUM_ROWS * NUM_COLS; ++i) {
+        all_pressed_keys[i] = Key();
+    }
+
 }
 
 void Ze::Board::reset_pressed_keys() {
     for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
         curr_pressed_keys[i] = Key();
     }
+
+    for (uint8_t i = 0; i < NUM_ROWS * NUM_COLS; ++i) {
+        if (all_pressed_keys[i].is_dummy()) break;
+        all_pressed_keys[i] = Key();
+    }
 }
 
 Ze::Key* Ze::Board::get_curr_pressed_keys() {
-    return this->curr_pressed_keys;
+    return this->all_pressed_keys;
+}
+
+uint8_t Ze::Board::get_num_keys_pressed() {
+    return this->tot_num_keys_pressed;
 }
 
 void Ze::Board::update() {
     reset_pressed_keys();
     num_keys_pressed = 0;
+    tot_num_keys_pressed = 0;
     current_modifier = 0;
     pressed_media = Key();
     fn_pressed = false;
@@ -142,6 +158,8 @@ void Ze::Board::scan_keys() {
                     // non dummy key is pressed
                     
                     Key pressed = KEYS[row][col];
+                    all_pressed_keys[tot_num_keys_pressed] = pressed;
+                    tot_num_keys_pressed++;
 
                     if (pressed.is_fn()) {
 
@@ -156,13 +174,12 @@ void Ze::Board::scan_keys() {
                         pressed_media = pressed;
 
                     } else {
-                        
-                        // if we already have six keys pressed, we need not continue
-                        if (num_keys_pressed == MAX_NUM_KEYS) return;
 
-                        curr_pressed_keys[num_keys_pressed] = pressed;
+                        // if there is room for keys to send
+                        if (num_keys_pressed < MAX_NUM_KEYS) {
+                            curr_pressed_keys[num_keys_pressed] = pressed;
+                        }
                         num_keys_pressed++;
-                        
                     }
                 }
             }

@@ -4,35 +4,18 @@
 #include <stdint.h>
 #include <FastLED.h>
 
+const int DELAY_MICROS = 16000;
 
 Ze::Board keyboard;
 Backlight backlight;
-
-//CRGB row0[NUM_ROW0_LEDS];
-//CRGB row1[NUM_ROW1_LEDS];
-//CRGB row2[NUM_ROW2_LEDS];
-//CRGB row3[NUM_ROW3_LEDS];
-//CRGB row4[NUM_ROW4_LEDS];
-//
-//CRGB* rows[Ze::NUM_ROWS] = {
-//    row0,
-//    row1,
-//    row2,
-//    row3,
-//    row4
-//};
 
 CRGB leds[NUM_LEDS];
 
 uint8_t count;
 
-void setup() {
+void smart_delay(unsigned long start_time);
 
-    // FastLED.addLeds<WS2812B, ROW0_PIN>(row0, NUM_ROW0_LEDS);
-    // FastLED.addLeds<WS2812B, ROW1_PIN>(row1, NUM_ROW1_LEDS);
-    // FastLED.addLeds<WS2812B, ROW2_PIN>(row2, NUM_ROW2_LEDS);
-    // FastLED.addLeds<WS2812B, ROW3_PIN>(row3, NUM_ROW3_LEDS);
-    // FastLED.addLeds<WS2812B, ROW4_PIN>(row4, NUM_ROW4_LEDS);
+void setup() {
 
     FastLED.addLeds<NEOPIXEL, 2>(leds, 64);
 
@@ -41,13 +24,6 @@ void setup() {
     FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
 
     delay(50);
-
-
-    // for (uint8_t i = 0; i < 64; ++i) {
-    //     leds[i].r = 1;
-    //     leds[i].g = 6;
-    //     leds[i].b = 3;
-    // }
 
     FastLED.show();
     
@@ -60,58 +36,29 @@ void setup() {
     Serial.begin(9600);
 
     delay(16);
-    
-    //backlight.print_grid();
 
 }
 
 void loop() {
 
-    // for (uint8_t i = 0; i < 64; ++i) {
-    //     leds[i] = CRGB::Purple;
-    //     delay(100);
-    //     FastLED.show();
-    // }
-
-
-    // for (uint8_t i = 0; i < 64; ++i) {
-    //     leds[i] = CRGB::Green;
-    //     delay(100);
-    //     FastLED.show();
-    // }
-
-
-    // for (uint8_t i = 0; i < 64; ++i) {
-    //     leds[i] = CRGB::Red;
-    //     delay(100);
-    //     FastLED.show();
-    // }
-
-
-    // for (uint8_t i = 0; i < 64; ++i) {
-    //     leds[i] = CRGB::Blue;
-    //     delay(100);
-    //     FastLED.show();
-    // }
-
-
-    // for (uint8_t i = 0; i < 64; ++i) {
-    //     leds[i] = CRGB::Yellow;
-    //     delay(100);
-    //     FastLED.show();
-    // }
-
-
-    // for (uint8_t i = 0; i < 64; ++i) {
-    //     leds[i] = CRGB::White;
-    //     delay(100);
-    //     FastLED.show();
-    // }
+    unsigned long start_time = micros();
 
     keyboard.update();
     
     backlight.update();
 
-    delay(16);
+    smart_delay(start_time);
 
+}
+
+void smart_delay(unsigned long start_time) {
+    unsigned long elapsed = micros() - start_time;
+    if (elapsed > DELAY_MICROS) {
+        Serial.println("Computing took more than 16 ms: ");
+        Serial.print(elapsed);
+        return;
+    } else {
+        Serial.println(elapsed);
+    }
+    delayMicroseconds(DELAY_MICROS - elapsed);
 }
