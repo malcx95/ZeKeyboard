@@ -7,8 +7,6 @@
 const led_t LED_DUMMY = 100;
 const float MAX_BYTE = 255.0;
 
-const float MAX_BRIGHTNESS = 1.0;
-
 struct LED {
 
     /*

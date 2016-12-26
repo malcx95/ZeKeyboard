@@ -15,7 +15,7 @@ class Backlight {
 
         Backlight();
 
-        void init(Ze::Board* keyboard, CRGB** rows);
+        void init(Ze::Board* keyboard, CRGB* rows);
 
         /*
          * Prints the grid for debugging.
@@ -36,10 +36,13 @@ class Backlight {
 
         Ze::Board* keyboard;
 
-        CRGB** rows;
+        float brightness;
+
+        CRGB* ledstrip;
 
         LED leds[Ze::NUM_ROWS][Ze::NUM_COLS];
 
+        uint8_t translate_grid_to_strip(uint8_t row, uint8_t col);
 };
 
 const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
@@ -125,8 +128,8 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
             LED_COMMA,
             LED_PERIOD,
             LED_SLASH,
-            LED_RSHIFT,
-            LED_DUMMY
+            LED_DUMMY,
+            LED_RSHIFT
         },
 
         //******************************************

@@ -22,7 +22,7 @@ Ze::Board keyboard;
 //    row4
 //};
 
-CRGB leds[64];
+CRGB leds[NUM_LEDS];
 
 uint8_t count;
 
@@ -38,13 +38,15 @@ void setup() {
 
     FastLED.clear();
 
-    FastLED.setMaxPowerInVoltsAndMilliamps(5, 700);
+    FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
 
     delay(50);
 
 
     for (uint8_t i = 0; i < 64; ++i) {
-        leds[i] = CRGB::White;
+        leds[i].r = 1;
+        leds[i].g = 6;
+        leds[i].b = 3;
     }
 
     FastLED.show();

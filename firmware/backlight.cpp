@@ -2,13 +2,13 @@
 
 Backlight::Backlight() {
     this->keyboard = nullptr;
-    this->rows = nullptr;
+    this->ledstrip = nullptr;
     this->style = BacklightStyle::STANDARD;
 }
 
-void Backlight::init(Ze::Board* keyboard, CRGB** rows) {
+void Backlight::init(Ze::Board* keyboard, CRGB* ledstrip) {
     this->keyboard = keyboard;
-    this->rows = rows;
+    this->ledstrip = ledstrip;
 
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
@@ -59,10 +59,13 @@ void Backlight::update() {
             LED curr = leds[row][col];
             if (!curr.is_dummy()) {
                 // set the color
-                rows[row][curr.port] = curr.get_hex_code();
+                ledstrip[translate_grid_to_strip(row, col)] = curr.get_hex_code();
             }
         }
     }
     FastLED.show();
 }
 
+uint8_t translate_grid_to_strip(uint8_t row, uint8_t col) {
+    return 0;
+}
