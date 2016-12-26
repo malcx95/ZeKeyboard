@@ -8,7 +8,7 @@
 
 const float DEFAULT_BRIGHTNESS = 0.25;
 
-const float RED_SPEED = 2.1 * M_PI;
+const float RED_SPEED = 2.1;
 const float GREEN_SPEED = 5.0;
 const float BLUE_SPEED = M_PI * M_PI;
 const float ROW_DIR_CHANGE_SPEED = M_PI / 3.0;

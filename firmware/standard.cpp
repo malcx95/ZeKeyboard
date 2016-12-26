@@ -17,7 +17,7 @@ void standard_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it) {
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
             leds[row][col].r = DEFAULT_BRIGHTNESS * 
-                (sin(RED_SPEED * it / GLOBAL_SPEED_DIVISOR +
+                (cos(RED_SPEED * it / GLOBAL_SPEED_DIVISOR +
                         (row * fade_dir_row - col * fade_dir_col) *
                         PHASE_DIFFERENCE) + 1) / 2;
             leds[row][col].g = DEFAULT_BRIGHTNESS * 
