@@ -52,7 +52,12 @@ void loop() {
 }
 
 void smart_delay(unsigned long start_time) {
-    unsigned long elapsed = micros() - start_time;
+    unsigned long time = micros();
+
+    // overflow has occurred
+    if (time < start_time) return;
+
+    unsigned long elapsed = time - start_time;
     if (elapsed > DELAY_MICROS) {
         Serial.println("Computing took more than 16 ms: ");
         Serial.print(elapsed);
