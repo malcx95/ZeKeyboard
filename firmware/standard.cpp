@@ -35,12 +35,28 @@ void standard_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it) {
 
 
     for (uint8_t i = 0; i < board->get_num_keys_pressed(); ++i) {
-        float r = leds[pressed[i].row][pressed[i].col].r;
-        leds[pressed[i].row][pressed[i].col].r = 1.0 - (r / DEFAULT_BRIGHTNESS);
-        float g = leds[pressed[i].row][pressed[i].col].g;
-        leds[pressed[i].row][pressed[i].col].g = 1.0 - (g / DEFAULT_BRIGHTNESS);
-        float b = leds[pressed[i].row][pressed[i].col].b;
-        leds[pressed[i].row][pressed[i].col].b = 1.0 - (b / DEFAULT_BRIGHTNESS);
+
+        float r = 1.0 - (leds[pressed[i].row][pressed[i].col].r / 
+                DEFAULT_BRIGHTNESS);
+        float g = 1.0 - (leds[pressed[i].row][pressed[i].col].g / 
+                DEFAULT_BRIGHTNESS);
+        float b = 1.0 - (leds[pressed[i].row][pressed[i].col].b /
+                DEFAULT_BRIGHTNESS);
+        leds[pressed[i].row][pressed[i].col].r = r;
+        leds[pressed[i].row][pressed[i].col].g = g;
+        leds[pressed[i].row][pressed[i].col].b = b;
+
+        if (pressed[i].code == KEY_SPACE) {
+            // Light up the left and right leds of the space bar
+
+            leds[pressed[i].row][pressed[i].col + 1].r = r;
+            leds[pressed[i].row][pressed[i].col + 1].g = g;
+            leds[pressed[i].row][pressed[i].col + 1].b = b; 
+
+            leds[pressed[i].row][pressed[i].col - 1].r = r; 
+            leds[pressed[i].row][pressed[i].col - 1].g = g;
+            leds[pressed[i].row][pressed[i].col - 1].b = b; 
+        }
     }
 }
 
