@@ -48,14 +48,15 @@ void standard_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it) {
 
         if (pressed[i].code == KEY_SPACE) {
             // Light up the left and right leds of the space bar
+            // Only light these up a third as much
 
-            leds[pressed[i].row][pressed[i].col + 1].r = r;
-            leds[pressed[i].row][pressed[i].col + 1].g = g;
-            leds[pressed[i].row][pressed[i].col + 1].b = b; 
+            leds[pressed[i].row][pressed[i].col + 1].r = r / 3;
+            leds[pressed[i].row][pressed[i].col + 1].g = g / 3;
+            leds[pressed[i].row][pressed[i].col + 1].b = b / 3; 
 
-            leds[pressed[i].row][pressed[i].col - 1].r = r; 
-            leds[pressed[i].row][pressed[i].col - 1].g = g;
-            leds[pressed[i].row][pressed[i].col - 1].b = b; 
+            leds[pressed[i].row][pressed[i].col - 1].r = r / 3; 
+            leds[pressed[i].row][pressed[i].col - 1].g = g / 3;
+            leds[pressed[i].row][pressed[i].col - 1].b = b / 3; 
         }
     }
 }
