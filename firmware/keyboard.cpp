@@ -76,6 +76,10 @@ void Ze::Board::print_key_arrays() {
     Serial.println("");
 }
 
+bool Ze::Board::brightness_inc_pressed() {
+    return this->b_inc_pressed && this->fn_pressed;
+}
+
 void Ze::Board::init() {
 
     // Set the rows as outputs
@@ -133,6 +137,7 @@ void Ze::Board::update() {
     num_keys_pressed = 0;
     tot_num_keys_pressed = 0;
     current_modifier = 0;
+    b_inc_pressed = false;
     pressed_media = Key();
     fn_pressed = false;
 
@@ -168,6 +173,11 @@ void Ze::Board::scan_keys() {
                     } else if (pressed.is_modifier()) {
 
                         current_modifier |= translate_modifier(pressed.code);
+
+                        // Handle brightness change
+                        if (pressed.code == KEY_INC_BRIGHTNESS) {
+                            b_inc_pressed = true;
+                        } 
 
                     } else if (pressed.is_media()) {
                         

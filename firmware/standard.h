@@ -6,7 +6,7 @@
 #include "keyboard.h"
 #include <math.h>
 
-const float DEFAULT_BRIGHTNESS = 0.25;
+const float DEFAULT_BRIGHTNESS = 0.5;
 
 const float RED_SPEED = 2.1;
 const float GREEN_SPEED = 5.0;

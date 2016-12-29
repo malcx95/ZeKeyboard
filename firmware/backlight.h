@@ -9,6 +9,9 @@
 #include "standard.h"
 #include <FastLED.h>
 
+// The difference in brightness settings, must be a fraction of 1
+const float BRIGHTNESS_UNIT = 0.1;
+
 class Backlight {
 
     public:
@@ -41,9 +44,14 @@ class Backlight {
 
         LED leds[Ze::NUM_ROWS][Ze::NUM_COLS];
 
+        uint64_t it;
+
+        bool already_changed_bright;
+
         uint8_t translate_grid_to_strip(uint8_t row, uint8_t col);
 
-        uint64_t it;
+        void increase_brightness();
+
 };
 
 const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =

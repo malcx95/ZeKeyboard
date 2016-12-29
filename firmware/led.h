@@ -30,7 +30,7 @@ struct LED {
 
     bool is_dummy() const;
 
-    uint32_t get_hex_code() const;
+    uint32_t get_hex_code(float brightness) const;
 
 };
 

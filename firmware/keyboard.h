@@ -24,6 +24,9 @@ namespace Ze {
     // to control behavior of other keys
     const int KEY_FN = -7;
 
+    // Keycodes for changing the backlight brightness
+    const int KEY_INC_BRIGHTNESS = KEY_LSHIFT;
+
     const uint8_t NUM_MODIFIERS = 6;
 
     const uint8_t READ_DELAY = 5;
@@ -110,6 +113,8 @@ namespace Ze {
 
             uint8_t get_num_keys_pressed();
 
+            bool brightness_inc_pressed();
+
         private:
 
             const int MODIFIER_MAP[NUM_MODIFIERS] = {
@@ -130,6 +135,8 @@ namespace Ze {
             };
 
             bool fn_pressed;
+
+            bool b_inc_pressed;
 
             uint8_t num_keys_pressed;
 

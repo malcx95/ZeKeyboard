@@ -21,7 +21,7 @@ void setup() {
 
     FastLED.clear();
 
-    FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
+    FastLED.setMaxPowerInVoltsAndMilliamps(5, 400);
 
     delay(50);
 
@@ -63,7 +63,7 @@ void smart_delay(unsigned long start_time) {
         Serial.print(elapsed);
         return;
     } else {
-        Serial.println(elapsed);
+        //Serial.println(elapsed);
     }
     delayMicroseconds(DELAY_MICROS - elapsed);
 }
