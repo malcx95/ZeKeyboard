@@ -33,7 +33,6 @@ void standard_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it) {
 
     Ze::Key* pressed = board->get_curr_pressed_keys();
 
-
     for (uint8_t i = 0; i < board->get_num_keys_pressed(); ++i) {
 
         float r = 1.0 - (leds[pressed[i].row][pressed[i].col].r / 

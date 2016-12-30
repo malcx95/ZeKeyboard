@@ -1,6 +1,14 @@
 #ifndef STANDARD_H
 #define STANDARD_H 
 
+/*
+ * The standard backlighting is a composition of sine waves
+ * varying the color among other things. This creates waves of 
+ * different colors propagating from varying directions with
+ * varying phase difference. When a key is pressed, the key lights
+ * up with the complementary color.
+ */
+
 #include "constants.h"
 #include "led.h"
 #include "keyboard.h"
