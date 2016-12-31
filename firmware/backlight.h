@@ -66,7 +66,7 @@ class Backlight {
         /*
          * The sea of water particles the WATER effect uses.
          */
-        WaterParticle particles[WATER_WIDTH][WATER_HEIGHT];
+        WaterParticle particles[WATER_HEIGHT][WATER_WIDTH];
 
         uint8_t translate_grid_to_strip(uint8_t row, uint8_t col);
 

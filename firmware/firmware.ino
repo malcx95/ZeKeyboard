@@ -21,7 +21,7 @@ void setup() {
 
     FastLED.clear();
 
-    FastLED.setMaxPowerInVoltsAndMilliamps(5, 400);
+    FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
 
     delay(50);
 
