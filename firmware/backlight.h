@@ -7,9 +7,10 @@
 #include "keyboard.h"
 #include "constants.h"
 #include "standard.h"
+#include "water.h"
 #include <FastLED.h>
 
-// The difference in brightness settings, must be a fraction of 1
+// The difference in brightness settings, do not change 
 const float BRIGHTNESS_UNIT = 0.1;
 
 class Backlight {
@@ -30,6 +31,9 @@ class Backlight {
          */
         void setup(BacklightStyle style);
 
+        /*
+         * Runs an iteration of the backlight effect.
+         */
         void update();
 
     private:
@@ -40,13 +44,29 @@ class Backlight {
 
         float brightness;
 
+        /*
+         * The actual LED-strip, an array of 64 brightness values.
+         */
         CRGB* ledstrip;
 
+        /*
+         * Grid containing all the LEDs to be manipulated
+         * by the effects.
+         */
         LED leds[Ze::NUM_ROWS][Ze::NUM_COLS];
 
+        /*
+         * Counter for iterating through, for example,
+         * the STANDARD effect.
+         */
         uint64_t it;
 
         bool already_changed_bright;
+
+        /*
+         * The sea of water particles the WATER effect uses.
+         */
+        WaterParticle particles[WATER_WIDTH][WATER_HEIGHT];
 
         uint8_t translate_grid_to_strip(uint8_t row, uint8_t col);
 

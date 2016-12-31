@@ -1,5 +1,5 @@
 #ifndef CONSTANTS_H
-#define CONSTANTS_H value
+#define CONSTANTS_H
 #include <stdint.h>
 
 namespace Ze {
@@ -12,7 +12,7 @@ namespace Ze {
 
 const uint8_t NUM_LEDS = 64;
 
-enum BacklightStyle {STANDARD};
+enum BacklightStyle {STANDARD, WATER};
 
 #endif /* ifndef CONSTANTS_H */
 

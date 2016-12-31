@@ -7,6 +7,7 @@ void standard_setup(LED leds[][Ze::NUM_COLS]) {
             leds[row][col].r = 0;
             leds[row][col].g = 0;
             leds[row][col].b = 0;
+            leds[row][col].aux = nullptr;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Ze {
     const int KEY_FN = -7;
 
     // Keycodes for changing the backlight brightness
-    const int KEY_INC_BRIGHTNESS = KEY_LSHIFT;
+    const int KEY_INC_BRIGHTNESS = KEY_RSHIFT;
 
     const uint8_t NUM_MODIFIERS = 6;
 

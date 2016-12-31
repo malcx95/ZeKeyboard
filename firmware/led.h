@@ -24,7 +24,17 @@ struct LED {
      */
     float b;
 
+    /*
+     * The index on the LEDstrip
+     */
     led_t port;
+
+    /*
+     * Place for storage of variables the
+     * particular effect requires, such as 
+     * a WaterParticle in the WATER effect.
+     */
+    void* aux;
 
     void init();
 

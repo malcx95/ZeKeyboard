@@ -45,6 +45,9 @@ void Backlight::setup(BacklightStyle style) {
         case STANDARD:
             standard_setup(this->leds);
             break;
+        case WATER:
+            water_setup(this->leds, this->particles);
+            break;
     }
 }
 
@@ -63,6 +66,9 @@ void Backlight::update() {
     switch (style) {
         case STANDARD:
             standard_update(this->leds, this->keyboard, this->it);
+            break;
+        case WATER:
+            water_update(this->leds, this->keyboard, this->particles);
             break;
     }
 
