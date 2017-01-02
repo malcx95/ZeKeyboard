@@ -68,7 +68,7 @@ void Backlight::update() {
             standard_update(this->leds, this->keyboard, this->it);
             break;
         case WATER:
-            water_update(this->leds, this->keyboard, this->particles);
+            water_update(this->leds, this->keyboard, this->particles, this->it);
             break;
     }
 

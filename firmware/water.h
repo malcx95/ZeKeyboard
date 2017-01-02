@@ -12,20 +12,16 @@ const float WIDTH_UNIT = WATER_WIDTH / Ze::NUM_COLS;
 const float HEIGHT_UNIT = WATER_HEIGHT / Ze::NUM_ROWS;
 
 struct WaterParticle {
-
     int8_t speed;
-
     int8_t pos;
-
     bool used;
-
 };
 
 void water_setup(LED leds[][Ze::NUM_COLS],
         WaterParticle particles[][WATER_WIDTH]);
 
 void water_update(LED leds[][Ze::NUM_COLS], 
-        Ze::Board* board, WaterParticle particles[][WATER_WIDTH]);
+        Ze::Board* board, WaterParticle particles[][WATER_WIDTH], uint64_t it);
 
 // The widths of the keys, zeros are dummies
 const float KEY_WIDTHS[Ze::NUM_ROWS][Ze::NUM_COLS] = {

@@ -2,6 +2,20 @@
 #include <math.h>
 #include <Arduino.h>
 
+void convert_colors(LED leds[][Ze::NUM_COLS],
+        WaterParticle particles[][WATER_WIDTH], uint64_t it) {
+    // TODO finish morph function
+}
+
+void copy_particles(WaterParticle main[][WATER_WIDTH],
+        WaterParticle copy[][WATER_WIDTH] ) {
+    for (uint8_t row = 0; row < WATER_HEIGHT; ++row) {
+        for (uint8_t col = 0; col < WATER_WIDTH; ++col) {
+            copy[row][col] = main[row][col];
+        }
+    }
+}
+
 void map_leds(LED leds[][Ze::NUM_COLS],
         WaterParticle particles[][WATER_WIDTH]) {
 
@@ -32,7 +46,12 @@ void water_setup(LED leds[][Ze::NUM_COLS],
 }
 
 void water_update(LED leds[][Ze::NUM_COLS], 
-        Ze::Board* board, WaterParticle particles[][WATER_WIDTH]) {
-    // TODO implement
+        Ze::Board* board, WaterParticle particles[][WATER_WIDTH], uint64_t it) {
+    WaterParticle copy[WATER_HEIGHT][WATER_WIDTH];
+    copy_particles(particles, copy);
+
+    // TODO update particles
+    
+
 }
 
