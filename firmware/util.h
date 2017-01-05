@@ -4,9 +4,9 @@
 #include <FastLED.h>
 
 struct Color {
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
+    float r;
+    float g;
+    float b;
 };
 
 /*
@@ -14,6 +14,6 @@ struct Color {
  * Amount specifies how much to be morphed: 0.0 is fully original
  * and 1.0 is fully new.
  */
-Color morph(Color from, Color to, float amount);
+void morph(Color from, Color to, float amount, Color& res);
 
 #endif /* ifndef UTIL_H */

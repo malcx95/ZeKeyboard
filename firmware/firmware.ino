@@ -31,7 +31,7 @@ void setup() {
 
     backlight.init(&keyboard, leds);
 
-    backlight.setup(BacklightStyle::STANDARD);
+    backlight.setup(BacklightStyle::WATER);
 
     Serial.begin(9600);
 

@@ -1,4 +1,5 @@
 #include "water.h"
+#include "util.h"
 #include <math.h>
 #include <Arduino.h>
 
@@ -50,8 +51,6 @@ void water_update(LED leds[][Ze::NUM_COLS],
     WaterParticle copy[WATER_HEIGHT][WATER_WIDTH];
     copy_particles(particles, copy);
 
-    // TODO update particles
-    
-
+    // TODO update particles and LED:s
 }
 
