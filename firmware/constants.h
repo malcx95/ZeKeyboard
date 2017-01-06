@@ -12,7 +12,5 @@ namespace Ze {
 
 const uint8_t NUM_LEDS = 64;
 
-enum BacklightStyle {STANDARD, WATER};
-
 #endif /* ifndef CONSTANTS_H */
 

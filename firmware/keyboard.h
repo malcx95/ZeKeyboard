@@ -113,8 +113,6 @@ namespace Ze {
 
             uint8_t get_num_keys_pressed();
 
-            bool brightness_inc_pressed();
-
         private:
 
             const int MODIFIER_MAP[NUM_MODIFIERS] = {
@@ -135,8 +133,6 @@ namespace Ze {
             };
 
             bool fn_pressed;
-
-            bool b_inc_pressed;
 
             uint8_t num_keys_pressed;
 
