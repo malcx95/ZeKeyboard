@@ -1,11 +1,34 @@
 #include "water.h"
-#include "util.h"
 #include <math.h>
 #include <Arduino.h>
 
+void do_water_physics(WaterParticle particles[][WATER_WIDTH]) {
+    for (uint8_t row = 0; row < WATER_HEIGHT; ++row) {
+        for (uint8_t col = 0; col < WATER_WIDTH; ++col) {
+            // TODO do physix
+        }
+    }
+}
+
 void convert_colors(LED leds[][Ze::NUM_COLS],
         WaterParticle particles[][WATER_WIDTH], uint64_t it) {
-    // TODO finish morph function
+    Color base_color = {
+        (sin(it * RED_SPEED_W / GLOBAL_SPEED_DIVISOR_W) + 1) / 2,
+        (sin(it * GREEN_SPEED_W / GLOBAL_SPEED_DIVISOR_W) + 1) / 2,
+        (sin(it * BLUE_SPEED_W / GLOBAL_SPEED_DIVISOR_W) + 1) / 2,
+    };
+    for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
+        for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
+            Color res;
+            LED* led = &leds[row][col];
+            WaterParticle* p = (WaterParticle*)led->aux;
+            float amount = p->pos / 128.0;
+            morph(base_color, WAVE_COLOR, amount, res);
+            led->r = res.r;
+            led->g = res.g;
+            led->b = res.b;
+        }
+    }
 }
 
 void copy_particles(WaterParticle main[][WATER_WIDTH],
@@ -30,7 +53,6 @@ void map_leds(LED leds[][Ze::NUM_COLS],
                 int index = (int)curr_width + offset;
                 leds[row][col].aux = (void*)&particles[row_index][index];
                 curr_width += (int)2 * offset;
-                particles[row_index][index].used = true;
             }
         }
     }
@@ -40,7 +62,7 @@ void water_setup(LED leds[][Ze::NUM_COLS],
         WaterParticle particles[][WATER_WIDTH]) {
     for (uint8_t row = 0; row < WATER_HEIGHT; ++row) {
         for (uint8_t col = 0; col < WATER_WIDTH; ++col) {
-            particles[row][col] = {0, 0, false};
+            particles[row][col] = {0, 0};
         }
     }
     map_leds(leds, particles);
@@ -51,6 +73,8 @@ void water_update(LED leds[][Ze::NUM_COLS],
     WaterParticle copy[WATER_HEIGHT][WATER_WIDTH];
     copy_particles(particles, copy);
 
-    // TODO update particles and LED:s
+    do_water_physics(particles);
+    
+    convert_colors(leds, particles, it);
 }
 
