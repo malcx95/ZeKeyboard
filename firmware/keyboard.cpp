@@ -91,7 +91,6 @@ void Ze::Board::init() {
     // Set the columns as inputs with pull up resistors
     for (uint8_t c = 0; c < NUM_COLS; ++c) {
         pinMode(COL_PINS[c], INPUT_PULLUP);
-        digitalWrite(COL_PINS[c], INPUT_PULLUP);
     }
 
     fn_pressed = false;
