@@ -37,7 +37,6 @@ void smart_delay(unsigned long start_time) {
     unsigned long elapsed = time - start_time;
     if (elapsed > DELAY_MICROS) {
         return;
-    } else {
     }
     delayMicroseconds(DELAY_MICROS - elapsed);
 }
