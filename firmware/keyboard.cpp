@@ -5,17 +5,13 @@ Ze::Key::Key() {
     this->code = KEY_DUMMY;
 }
 
-Ze::Key::Key(int code, uint8_t row, uint8_t col) {
+Ze::Key::Key(int code) {
     this->code = code;
-    this->row = row;
-    this->col = col;
     this->second = KEY_DUMMY;
 }
 
-Ze::Key::Key(int code, int second, uint8_t row, uint8_t col) {
+Ze::Key::Key(int code, int second) {
     this->code = code;
-    this->row = row;
-    this->col = col;
     this->second = second;
 }
 
