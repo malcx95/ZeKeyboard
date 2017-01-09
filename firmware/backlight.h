@@ -8,6 +8,7 @@
 #include "constants.h"
 #include "standard.h"
 #include "water.h"
+#include "rave.h"
 #include <FastLED.h>
 
 // The difference in brightness settings, do not change 
