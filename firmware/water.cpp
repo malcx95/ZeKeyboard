@@ -2,7 +2,8 @@
 #include <math.h>
 #include <Arduino.h>
 
-void do_water_physics(WaterParticle particles[][WATER_WIDTH]) {
+void do_water_physics(WaterParticle particles[][WATER_WIDTH],
+        WaterParticle copy[][WATER_WIDTH]) {
     for (uint8_t row = 0; row < WATER_HEIGHT; ++row) {
         for (uint8_t col = 0; col < WATER_WIDTH; ++col) {
             // TODO do physix
