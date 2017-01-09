@@ -41,12 +41,12 @@ namespace Ze {
         /*
          * Initializes key without second function.
          */
-        Key(int code, uint8_t row, uint8_t col);
+        Key(int code);
 
         /*
          * Initializes key with main and second function.
          */
-        Key(int main, int second, uint8_t row, uint8_t col);
+        Key(int main, int second);
 
         /*
          * Checks whether this key is a modifier key.
