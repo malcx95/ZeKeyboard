@@ -52,30 +52,6 @@ int Ze::Board::translate_modifier(const int modifier) const {
     return MODIFIER_MAP[-1 * modifier - 1];
 }
 
-// for debugging
-void Ze::Board::print_key_arrays() {
-    
-    Serial.println("-------------------------");
-
-    for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
-        Serial.print(curr_pressed_keys[i].code);
-        Serial.print(" ");
-    }
-    Serial.println("");
-
-    for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
-        Serial.print(keys_to_send[i].code);
-        Serial.print(" ");
-    }
-    Serial.println("");
-
-    for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
-        Serial.print(codes_to_send[i]);
-        Serial.print(" ");
-    }
-    Serial.println("");
-}
-
 bool Ze::Board::brightness_inc_pressed() {
     return this->b_inc_pressed && this->fn_pressed;
 }

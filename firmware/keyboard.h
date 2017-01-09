@@ -174,10 +174,6 @@ namespace Ze {
 
             int current_media;
 
-            int test_counter;
-            
-            void print_key_arrays();
-
             /*
              * Gets the real modifier code for a modifier key.
              * Does not translate the FN-key, and the modifier
