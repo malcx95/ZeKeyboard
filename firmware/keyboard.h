@@ -111,7 +111,11 @@ namespace Ze {
 
             Key* get_curr_pressed_keys();
 
+            Key* get_just_released_keys();
+
             uint8_t get_num_keys_pressed();
+
+            uint8_t get_num_released_keys();
 
             bool brightness_inc_pressed();
 
@@ -140,6 +144,8 @@ namespace Ze {
 
             uint8_t num_keys_pressed;
 
+            uint8_t num_keys_released;
+
             uint8_t tot_num_keys_pressed;
 
             /*
@@ -154,6 +160,12 @@ namespace Ze {
              * those that won't be sent.
              */
             Key all_pressed_keys[NUM_ROWS * NUM_COLS];
+
+            /*
+             * Array of the keys that were just released
+             * in this iteration.
+             */
+            Key just_released_keys[MAX_NUM_KEYS];
 
             /*
              * The keys to be sent. We need this

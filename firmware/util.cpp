@@ -13,3 +13,9 @@ void morph(Color from, Color to, float amount, Color& res) {
     res.b = from.b - bdiff * amount;
 }
 
+uint8_t clamp(int index, uint8_t max) {
+    if (index < 0) return 0;
+    else if (index > max) return max;
+    else return index;
+}
+

@@ -115,6 +115,7 @@ void Ze::Board::init() {
 void Ze::Board::reset_pressed_keys() {
     for (uint8_t i = 0; i < MAX_NUM_KEYS; ++i) {
         curr_pressed_keys[i] = Key();
+        just_released_keys[i] = Key();
     }
 
     for (uint8_t i = 0; i < NUM_ROWS * NUM_COLS; ++i) {
@@ -127,13 +128,22 @@ Ze::Key* Ze::Board::get_curr_pressed_keys() {
     return this->all_pressed_keys;
 }
 
+Ze::Key* Ze::Board::get_just_released_keys() {
+    return this->just_released_keys;
+}
+
 uint8_t Ze::Board::get_num_keys_pressed() {
     return this->tot_num_keys_pressed;
+}
+
+uint8_t Ze::Board::get_num_released_keys() {
+    return this->num_keys_released;
 }
 
 void Ze::Board::update() {
     reset_pressed_keys();
     num_keys_pressed = 0;
+    num_keys_released = 0;
     tot_num_keys_pressed = 0;
     current_modifier = 0;
     b_inc_pressed = false;
@@ -214,10 +224,12 @@ void Ze::Board::remove_released_keys() {
             // if the key was not found in the 
             // curr_pressed_keys array, it has
             // been released. Remove it from keys 
-            // to send.
+            // to send and add it to just released keys.
             if (!found) {
+                just_released_keys[num_keys_released] = keys_to_send[i];
                 keys_to_send[i] = Key();
                 codes_to_send[i] = KEY_DUMMY;
+                num_keys_released++;
             }
         }
     }

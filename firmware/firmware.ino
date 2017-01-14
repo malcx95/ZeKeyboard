@@ -35,8 +35,7 @@ void setup() {
 
     Serial.begin(9600);
 
-    delay(16);
-    delay(3000);
+    delay(1000);
 
 }
 
@@ -50,7 +49,7 @@ void loop() {
 
     smart_delay(start_time);
 
-    delay(50);
+    delay(10);
 
 }
 

@@ -16,4 +16,7 @@ struct Color {
  */
 void morph(Color from, Color to, float amount, Color& res);
 
+uint8_t clamp(int index, uint8_t max);
+
+
 #endif /* ifndef UTIL_H */

@@ -6,8 +6,8 @@
 #include "led.h"
 #include "util.h"
 
-const uint8_t WATER_HEIGHT = 20;
-const uint8_t WATER_WIDTH = 60;
+const uint8_t WATER_HEIGHT = 30;
+const uint8_t WATER_WIDTH = 90;
 
 const float RED_SPEED_W = 2;
 const float GREEN_SPEED_W = 1.6;
@@ -16,13 +16,17 @@ const float GLOBAL_SPEED_DIVISOR_W = 1500.0;
 
 const float WIDTH_UNIT = WATER_WIDTH / Ze::NUM_COLS;
 const float HEIGHT_UNIT = WATER_HEIGHT / Ze::NUM_ROWS;
-const float DAMPENING = 0.99;
+const float DAMPENING = 0.97;
 
-const Color WAVE_COLOR = {1.0, 1.0, 1.0};
+const uint8_t KEY_PRESS_RADIUS = 4;
+
+const Color WAVE_COLOR = {0.0, 0.0, 1.0};
 
 struct WaterParticle {
     int16_t speed;
     int16_t pos;
+    int8_t row;
+    int8_t col;
 };
 
 void water_setup(LED leds[][Ze::NUM_COLS],
