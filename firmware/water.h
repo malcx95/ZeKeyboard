@@ -16,12 +16,13 @@ const float GLOBAL_SPEED_DIVISOR_W = 1500.0;
 
 const float WIDTH_UNIT = WATER_WIDTH / Ze::NUM_COLS;
 const float HEIGHT_UNIT = WATER_HEIGHT / Ze::NUM_ROWS;
+const float DAMPENING = 0.99;
 
 const Color WAVE_COLOR = {1.0, 1.0, 1.0};
 
 struct WaterParticle {
-    int8_t speed;
-    int8_t pos;
+    int16_t speed;
+    int16_t pos;
 };
 
 void water_setup(LED leds[][Ze::NUM_COLS],
