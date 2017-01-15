@@ -1,15 +1,26 @@
 #include "water.h"
-#include <math.h>
 #include <Arduino.h>
 
-const int NUM_NEIGHBORS = 4;
+const int NUM_NEIGHBORS = 8;
 
 void get_neighbors(WaterParticle particles[][WATER_WIDTH],
-        WaterParticle neighbors[NUM_NEIGHBORS], int row, int col) {
+        WaterParticle neighbors[NUM_NEIGHBORS / 2], int row, int col) {
     neighbors[0] = particles[clamp(row + 1, WATER_HEIGHT - 1)][clamp(col, WATER_WIDTH - 1)];
     neighbors[1] = particles[clamp(row - 1, WATER_HEIGHT - 1)][clamp(col, WATER_WIDTH - 1)];
     neighbors[2] = particles[clamp(row, WATER_HEIGHT - 1)][clamp(col + 1, WATER_WIDTH - 1)];
     neighbors[3] = particles[clamp(row, WATER_HEIGHT - 1)][clamp(col - 1, WATER_WIDTH - 1)];
+}
+
+void get_corner_neighbors(WaterParticle particles[][WATER_WIDTH],
+        WaterParticle neighbors[NUM_NEIGHBORS / 2], int row, int col) {
+    neighbors[0] = particles[clamp(row + 1, WATER_HEIGHT - 1)]
+        [clamp(col + 1, WATER_WIDTH - 1)];
+    neighbors[1] = particles[clamp(row - 1, WATER_HEIGHT - 1)]
+        [clamp(col + 1, WATER_WIDTH - 1)];
+    neighbors[2] = particles[clamp(row + 1, WATER_HEIGHT - 1)]
+        [clamp(col - 1, WATER_WIDTH - 1)];
+    neighbors[3] = particles[clamp(row - 1, WATER_HEIGHT - 1)]
+        [clamp(col - 1, WATER_WIDTH - 1)];
 }
 
 void do_water_physics(WaterParticle particles[][WATER_WIDTH]) {
@@ -21,15 +32,19 @@ void do_water_physics(WaterParticle particles[][WATER_WIDTH]) {
             p->prev_speed = p->speed;
             p->prev_pos = p->pos;
 
-            WaterParticle neighbors[NUM_NEIGHBORS];
+            WaterParticle neighbors[NUM_NEIGHBORS / 2];
+            WaterParticle corners[NUM_NEIGHBORS / 2];
+
             get_neighbors(particles, neighbors, row, col);
+            get_corner_neighbors(particles, corners, row, col);
             int speed = 0;
-            for (uint8_t i = 0; i < NUM_NEIGHBORS; ++i) {
+            for (uint8_t i = 0; i < NUM_NEIGHBORS / 2; ++i) {
                 speed += (int)neighbors[i].prev_pos;
+                speed += (int)(corners[i].prev_pos * CORNER_DIST);
             }
             speed = (speed / NUM_NEIGHBORS) - p->prev_pos;
-            p->speed = (int16_t)(((float)(p->prev_speed + speed))
-                    * DAMPENING);
+            p->speed = (int16_t)(((float)(p->prev_speed + speed)) *
+                    DAMPENING);
             p->pos += p->speed;
         }
     }
@@ -78,8 +93,8 @@ void map_leds(LED leds[][Ze::NUM_COLS],
 
 void water_setup(LED leds[][Ze::NUM_COLS],
         WaterParticle particles[][WATER_WIDTH]) {
-    for (uint8_t row = 0; row < WATER_HEIGHT; ++row) {
-        for (uint8_t col = 0; col < WATER_WIDTH; ++col) {
+    for (int8_t row = 0; row < WATER_HEIGHT; ++row) {
+        for (int8_t col = 0; col < WATER_WIDTH; ++col) {
             particles[row][col] = {0, 0, 0, 0, row, col};
         }
     }

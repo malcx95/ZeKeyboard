@@ -10,6 +10,7 @@
 #include "keyboard.h"
 #include "led.h"
 #include "util.h"
+#include <math.h>
 
 const uint8_t WATER_HEIGHT = 30;
 const uint8_t WATER_WIDTH = 90;
@@ -20,11 +21,11 @@ const float PHI_SPEED = 2.0;
 const float THETA_SPEED = 3.0;
 const float GLOBAL_SPEED_DIVISOR_W = 1000.0;
 
-const float DAMPENING = 0.97;
+const float CORNER_DIST = 1.0 / sqrt(2);
 
-const uint8_t KEY_PRESS_RADIUS = 4;
+const float DAMPENING = 0.98;
 
-const Color WAVE_COLOR = {0.0, 0.0, 1.0};
+const uint8_t KEY_PRESS_RADIUS = 3;
 
 struct WaterParticle {
     int16_t speed;
