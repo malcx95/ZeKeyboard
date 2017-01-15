@@ -19,13 +19,13 @@ const float HEIGHT_UNIT = WATER_HEIGHT / Ze::NUM_ROWS;
 
 const float PHI_SPEED = 2.0;
 const float THETA_SPEED = 3.0;
-const float GLOBAL_SPEED_DIVISOR_W = 1000.0;
+const float GLOBAL_SPEED_DIVISOR_W = 500.0;
 
 const float CORNER_DIST = 1.0 / sqrt(2);
 
 const float DAMPENING = 0.98;
 
-const uint8_t KEY_PRESS_RADIUS = 3;
+const uint8_t KEY_PRESS_RADIUS = 4;
 
 struct WaterParticle {
     int16_t speed;

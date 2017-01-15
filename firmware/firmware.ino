@@ -35,7 +35,7 @@ void setup() {
 
     Serial.begin(9600);
 
-    delay(1000);
+    delay(500);
 
 }
 
@@ -48,8 +48,6 @@ void loop() {
     backlight.update();
 
     smart_delay(start_time);
-
-    //delay(10);
 
 }
 
