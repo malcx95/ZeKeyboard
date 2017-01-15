@@ -73,6 +73,9 @@ void Backlight::change_style() {
         case WATER:
             water_destroy(this->particles);
             break;
+        case RAVE:
+            rave_destroy();
+            break;
     }
     BacklightStyle s = static_cast<BacklightStyle>((((int)this->style) + 1) % NUM_STYLES);
     this->setup(s);

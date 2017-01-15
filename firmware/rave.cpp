@@ -56,3 +56,6 @@ void rave_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it) {
         }
     }
 }
+
+void rave_destroy() {}
+
