@@ -18,7 +18,7 @@ const float HEIGHT_UNIT = WATER_HEIGHT / Ze::NUM_ROWS;
 
 const float PHI_SPEED = 2.0;
 const float THETA_SPEED = 3.0;
-const float GLOBAL_SPEED_DIVISOR_W = 1500.0;
+const float GLOBAL_SPEED_DIVISOR_W = 1000.0;
 
 const float DAMPENING = 0.97;
 

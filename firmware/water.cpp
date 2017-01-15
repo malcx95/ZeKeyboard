@@ -50,10 +50,9 @@ void convert_colors(LED leds[][Ze::NUM_COLS],
                 WaterParticle* p = (WaterParticle*)led->aux;
                 float amount = ((((float)p->pos) / 32767.0) + 1.0) / 2.0;
                 amount *= amount * amount;
-                led->r = res.r * amount;
-                led->g = res.g * amount;
-                led->b = res.b * amount;
-                // FIXME THEY ARE SOMETIMES NEGATIVE
+                led->r = fabs(res.r) * amount;
+                led->g = fabs(res.g) * amount;
+                led->b = fabs(res.b) * amount;
             }
         }
     }

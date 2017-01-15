@@ -11,8 +11,8 @@
 #include "rave.h"
 #include <FastLED.h>
 
-// The difference in brightness settings, do not change 
-const float BRIGHTNESS_UNIT = 0.1;
+const uint8_t NUM_BRIGHTNESS_VALUES = 4;
+const float BRIGHTNESS_VALUES[NUM_BRIGHTNESS_VALUES] = {0.0, 0.25, 0.5, 1.0};
 
 class Backlight {
 
@@ -42,6 +42,8 @@ class Backlight {
         BacklightStyle style;
 
         Ze::Board* keyboard;
+
+        uint8_t curr_brightness;
 
         float brightness;
 

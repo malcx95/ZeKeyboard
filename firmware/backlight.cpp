@@ -9,7 +9,8 @@ Backlight::Backlight() {
 void Backlight::init(Ze::Board* keyboard, CRGB* ledstrip) {
     this->keyboard = keyboard;
     this->ledstrip = ledstrip;
-    this->brightness = 0.4;
+    this->curr_brightness = 2;
+    this->brightness = BRIGHTNESS_VALUES[this->curr_brightness];
     this->it = 0;
     this->already_changed_bright = false;
 
@@ -126,13 +127,8 @@ void Backlight::update() {
 }
 
 void Backlight::increase_brightness() {
-    if (this->brightness == 1.0) {
-        this->brightness = 0;
-    } else if (this->brightness >= 0.6) {
-        this->brightness += BRIGHTNESS_UNIT * 2;
-    } else {
-        this->brightness += BRIGHTNESS_UNIT;
-    }
+    this->curr_brightness = (curr_brightness + 1) % NUM_BRIGHTNESS_VALUES;
+    this->brightness = BRIGHTNESS_VALUES[curr_brightness];
 }
 
 uint8_t Backlight::translate_grid_to_strip(uint8_t row, uint8_t col) {
