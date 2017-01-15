@@ -35,6 +35,8 @@ void water_setup(LED leds[][Ze::NUM_COLS],
 void water_update(LED leds[][Ze::NUM_COLS], 
         Ze::Board* board, WaterParticle particles[][WATER_WIDTH], uint64_t it);
 
+void water_destroy(WaterParticle particles[][WATER_WIDTH]);
+
 // The widths of the keys, zeros are dummies
 const float KEY_WIDTHS[Ze::NUM_ROWS][Ze::NUM_COLS] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2},

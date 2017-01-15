@@ -31,7 +31,7 @@ void setup() {
 
     backlight.init(&keyboard, leds);
 
-    backlight.setup(BacklightStyle::WATER);
+    backlight.setup(BacklightStyle::STANDARD);
 
     Serial.begin(9600);
 
@@ -49,7 +49,7 @@ void loop() {
 
     smart_delay(start_time);
 
-    delay(10);
+    //delay(10);
 
 }
 

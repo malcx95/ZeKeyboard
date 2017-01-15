@@ -80,6 +80,10 @@ bool Ze::Board::brightness_inc_pressed() {
     return this->b_inc_pressed && this->fn_pressed;
 }
 
+bool Ze::Board::backlight_style_changed() {
+    return this->b_style_pressed && this->fn_pressed;
+}
+
 void Ze::Board::init() {
 
     // Set the rows as outputs
@@ -147,6 +151,7 @@ void Ze::Board::update() {
     tot_num_keys_pressed = 0;
     current_modifier = 0;
     b_inc_pressed = false;
+    b_style_pressed = false;
     pressed_media = Key();
     fn_pressed = false;
 
@@ -186,7 +191,10 @@ void Ze::Board::scan_keys() {
                         // Handle brightness change
                         if (pressed.code == KEY_INC_BRIGHTNESS) {
                             b_inc_pressed = true;
-                        } 
+                        }
+                        if (pressed.code == KEY_BACKLIGHT_STYLE) {
+                            b_style_pressed = true;
+                        }
 
                     } else if (pressed.is_media()) {
                         

@@ -130,3 +130,7 @@ void water_update(LED leds[][Ze::NUM_COLS],
     convert_colors(leds, particles, it);
 }
 
+void water_destroy(WaterParticle particles[][WATER_WIDTH]) {
+    // TODO implement and change from array to **
+}
+
