@@ -37,32 +37,25 @@ void do_water_physics(WaterParticle particles[][WATER_WIDTH]) {
 
 void convert_colors(LED leds[][Ze::NUM_COLS],
         WaterParticle particles[][WATER_WIDTH], uint64_t it) {
-    //Color base_color = {
-    //    (sin(it * RED_SPEED_W / GLOBAL_SPEED_DIVISOR_W) + 1) / 2,
-    //    (cos(it * GREEN_SPEED_W / GLOBAL_SPEED_DIVISOR_W) + 1) / 2,
-    //    (sin(it * BLUE_SPEED_W / GLOBAL_SPEED_DIVISOR_W) + 1) / 2,
-    //};
-    Color base_color = {0.0, 0.0, 1.0};
+    Color res;
+    spherical_color(
+            1.0, 
+            it * PHI_SPEED / GLOBAL_SPEED_DIVISOR_W,
+            it * THETA_SPEED / GLOBAL_SPEED_DIVISOR_W, 
+            res);
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
             if (!leds[row][col].is_dummy()) {
-                Color res;
                 LED* led = &leds[row][col];
                 WaterParticle* p = (WaterParticle*)led->aux;
                 float amount = ((((float)p->pos) / 32767.0) + 1.0) / 2.0;
                 amount *= amount * amount;
-                //Serial.print(amount);
-                //Serial.print(" ");
-                //morph(base_color, WAVE_COLOR, amount, res);
-                //led->r = res.r;
-                //led->g = res.g;
-                //led->b = res.b;
-                led->r = 0;
-                led->g = 0;
-                led->b = amount;
+                led->r = res.r * amount;
+                led->g = res.g * amount;
+                led->b = res.b * amount;
+                // FIXME THEY ARE SOMETIMES NEGATIVE
             }
         }
-        //Serial.println("");
     }
 }
 

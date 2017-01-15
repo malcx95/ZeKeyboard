@@ -19,3 +19,13 @@ uint8_t clamp(int index, uint8_t max) {
     else return index;
 }
 
+void spherical_color(double r, double phi, double theta, Color& res) {
+    double sinphi = sin(phi);
+    double sintheta = sin(theta);
+    double cosphi = cos(phi);
+    double costheta = cos(theta);
+
+    res.r = r * sintheta * cosphi;
+    res.g = r * sintheta * sinphi;
+    res.b = r * costheta;
+}

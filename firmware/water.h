@@ -16,9 +16,8 @@ const uint8_t WATER_WIDTH = 90;
 const float WIDTH_UNIT = WATER_WIDTH / Ze::NUM_COLS;
 const float HEIGHT_UNIT = WATER_HEIGHT / Ze::NUM_ROWS;
 
-const float RED_SPEED_W = 2;
-const float GREEN_SPEED_W = 1.6;
-const float BLUE_SPEED_W = 1.1;
+const float PHI_SPEED = 2.0;
+const float THETA_SPEED = 3.0;
 const float GLOBAL_SPEED_DIVISOR_W = 1500.0;
 
 const float DAMPENING = 0.97;
