@@ -49,7 +49,7 @@ void Backlight::setup(BacklightStyle style) {
             water_setup(this->leds, this->particles);
             break;
         case RAVE:
-            standard_setup(this->leds);
+            rave_setup(this->leds);
             break;
     }
 }

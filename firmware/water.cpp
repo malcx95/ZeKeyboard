@@ -12,24 +12,26 @@ void get_neighbors(WaterParticle particles[][WATER_WIDTH],
     neighbors[3] = particles[clamp(row, WATER_HEIGHT - 1)][clamp(col - 1, WATER_WIDTH - 1)];
 }
 
-void do_water_physics(WaterParticle particles[][WATER_WIDTH],
-        WaterParticle copy[][WATER_WIDTH]) {
+void do_water_physics(WaterParticle particles[][WATER_WIDTH]) {
     for (int row = 0; row < WATER_HEIGHT; ++row) {
         for (int col = 0; col < WATER_WIDTH; ++col) {
+            WaterParticle* p = &particles[row][col];
+
+            // make sure we still have the previous speed and position
+            p->prev_speed = p->speed;
+            p->prev_pos = p->pos;
+
             WaterParticle neighbors[NUM_NEIGHBORS];
-            get_neighbors(copy, neighbors, row, col);
+            get_neighbors(particles, neighbors, row, col);
             int speed = 0;
             for (uint8_t i = 0; i < NUM_NEIGHBORS; ++i) {
-                speed += (int)neighbors[i].pos;
+                speed += (int)neighbors[i].prev_pos;
             }
-            speed = (speed / NUM_NEIGHBORS) - copy[row][col].pos;
-            particles[row][col].speed = (int16_t)(((float)(copy[row][col].speed + speed))
+            speed = (speed / NUM_NEIGHBORS) - p->prev_pos;
+            p->speed = (int16_t)(((float)(p->prev_speed + speed))
                     * DAMPENING);
-            particles[row][col].pos += particles[row][col].speed;
-            //Serial.print(particles[row][col].pos);
-            //Serial.print(" ");
+            p->pos += p->speed;
         }
-        //Serial.println("");
     }
 }
 
@@ -64,15 +66,6 @@ void convert_colors(LED leds[][Ze::NUM_COLS],
     }
 }
 
-void copy_particles(WaterParticle main[][WATER_WIDTH],
-        WaterParticle copy[][WATER_WIDTH] ) {
-    for (uint8_t row = 0; row < WATER_HEIGHT; ++row) {
-        for (uint8_t col = 0; col < WATER_WIDTH; ++col) {
-            copy[row][col] = main[row][col];
-        }
-    }
-}
-
 void map_leds(LED leds[][Ze::NUM_COLS],
         WaterParticle particles[][WATER_WIDTH]) {
 
@@ -95,7 +88,7 @@ void water_setup(LED leds[][Ze::NUM_COLS],
         WaterParticle particles[][WATER_WIDTH]) {
     for (uint8_t row = 0; row < WATER_HEIGHT; ++row) {
         for (uint8_t col = 0; col < WATER_WIDTH; ++col) {
-            particles[row][col] = {0, 0, row, col};
+            particles[row][col] = {0, 0, 0, 0, row, col};
         }
     }
     map_leds(leds, particles);
@@ -119,15 +112,25 @@ void react_to_keypress(Ze::Board* board,
     }
 }
 
+void update_previous_fields(WaterParticle particles[][WATER_WIDTH]) {
+    for (uint8_t row = 0; row < WATER_HEIGHT; ++row) {
+        for (uint8_t col = 0; col < WATER_WIDTH; ++col) {
+            WaterParticle* p = &particles[row][col];
+            p->prev_pos = p->pos;
+            p->prev_speed = p->speed;
+        }
+    }
+}
+
 void water_update(LED leds[][Ze::NUM_COLS], 
         Ze::Board* board, WaterParticle particles[][WATER_WIDTH], uint64_t it) {
     react_to_keypress(board, particles, leds);
-    WaterParticle copy[WATER_HEIGHT][WATER_WIDTH];
-    copy_particles(particles, copy);
 
-    do_water_physics(particles, copy);
+    do_water_physics(particles);
     
     convert_colors(leds, particles, it);
+
+    update_previous_fields(particles);
 }
 
 void water_destroy(WaterParticle particles[][WATER_WIDTH]) {

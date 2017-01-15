@@ -30,6 +30,8 @@ const Color WAVE_COLOR = {0.0, 0.0, 1.0};
 struct WaterParticle {
     int16_t speed;
     int16_t pos;
+    int16_t prev_speed;
+    int16_t prev_pos;
     int8_t row;
     int8_t col;
 };
