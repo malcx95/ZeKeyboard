@@ -61,3 +61,5 @@ void standard_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it) {
     }
 }
 
+void standard_destroy() {}
+

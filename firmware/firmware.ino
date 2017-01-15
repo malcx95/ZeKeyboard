@@ -35,7 +35,7 @@ void setup() {
 
     Serial.begin(9600);
 
-    delay(16);
+    delay(1000);
 
 }
 
@@ -49,6 +49,8 @@ void loop() {
 
     smart_delay(start_time);
 
+    //delay(10);
+
 }
 
 void smart_delay(unsigned long start_time) {
@@ -59,11 +61,11 @@ void smart_delay(unsigned long start_time) {
 
     unsigned long elapsed = time - start_time;
     if (elapsed > DELAY_MICROS) {
-        Serial.println("Computing took more than 16 ms: ");
-        Serial.print(elapsed);
+        Serial.print("Computing took more than 16 ms: ");
+        Serial.println(elapsed);
         return;
     } else {
-        //Serial.println(elapsed);
+        Serial.println(elapsed);
     }
     delayMicroseconds(DELAY_MICROS - elapsed);
 }

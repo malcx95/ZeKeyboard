@@ -54,8 +54,7 @@ void Backlight::setup(BacklightStyle style) {
     }
 }
 
-void Backlight::update() {
-
+void Backlight::handle_brightness_change() {
     if (this->keyboard->brightness_inc_pressed()) {
         if (!this->already_changed_bright) {
             increase_brightness();
@@ -64,6 +63,37 @@ void Backlight::update() {
     } else {
         this->already_changed_bright = false;
     }
+}
+
+void Backlight::change_style() {
+    switch (this->style) {
+        case STANDARD:
+            standard_destroy();
+            break;
+        case WATER:
+            water_destroy(this->particles);
+            break;
+    }
+    BacklightStyle s = static_cast<BacklightStyle>((((int)this->style) + 1) % NUM_STYLES);
+    this->setup(s);
+}
+
+void Backlight::handle_backlight_change() {
+    if (this->keyboard->backlight_style_changed()) {
+        if (!this->already_changed_style) {
+            change_style();
+        }
+        this->already_changed_style = true;
+    } else {
+        this->already_changed_style = false;
+    }
+}
+
+void Backlight::update() {
+
+    handle_backlight_change();
+    
+    handle_brightness_change();
 
     this->it++;
     switch (style) {
@@ -71,7 +101,7 @@ void Backlight::update() {
             standard_update(this->leds, this->keyboard, this->it);
             break;
         case WATER:
-            water_update(this->leds, this->keyboard, this->particles);
+            water_update(this->leds, this->keyboard, this->particles, this->it);
             break;
         case RAVE:
             rave_update(this->leds, this->keyboard, this->it);

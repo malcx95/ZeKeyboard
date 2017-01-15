@@ -4,28 +4,38 @@
 #include "constants.h"
 #include "keyboard.h"
 #include "led.h"
+#include "util.h"
 
-const uint8_t WATER_HEIGHT = 20;
-const uint8_t WATER_WIDTH = 60;
+const uint8_t WATER_HEIGHT = 30;
+const uint8_t WATER_WIDTH = 90;
+
+const float RED_SPEED_W = 2;
+const float GREEN_SPEED_W = 1.6;
+const float BLUE_SPEED_W = 1.1;
+const float GLOBAL_SPEED_DIVISOR_W = 1500.0;
 
 const float WIDTH_UNIT = WATER_WIDTH / Ze::NUM_COLS;
 const float HEIGHT_UNIT = WATER_HEIGHT / Ze::NUM_ROWS;
+const float DAMPENING = 0.97;
+
+const uint8_t KEY_PRESS_RADIUS = 4;
+
+const Color WAVE_COLOR = {0.0, 0.0, 1.0};
 
 struct WaterParticle {
-
-    int8_t speed;
-
-    int8_t pos;
-
-    bool used;
-
+    int16_t speed;
+    int16_t pos;
+    int8_t row;
+    int8_t col;
 };
 
 void water_setup(LED leds[][Ze::NUM_COLS],
         WaterParticle particles[][WATER_WIDTH]);
 
 void water_update(LED leds[][Ze::NUM_COLS], 
-        Ze::Board* board, WaterParticle particles[][WATER_WIDTH]);
+        Ze::Board* board, WaterParticle particles[][WATER_WIDTH], uint64_t it);
+
+void water_destroy(WaterParticle particles[][WATER_WIDTH]);
 
 // The widths of the keys, zeros are dummies
 const float KEY_WIDTHS[Ze::NUM_ROWS][Ze::NUM_COLS] = {

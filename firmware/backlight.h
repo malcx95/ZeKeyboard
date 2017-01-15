@@ -64,6 +64,8 @@ class Backlight {
 
         bool already_changed_bright;
 
+        bool already_changed_style;
+
         /*
          * The sea of water particles the WATER effect uses.
          */
@@ -72,6 +74,14 @@ class Backlight {
         uint8_t translate_grid_to_strip(uint8_t row, uint8_t col);
 
         void increase_brightness();
+
+        void change_style();
+
+        void change_backlight_style();
+
+        void handle_brightness_change();
+        
+        void handle_backlight_change();
 
 };
 
