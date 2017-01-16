@@ -25,5 +25,7 @@ void spherical_color(double r, double phi, double theta, Color& res);
 
 uint8_t clamp(int index, uint8_t max);
 
+uint8_t wrap_around(int index, uint8_t max);
+
 
 #endif /* ifndef UTIL_H */

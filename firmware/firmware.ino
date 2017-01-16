@@ -17,7 +17,7 @@ void smart_delay(unsigned long start_time);
 
 void setup() {
 
-    FastLED.addLeds<NEOPIXEL, 2>(leds, 64);
+    FastLED.addLeds<NEOPIXEL, 2>(leds, NUM_LEDS);
 
     FastLED.clear();
 

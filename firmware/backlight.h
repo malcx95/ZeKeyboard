@@ -9,6 +9,7 @@
 #include "standard.h"
 #include "water.h"
 #include "rave.h"
+#include "gameoflife.h"
 #include <FastLED.h>
 
 const uint8_t NUM_BRIGHTNESS_VALUES = 4;

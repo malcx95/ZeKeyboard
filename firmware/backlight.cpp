@@ -52,6 +52,9 @@ void Backlight::setup(BacklightStyle style) {
         case RAVE:
             rave_setup(this->leds);
             break;
+        case GAMEOFLIFE:
+            gameoflife_setup(this->leds, this->cells);
+            break;
     }
 }
 
@@ -109,6 +112,9 @@ void Backlight::update() {
             break;
         case RAVE:
             rave_update(this->leds, this->keyboard, this->it);
+            break;
+        case GAMEOFLIFE:
+            gameoflife_update(this->leds, this->keyboard, this->cells, this->it);
             break;
     }
 

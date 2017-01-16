@@ -19,6 +19,12 @@ uint8_t clamp(int index, uint8_t max) {
     else return index;
 }
 
+uint8_t wrap_around(int index, uint8_t max) {
+    if (index < 0) return max;
+    else if (index > max) return 0;
+    else return index;
+}
+
 void spherical_color(double r, double phi, double theta, Color& res) {
     double sinphi = sin(phi);
     double sintheta = sin(theta);
