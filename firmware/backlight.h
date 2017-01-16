@@ -73,6 +73,12 @@ class Backlight {
          */
         WaterParticle particles[WATER_HEIGHT][WATER_WIDTH];
 
+        /*
+         * The grid of ceĺls in the game of life effect.
+         * Each bit corresponds to a cell.
+         */
+        uint16_t cells[Ze::NUM_ROWS];
+
         uint8_t translate_grid_to_strip(uint8_t row, uint8_t col);
 
         void increase_brightness();
