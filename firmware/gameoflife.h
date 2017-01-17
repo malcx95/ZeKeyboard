@@ -11,22 +11,23 @@
  */
 const uint8_t OUTERMOST_CELL = 13;
 
+const uint8_t DELAY = 10;
+
 /*
  * These are the colors of cells with different numbers of
  * neighbors. The 0:th entry is the color an alive cell has
  * when it has no alive neighbors, and the 8:th when it has 
  * eight alive neighbors.
  */
-
 const Color CELL_COLORS[9] = {
     {0.0, 0.0, 1.0},
     {0.0, 0.5, 0.5},
     {0.0, 0.7, 0.3},
     {0.0, 1.0, 0.0},
-    {0.2, 0.8, 0.0},
+    {0.3, 0.7, 0.0},
     {0.5, 0.5, 0.0},
-    {0.8, 0.2, 0.0},
-    {1.0, 0.0, 0.0},
+    {0.7, 0.3, 0.0},
+    {0.9, 0.1, 0.0},
     {1.0, 0.0, 0.0}
 };
 

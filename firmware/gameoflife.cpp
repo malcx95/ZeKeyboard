@@ -81,12 +81,19 @@ void gameoflife_setup(LED leds[][Ze::NUM_COLS], uint16_t cells[Ze::NUM_ROWS]) {
     for (uint8_t i = 0; i < Ze::NUM_ROWS; ++i) {
         cells[i] = 0;
     }
+
+    // Start with glider
+    set_cell(cells, 3, 5, true);
+    set_cell(cells, 3, 6, true);
+    set_cell(cells, 3, 7, true);
+    set_cell(cells, 2, 7, true);
+    set_cell(cells, 1, 6, true);
 }
 
 void gameoflife_update(LED leds[][Ze::NUM_COLS], 
         Ze::Board* board, uint16_t cells[Ze::NUM_ROWS], uint64_t it) {
 
-    if (it % 16 == 0) {
+    if (it % DELAY == 0) {
         update_cells(cells);
     }
 
