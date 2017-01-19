@@ -9,6 +9,7 @@ void standard_setup(LED leds[][Ze::NUM_COLS], WaterParticle particles[][WATER_WI
             leds[row][col].b = 0;
             // map each LED to a particle for fade out effect. Yes, this is pretty hacky.
             leds[row][col].aux = &particles[row][col];
+            particles[row][col].pos = 0;
         }
     }
 }
