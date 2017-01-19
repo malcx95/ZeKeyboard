@@ -3,7 +3,7 @@
 
 /*
  * A backlight effect that simulates a pool
- * of liquid. Press a key do disrupt the surface.
+ * of liquid. Press a key to disrupt the surface.
  */
 
 #include "constants.h"

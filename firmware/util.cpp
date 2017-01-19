@@ -1,6 +1,6 @@
 #include "util.h"
 
-void morph(Color from, Color to, float amount, Color& res) {
+void morph(Color& from, Color& to, float amount, Color& res) {
     if (amount < 0.0) amount = 0.0;
     else if (amount > 1.0) amount = 1.0;
 

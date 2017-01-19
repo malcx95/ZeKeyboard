@@ -15,7 +15,7 @@ struct Color {
  * Amount specifies how much to be morphed: 0.0 is fully original
  * and 1.0 is fully new.
  */
-void morph(Color from, Color to, float amount, Color& res);
+void morph(Color& from, Color& to, float amount, Color& res);
 
 /*
  * Converts spherical coordinates to color, where red is x, green is y,

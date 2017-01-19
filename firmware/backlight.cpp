@@ -44,7 +44,7 @@ void Backlight::setup(BacklightStyle style) {
     this->style = style;
     switch (style) {
         case STANDARD:
-            standard_setup(this->leds);
+            standard_setup(this->leds, this->particles);
             break;
         case WATER:
             water_setup(this->leds, this->particles);
