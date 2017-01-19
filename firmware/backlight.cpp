@@ -55,6 +55,9 @@ void Backlight::setup(BacklightStyle style) {
         case GAMEOFLIFE:
             gameoflife_setup(this->leds, this->cells);
             break;
+        case VIM:
+            vim_setup(this->leds);
+            break;
     }
 }
 
@@ -115,6 +118,9 @@ void Backlight::update() {
             break;
         case GAMEOFLIFE:
             gameoflife_update(this->leds, this->keyboard, this->cells, this->it);
+            break;
+        case VIM:
+            vim_update(this->leds, this->keyboard, this->it);
             break;
     }
 

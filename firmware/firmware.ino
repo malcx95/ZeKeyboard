@@ -15,6 +15,8 @@ uint8_t count;
 
 void smart_delay(unsigned long start_time);
 
+void check_serial();
+
 void setup() {
 
     FastLED.addLeds<NEOPIXEL, 2>(leds, NUM_LEDS);
@@ -47,6 +49,8 @@ void loop() {
     
     backlight.update();
 
+    check_serial();
+
     smart_delay(start_time);
 
 }
@@ -63,7 +67,20 @@ void smart_delay(unsigned long start_time) {
         Serial.println(elapsed);
         return;
     } else {
-        Serial.println(elapsed);
+        //Serial.println(elapsed);
     }
     delayMicroseconds(DELAY_MICROS - elapsed);
+}
+
+void check_serial() {
+    if (Serial.available()) {
+        char c = (char)Serial.read();
+        if (c == 'i') {
+            backlight.setup(BacklightStyle::GAMEOFLIFE);
+        } else if (c == 'v') {
+            backlight.setup(BacklightStyle::WATER);
+        } else if (c == 'n') {
+            backlight.setup(BacklightStyle::STANDARD);
+        }
+    }
 }
