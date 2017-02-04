@@ -11,6 +11,7 @@
 
 #include "constants.h"
 #include "led.h"
+#include "water.h"
 #include "keyboard.h"
 #include <math.h>
 
@@ -25,8 +26,13 @@ const float COL_DIR_CHANGE_SPEED = 0.51;
 const float GLOBAL_SPEED_DIVISOR = 500.0;
 const float PHASE_DIFFERENCE = 0.2;
 
-void standard_setup(LED leds[][Ze::NUM_COLS]);
+const int16_t INITIAL_VALUE = 1000;
+const int16_t FADE_OUT_SPEED = 11;
+
+void standard_setup(LED leds[][Ze::NUM_COLS], WaterParticle particles[][WATER_WIDTH]);
 
 void standard_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it);
+
+void standard_destroy();
 
 #endif /* ifndef STANDARD_H */

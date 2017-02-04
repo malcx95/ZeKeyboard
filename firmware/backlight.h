@@ -8,10 +8,13 @@
 #include "constants.h"
 #include "standard.h"
 #include "water.h"
+#include "rave.h"
+#include "vim.h"
+#include "gameoflife.h"
 #include <FastLED.h>
 
-// The difference in brightness settings, do not change 
-const float BRIGHTNESS_UNIT = 0.1;
+const uint8_t NUM_BRIGHTNESS_VALUES = 4;
+const float BRIGHTNESS_VALUES[NUM_BRIGHTNESS_VALUES] = {0.0, 0.25, 0.5, 1.0};
 
 class Backlight {
 
@@ -42,6 +45,8 @@ class Backlight {
 
         Ze::Board* keyboard;
 
+        uint8_t curr_brightness;
+
         float brightness;
 
         /*
@@ -63,14 +68,30 @@ class Backlight {
 
         bool already_changed_bright;
 
+        bool already_changed_style;
+
         /*
          * The sea of water particles the WATER effect uses.
          */
         WaterParticle particles[WATER_HEIGHT][WATER_WIDTH];
 
+        /*
+         * The grid of ceĺls in the game of life effect.
+         * Each bit corresponds to a cell.
+         */
+        uint16_t cells[Ze::NUM_ROWS];
+
         uint8_t translate_grid_to_strip(uint8_t row, uint8_t col);
 
         void increase_brightness();
+
+        void change_style();
+
+        void change_backlight_style();
+
+        void handle_brightness_change();
+        
+        void handle_backlight_change();
 
 };
 
