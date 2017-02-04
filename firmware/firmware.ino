@@ -15,9 +15,11 @@ uint8_t count;
 
 void smart_delay(unsigned long start_time);
 
+void check_serial();
+
 void setup() {
 
-    FastLED.addLeds<NEOPIXEL, 2>(leds, 64);
+    FastLED.addLeds<NEOPIXEL, 2>(leds, NUM_LEDS);
 
     FastLED.clear();
 
@@ -31,11 +33,11 @@ void setup() {
 
     backlight.init(&keyboard, leds);
 
-    backlight.setup(BacklightStyle::WATER);
+    backlight.setup(BacklightStyle::STANDARD);
 
     Serial.begin(9600);
 
-    delay(16);
+    delay(500);
 
 }
 
@@ -46,6 +48,8 @@ void loop() {
     keyboard.update();
     
     backlight.update();
+
+    check_serial();
 
     smart_delay(start_time);
 
@@ -59,11 +63,24 @@ void smart_delay(unsigned long start_time) {
 
     unsigned long elapsed = time - start_time;
     if (elapsed > DELAY_MICROS) {
-        Serial.println("Computing took more than 16 ms: ");
-        Serial.print(elapsed);
+        Serial.print("Computing took more than 16 ms: ");
+        Serial.println(elapsed);
         return;
     } else {
         //Serial.println(elapsed);
     }
     delayMicroseconds(DELAY_MICROS - elapsed);
+}
+
+void check_serial() {
+    if (Serial.available()) {
+        char c = (char)Serial.read();
+        if (c == 'i') {
+            backlight.setup(BacklightStyle::GAMEOFLIFE);
+        } else if (c == 'v') {
+            backlight.setup(BacklightStyle::WATER);
+        } else if (c == 'n') {
+            backlight.setup(BacklightStyle::STANDARD);
+        }
+    }
 }

@@ -1,13 +1,15 @@
 #include "standard.h"
 #include <Arduino.h>
 
-void standard_setup(LED leds[][Ze::NUM_COLS]) {
+void standard_setup(LED leds[][Ze::NUM_COLS], WaterParticle particles[][WATER_WIDTH]) {
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
             leds[row][col].r = 0;
             leds[row][col].g = 0;
             leds[row][col].b = 0;
-            leds[row][col].aux = nullptr;
+            // map each LED to a particle for fade out effect. Yes, this is pretty hacky.
+            leds[row][col].aux = &particles[row][col];
+            particles[row][col].pos = 0;
         }
     }
 }
@@ -17,18 +19,32 @@ void standard_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it) {
     float fade_dir_col = sin(COL_DIR_CHANGE_SPEED * it / GLOBAL_SPEED_DIVISOR);
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
-            leds[row][col].r = DEFAULT_BRIGHTNESS * 
+            float r = DEFAULT_BRIGHTNESS * 
                 (cos(RED_SPEED * it / GLOBAL_SPEED_DIVISOR +
                         (row * fade_dir_row - col * fade_dir_col) *
                         PHASE_DIFFERENCE) + 1) / 2;
-            leds[row][col].g = DEFAULT_BRIGHTNESS * 
+            float g = DEFAULT_BRIGHTNESS * 
                 (sin(GREEN_SPEED * it / GLOBAL_SPEED_DIVISOR +
                         (row * fade_dir_row - col * fade_dir_col) *
                         PHASE_DIFFERENCE) + 1) / 2;
-            leds[row][col].b = DEFAULT_BRIGHTNESS * 
+            float b = DEFAULT_BRIGHTNESS * 
                 (sin(BLUE_SPEED * it / GLOBAL_SPEED_DIVISOR +
                         (row * fade_dir_row - col * fade_dir_col) *
                         PHASE_DIFFERENCE) + 1) / 2;
+            LED* l = &leds[row][col];
+            int16_t pos = ((WaterParticle*)l->aux)->pos;
+            if (pos > 0) {
+                float amount = (float)((float)pos) / ((float)INITIAL_VALUE);
+                Color res = {r - (r - 1) * amount, g * (1 - amount), b * (1 - amount)};
+                l->r = res.r;
+                l->g = res.g;
+                l->b = res.b;
+                ((WaterParticle*)l->aux)->pos -= FADE_OUT_SPEED;
+            } else {
+                l->r = r;
+                l->g = g;
+                l->b = b;
+            }
         }
     }
 
@@ -36,28 +52,20 @@ void standard_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it) {
 
     for (uint8_t i = 0; i < board->get_num_keys_pressed(); ++i) {
 
-        float r = 1.0 - (leds[pressed[i].row][pressed[i].col].r / 
-                DEFAULT_BRIGHTNESS);
-        float g = 1.0 - (leds[pressed[i].row][pressed[i].col].g / 
-                DEFAULT_BRIGHTNESS);
-        float b = 1.0 - (leds[pressed[i].row][pressed[i].col].b /
-                DEFAULT_BRIGHTNESS);
-        leds[pressed[i].row][pressed[i].col].r = r;
-        leds[pressed[i].row][pressed[i].col].g = g;
-        leds[pressed[i].row][pressed[i].col].b = b;
+        Ze::Key* k = &pressed[i];
+        
+        ((WaterParticle*)leds[k->row][k->col].aux)->pos = INITIAL_VALUE;
 
         if (pressed[i].code == KEY_SPACE) {
             // Light up the left and right leds of the space bar
             // Only light these up a third as much
+            
+            ((WaterParticle*)leds[k->row][k->col - 1].aux)->pos = INITIAL_VALUE;
+            ((WaterParticle*)leds[k->row][k->col + 1].aux)->pos = INITIAL_VALUE;
 
-            leds[pressed[i].row][pressed[i].col + 1].r = r / 3;
-            leds[pressed[i].row][pressed[i].col + 1].g = g / 3;
-            leds[pressed[i].row][pressed[i].col + 1].b = b / 3; 
-
-            leds[pressed[i].row][pressed[i].col - 1].r = r / 3; 
-            leds[pressed[i].row][pressed[i].col - 1].g = g / 3;
-            leds[pressed[i].row][pressed[i].col - 1].b = b / 3; 
         }
     }
 }
+
+void standard_destroy() {}
 

@@ -9,7 +9,8 @@ Backlight::Backlight() {
 void Backlight::init(Ze::Board* keyboard, CRGB* ledstrip) {
     this->keyboard = keyboard;
     this->ledstrip = ledstrip;
-    this->brightness = 0.4;
+    this->curr_brightness = 2;
+    this->brightness = BRIGHTNESS_VALUES[this->curr_brightness];
     this->it = 0;
     this->already_changed_bright = false;
 
@@ -43,16 +44,24 @@ void Backlight::setup(BacklightStyle style) {
     this->style = style;
     switch (style) {
         case STANDARD:
-            standard_setup(this->leds);
+            standard_setup(this->leds, this->particles);
             break;
         case WATER:
             water_setup(this->leds, this->particles);
             break;
+        case RAVE:
+            rave_setup(this->leds);
+            break;
+        case GAMEOFLIFE:
+            gameoflife_setup(this->leds, this->cells);
+            break;
+        case VIM:
+            vim_setup(this->leds);
+            break;
     }
 }
 
-void Backlight::update() {
-
+void Backlight::handle_brightness_change() {
     if (this->keyboard->brightness_inc_pressed()) {
         if (!this->already_changed_bright) {
             increase_brightness();
@@ -61,6 +70,40 @@ void Backlight::update() {
     } else {
         this->already_changed_bright = false;
     }
+}
+
+void Backlight::change_style() {
+    switch (this->style) {
+        case STANDARD:
+            standard_destroy();
+            break;
+        case WATER:
+            water_destroy(this->particles);
+            break;
+        case RAVE:
+            rave_destroy();
+            break;
+    }
+    BacklightStyle s = static_cast<BacklightStyle>((((int)this->style) + 1) % NUM_STYLES);
+    this->setup(s);
+}
+
+void Backlight::handle_backlight_change() {
+    if (this->keyboard->backlight_style_changed()) {
+        if (!this->already_changed_style) {
+            change_style();
+        }
+        this->already_changed_style = true;
+    } else {
+        this->already_changed_style = false;
+    }
+}
+
+void Backlight::update() {
+
+    handle_backlight_change();
+    
+    handle_brightness_change();
 
     this->it++;
     switch (style) {
@@ -69,6 +112,15 @@ void Backlight::update() {
             break;
         case WATER:
             water_update(this->leds, this->keyboard, this->particles, this->it);
+            break;
+        case RAVE:
+            rave_update(this->leds, this->keyboard, this->it);
+            break;
+        case GAMEOFLIFE:
+            gameoflife_update(this->leds, this->keyboard, this->cells, this->it);
+            break;
+        case VIM:
+            vim_update(this->leds, this->keyboard, this->it);
             break;
     }
 
@@ -87,13 +139,8 @@ void Backlight::update() {
 }
 
 void Backlight::increase_brightness() {
-    if (this->brightness == 1.0) {
-        this->brightness = 0;
-    } else if (this->brightness >= 0.6) {
-        this->brightness += BRIGHTNESS_UNIT * 2;
-    } else {
-        this->brightness += BRIGHTNESS_UNIT;
-    }
+    this->curr_brightness = (curr_brightness + 1) % NUM_BRIGHTNESS_VALUES;
+    this->brightness = BRIGHTNESS_VALUES[curr_brightness];
 }
 
 uint8_t Backlight::translate_grid_to_strip(uint8_t row, uint8_t col) {
