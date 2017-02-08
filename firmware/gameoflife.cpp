@@ -101,6 +101,16 @@ void gameoflife_update(LED leds[][Ze::NUM_COLS],
     Ze::Key* pressed = board->get_curr_pressed_keys();
     for (uint8_t i = 0; i < board->get_num_keys_pressed(); ++i) {
         set_cell(cells, pressed[i].row, pressed[i].col, true);
+
+        if (pressed[i].code == KEY_SPACE) {
+
+            // Set the secondary cells of the spacebar as alive
+            
+            set_cell(cells, pressed[i].row, pressed[i].col - 1, true);
+            set_cell(cells, pressed[i].row, pressed[i].col + 1, true);
+
+        }
+
     }
 
     // update the leds
