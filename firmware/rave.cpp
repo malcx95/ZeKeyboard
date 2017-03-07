@@ -17,15 +17,25 @@ void rave_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it) {
     if (it % 10 < 5) {
         for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
             for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
-                leds[row][col].r = 0;
-                leds[row][col].b = 1;
+                if (col % 2 == 0) {
+                    leds[row][col].r = 0;
+                    leds[row][col].b = 1;
+                } else {
+                    leds[row][col].r = 1;
+                    leds[row][col].b = 0;
+                }
             }
         }
     } else {
         for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
             for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
-                leds[row][col].r = 1;
-                leds[row][col].b = 0;
+                if (col % 2 == 0) {
+                    leds[row][col].r = 1;
+                    leds[row][col].b = 0;
+                } else {
+                    leds[row][col].r = 0;
+                    leds[row][col].b = 1;
+                }
             }
         }
     
