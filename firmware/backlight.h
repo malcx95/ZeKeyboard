@@ -9,7 +9,7 @@
 #include "standard.h"
 #include "water.h"
 #include "rave.h"
-#include "vim.h"
+#include "tetris.h"
 #include "gameoflife.h"
 #include <FastLED.h>
 
