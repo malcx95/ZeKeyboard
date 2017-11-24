@@ -56,7 +56,8 @@ void Backlight::setup(BacklightStyle style) {
             gameoflife_setup(this->leds, this->cells);
             break;
         case TETRIS:
-            tetris_setup(this->leds);
+            tetris_setup(this->leds, this->tetris_board, 
+                    &this->falling_tetromino);
             break;
     }
 }
@@ -120,7 +121,8 @@ void Backlight::update() {
             gameoflife_update(this->leds, this->keyboard, this->cells, this->it);
             break;
         case TETRIS:
-            tetris_update(this->leds, this->keyboard, this->it);
+            tetris_update(this->leds, this->keyboard, 
+                    this->it, this->tetris_board, &this->falling_tetromino);
             break;
     }
 

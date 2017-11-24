@@ -83,6 +83,10 @@ class Backlight {
 
         uint8_t translate_grid_to_strip(uint8_t row, uint8_t col);
 
+        tetris::SquareType tetris_board[tetris::NUM_ROWS][tetris::NUM_COLS];
+
+        tetris::Tetromino falling_tetromino;
+
         void increase_brightness();
 
         void change_style();
