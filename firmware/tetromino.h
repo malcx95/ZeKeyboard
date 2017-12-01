@@ -14,8 +14,8 @@ namespace tetris {
     };
     
     enum TetrominoType {
-        TETROMINO_I, TETROMINO_L, TETROMINO_J, TETROMINO_O,
-        TETROMINO_S, TETROMINO_T, TETROMINO_Z, TETROMINO_NONE
+        TETROMINO_I = 0, TETROMINO_L = 1, TETROMINO_J = 2, TETROMINO_O = 3,
+        TETROMINO_S = 4, TETROMINO_T = 5, TETROMINO_Z = 6, TETROMINO_NONE = 7
     };
 
     struct Tetromino {
@@ -82,12 +82,25 @@ namespace tetris {
     const Color Z_COLOR = {1, 0, 0};
     const Color EMPTY_COLOR = {0, 0, 0};
 
+    // for testing
+    char tetrominotype_to_char(TetrominoType type);
+
     void tetromino_init(Tetromino* t, 
             TetrominoType type);
 
     void tetromino_deinit(Tetromino* t);
 
     bool is_tetromino_falling(Tetromino* t);
+
+    TetrominoType generate_random_tetromino_type(uint64_t it);
+
+    SquareType tetromino_type_to_square_type(TetrominoType type);
+
+    Color square_type_to_color(SquareType type);
+
+    uint8_t** get_body(TetrominoType type);
+
+    // TetrominoType generate_random_tetromino_type(uint64_t it);
 
 };
 

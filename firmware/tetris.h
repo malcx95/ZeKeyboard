@@ -6,6 +6,8 @@
 #include "tetromino.h"
 #include "tetrisboard.h"
 
+const uint8_t TETRIS_DELAY = 10;
+
 void tetris_setup(LED leds[][Ze::NUM_COLS],
         tetris::SquareType tetris_board[][tetris::NUM_COLS],
         tetris::Tetromino* falling_tetromino);
