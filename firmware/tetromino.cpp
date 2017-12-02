@@ -11,6 +11,31 @@ void body_copy(Tetromino* t,
     }
 }
 
+void tetris::tetromino_rotate_right(Tetromino* t) {
+    // Deal with it
+    tetromino_rotate_left(t);
+    tetromino_rotate_left(t);
+    tetromino_rotate_left(t);
+}
+
+void tetris::tetromino_rotate_left(Tetromino* t) {
+    Tetromino old;
+    tetromino_copy(t, &old);
+    for (uint8_t row = 0; row < tetris::TETROMINO_SIZE; ++row) {
+        for (uint8_t col = 0; col < tetris::TETROMINO_SIZE; ++col) {
+            t->body[row][col] = old.body[TETROMINO_SIZE - col - 1][row];
+        }
+    }
+}
+
+void tetris::tetromino_copy(Tetromino* src, Tetromino* copy) {
+    copy->type = src->type;
+    copy->x = src->x;
+    copy->y = src->y;
+    body_copy(copy, src->body);
+}
+
+
 void tetris::tetromino_init(Tetromino* t, 
         TetrominoType type) {
     t->type = type;
@@ -51,7 +76,7 @@ bool tetris::is_tetromino_falling(Tetromino* t) {
 }
 
 TetrominoType tetris::generate_random_tetromino_type(uint64_t it) {
-    return (TetrominoType)(it % (NUM_TETROMINOS - 1));
+    return (TetrominoType)((it >> 1) % NUM_TETROMINOS);
 }
 
 Color tetris::square_type_to_color(SquareType type) {
@@ -96,26 +121,26 @@ SquareType tetris::tetromino_type_to_square_type(TetrominoType type) {
     }
 }
 
-// char tetris::tetrominotype_to_char(TetrominoType type) {
-//     switch (type) {
-//         case SQUARE_EMPTY:
-//             return ' ';
-//         case SQUARE_I:
-//             return 'I';
-//         case SQUARE_L:
-//             return 'L';
-//         case SQUARE_J:
-//             return 'J';
-//         case SQUARE_O:
-//             return 'O';
-//         case SQUARE_S:
-//             return 'S';
-//         case SQUARE_T:
-//             return 'T';
-//         case SQUARE_Z:
-//             return 'Z';
-//         default:
-//             return ' ';
-//     }
-// }
+char tetris::squaretype_to_char(SquareType type) {
+    switch (type) {
+        case SQUARE_EMPTY:
+            return ' ';
+        case SQUARE_I:
+            return 'I';
+        case SQUARE_L:
+            return 'L';
+        case SQUARE_J:
+            return 'J';
+        case SQUARE_O:
+            return 'O';
+        case SQUARE_S:
+            return 'S';
+        case SQUARE_T:
+            return 'T';
+        case SQUARE_Z:
+            return 'Z';
+        default:
+            return ' ';
+    }
+}
 

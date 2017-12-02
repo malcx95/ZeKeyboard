@@ -9,10 +9,6 @@ namespace tetris {
     const uint8_t NUM_ROWS = Ze::NUM_COLS;
     const uint8_t NUM_COLS = Ze::NUM_ROWS;
 
-    // for testing purposes
-    // void print_tetris_board(SquareType tetris_board[][NUM_COLS], 
-    //         Tetromino* falling_tetromino);
-
     void clear_board(SquareType tetris_board[][NUM_COLS]);
 
     SquareType get_square(SquareType tetris_board[][NUM_COLS], 

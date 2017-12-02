@@ -99,7 +99,13 @@ namespace tetris {
 
     Color square_type_to_color(SquareType type);
 
-    // TetrominoType generate_random_tetromino_type(uint64_t it);
+    void tetromino_rotate_left(Tetromino* t);
+
+    void tetromino_rotate_right(Tetromino* t);
+
+    void tetromino_copy(Tetromino* src, Tetromino* copy);
+
+    char squaretype_to_char(SquareType type);
 
 };
 
