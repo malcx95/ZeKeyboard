@@ -16,6 +16,8 @@ void draw_tetris_board(LED leds[][Ze::NUM_COLS],
         }
     }
 
+
+    Serial.println("Drawing tetromino");
     if (is_tetromino_falling(falling_tetromino)) {
 
         // transfer the falling tetromino, transposing it
@@ -23,15 +25,19 @@ void draw_tetris_board(LED leds[][Ze::NUM_COLS],
                 falling_tetromino->type);
         uint8_t tx = falling_tetromino->x;
         uint8_t ty = falling_tetromino->y;
-        uint8_t** body = tetris::get_body(falling_tetromino->type);
+
         for (uint8_t row = 0; row < tetris::TETROMINO_SIZE; ++row) {
             for (uint8_t col = 0; col < tetris::TETROMINO_SIZE; ++col) {
-                Serial.print("Drawing tetromino");
-                if (body[row][col] != 0) {
-                    Serial.print(row);
+                if (falling_tetromino->body[row][col] != 0) {
+                    Serial.println("WE FOUND AN ACTIVE CELL");
+                    Serial.print(row + ty);
                     Serial.print(", ");
-                    Serial.println(col);
-                    rendered_board[col + tx][col + ty] = type;
+                    Serial.println(col + tx);
+                    rendered_board[col + tx][row + ty] = type;
+                } else {
+                    Serial.print(row + ty);
+                    Serial.print(", ");
+                    Serial.println(col + tx);
                 }
             }
         }
@@ -52,6 +58,7 @@ void tetris_setup(LED leds[][Ze::NUM_COLS],
         tetris::SquareType tetris_board[][tetris::NUM_COLS],
         tetris::Tetromino* falling_tetromino) {
     Serial.println("Setting up");
+    tetromino_deinit(falling_tetromino);
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
             leds[row][col].r = 0;

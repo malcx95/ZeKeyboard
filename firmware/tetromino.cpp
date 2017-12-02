@@ -2,12 +2,45 @@
 
 using namespace tetris;
 
+void body_copy(Tetromino* t, 
+        const uint8_t body[TETROMINO_SIZE][TETROMINO_SIZE]) {
+    for (uint8_t row = 0; row < tetris::TETROMINO_SIZE; ++row) {
+        for (uint8_t col = 0; col < tetris::TETROMINO_SIZE; ++col) {
+            t->body[row][col] = body[row][col];
+        }
+    }
+}
+
 void tetris::tetromino_init(Tetromino* t, 
         TetrominoType type) {
     t->type = type;
     t->x = 0;
     t->y = 0;
+    switch (type) {
+        case TETROMINO_I:
+            body_copy(t, I_BODY);
+            break;
+        case TETROMINO_L:
+            body_copy(t, L_BODY);
+            break;
+        case TETROMINO_J:
+            body_copy(t, J_BODY);
+            break;
+        case TETROMINO_O:
+            body_copy(t, O_BODY);
+            break;
+        case TETROMINO_S:
+            body_copy(t, S_BODY);
+            break;
+        case TETROMINO_T:
+            body_copy(t, T_BODY);
+            break;
+        case TETROMINO_Z:
+            body_copy(t, Z_BODY);
+            break;
+    }
 }
+
 
 void tetris::tetromino_deinit(Tetromino* t) {
     t->type = TETROMINO_NONE;
@@ -60,27 +93,6 @@ SquareType tetris::tetromino_type_to_square_type(TetrominoType type) {
             return SQUARE_Z;
         default:
             return SQUARE_EMPTY;
-    }
-}
-
-uint8_t** tetris::get_body(TetrominoType type) {
-    switch (type) {
-        case TETROMINO_I:
-            return (uint8_t**)I_BODY;
-        case TETROMINO_L:
-            return (uint8_t**)L_BODY;
-        case TETROMINO_J:
-            return (uint8_t**)J_BODY;
-        case TETROMINO_O:
-            return (uint8_t**)O_BODY;
-        case TETROMINO_S:
-            return (uint8_t**)S_BODY;
-        case TETROMINO_T:
-            return (uint8_t**)T_BODY;
-        case TETROMINO_Z:
-            return (uint8_t**)Z_BODY;
-        default:
-            return nullptr;
     }
 }
 

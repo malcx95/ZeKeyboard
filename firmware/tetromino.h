@@ -22,6 +22,7 @@ namespace tetris {
         uint8_t x;
         uint8_t y;
         TetrominoType type;
+        uint8_t body[TETROMINO_SIZE][TETROMINO_SIZE];
     };
 
     const uint8_t I_BODY[TETROMINO_SIZE][TETROMINO_SIZE] {
@@ -97,8 +98,6 @@ namespace tetris {
     SquareType tetromino_type_to_square_type(TetrominoType type);
 
     Color square_type_to_color(SquareType type);
-
-    uint8_t** get_body(TetrominoType type);
 
     // TetrominoType generate_random_tetromino_type(uint64_t it);
 
