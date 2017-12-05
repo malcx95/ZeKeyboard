@@ -61,20 +61,29 @@ void tetris::tick(SquareType tetris_board[][NUM_COLS],
 
 void tetris::try_move(SquareType tetris_board[][NUM_COLS], 
         Tetromino* falling_tetromino, bool left) {
-    // TODO implement
+    if (!is_tetromino_falling(falling_tetromino)) return;
+    if (left && can_move_to(tetris_board, falling_tetromino, -1, 0)) {
+        falling_tetromino->x -= 1;
+    } else if (!left && can_move_to(tetris_board, falling_tetromino, 1, 0)) {
+        falling_tetromino->x += 1;
+    }
 
 }
 
 void tetris::try_rotate(SquareType tetris_board[][NUM_COLS], 
         Tetromino* falling_tetromino, bool left) {
-    // TODO implement
-
+    if (!is_tetromino_falling(falling_tetromino)) return;
+    if (left && can_rotate(tetris_board, falling_tetromino, true)) {
+        tetromino_rotate_left(falling_tetromino);
+    } else if (!left && can_rotate(tetris_board, falling_tetromino, false)) {
+        tetromino_rotate_right(falling_tetromino);
+    }
 }
 
 void tetris::rush_down(SquareType tetris_board[][NUM_COLS], 
         Tetromino* falling_tetromino) {
+    if (!is_tetromino_falling(falling_tetromino)) return;
     // TODO implement
-
 }
 
 void transfer_tetromino_to_board(SquareType tetris_board[][NUM_COLS], 
