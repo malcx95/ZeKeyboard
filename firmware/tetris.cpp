@@ -19,11 +19,11 @@ void draw_tetris_board(LED leds[][Ze::NUM_COLS],
         // transfer the falling tetromino, transposing it
         tetris::SquareType type = tetris::tetromino_type_to_square_type(
                 falling_tetromino->type);
-        uint8_t tx = falling_tetromino->x;
-        uint8_t ty = falling_tetromino->y;
+        int8_t tx = falling_tetromino->x;
+        int8_t ty = falling_tetromino->y;
 
-        for (uint8_t row = 0; row < tetris::TETROMINO_SIZE; ++row) {
-            for (uint8_t col = 0; col < tetris::TETROMINO_SIZE; ++col) {
+        for (int8_t row = 0; row < tetris::TETROMINO_SIZE; ++row) {
+            for (int8_t col = 0; col < tetris::TETROMINO_SIZE; ++col) {
                 if (falling_tetromino->body[row][col] != 0) {
                     rendered_board[col + tx][row + ty] = type;
                 }

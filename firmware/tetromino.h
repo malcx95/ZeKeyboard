@@ -19,8 +19,8 @@ namespace tetris {
     };
 
     struct Tetromino {
-        uint8_t x;
-        uint8_t y;
+        int8_t x;
+        int8_t y;
         TetrominoType type;
         uint8_t body[TETROMINO_SIZE][TETROMINO_SIZE];
     };
