@@ -85,6 +85,27 @@ void tetris::rush_down(Tetromino* falling_tetromino) {
     falling_tetromino->rushing_down = true;
 }
 
+bool tetris::find_rows_to_eliminate(SquareType tetris_board[][NUM_COLS],
+        bool rows_to_eliminate[NUM_ROWS]) {
+
+    bool found_any = false;
+
+    for (uint8_t row = 0; row < tetris::NUM_ROWS; ++row) {
+
+        bool should_eliminate = true;
+        for (uint8_t col = 0; col < tetris::NUM_COLS; ++col) {
+            if (tetris_board[row][col] == SQUARE_EMPTY) {
+                should_eliminate = false;
+                break;
+            }
+        }
+        rows_to_eliminate[row] = should_eliminate;
+        found_any = found_any || should_eliminate;
+    }
+
+    return found_any;
+}
+
 void tetris::increment_rush(SquareType tetris_board[][NUM_COLS],
         Tetromino* falling_tetromino) {
     if (can_move_to(tetris_board, falling_tetromino, 0, 1)) {
@@ -108,6 +129,32 @@ void transfer_tetromino_to_board(SquareType tetris_board[][NUM_COLS],
     }
     tetromino_deinit(falling_tetromino);
 }
+
+void tetris::eliminate_rows(SquareType tetris_board[][NUM_COLS],
+        bool rows_to_eliminate[tetris::NUM_ROWS]) {
+
+    // set the squares of the rows to eliminate to SQUARE_EMPTY
+    for (uint8_t i = 0; i < tetris::NUM_ROWS; ++i) {
+
+        if (rows_to_eliminate[i]) {
+            // shift every row above here one step down
+
+            for (uint8_t row = i - 1; row < tetris::NUM_ROWS; --row) {
+                for (uint8_t col = 0; col < tetris::NUM_COLS; ++col) {
+                    tetris_board[row + 1][col] = tetris_board[row][col];
+                }
+            }
+
+
+            // set the top row to SQUARE_EMPTY
+            for (uint8_t col = 0; col < tetris::NUM_COLS; ++col) {
+                tetris_board[0][col] = SQUARE_EMPTY;
+            }
+        }
+
+    }
+}
+
 
 bool can_rotate(SquareType tetris_board[][NUM_COLS], 
         Tetromino* falling_tetromino, bool left) {

@@ -30,6 +30,17 @@ namespace tetris {
     void increment_rush(SquareType tetris_board[][NUM_COLS], 
             Tetromino* falling_tetromino);
 
+    /*
+     * Finds which rows to eliminate because they are filled with
+     * squares of the same color. Returns true if any were found,
+     * false otherwise. Puts the fund row in the given array.
+     */
+    bool find_rows_to_eliminate(SquareType tetris_board[][NUM_COLS],
+            bool rows_to_eliminate[tetris::NUM_ROWS]);
+
+    void eliminate_rows(SquareType tetris_board[][NUM_COLS],
+            bool rows_to_eliminate[tetris::NUM_ROWS]);
+
 };
 
 #endif /* ifndef TETRISBOARD_H */

@@ -1,5 +1,28 @@
 #include "tetris.h"
 
+void handle_keyboard_input(Ze::Board* board, 
+        tetris::SquareType tetris_board[][tetris::NUM_COLS], 
+        tetris::Tetromino* falling_tetromino);
+
+/*
+ * Lights up the rows about to be removed
+ */
+void mark_rows_to_eliminate(LED leds[][Ze::NUM_COLS],
+        bool rows_to_eliminate[tetris::NUM_ROWS]) {
+    for (uint8_t row = 0; row < tetris::NUM_ROWS; ++row) {
+
+        if (rows_to_eliminate[row]) {
+            for (uint8_t col = 0; col < tetris::NUM_COLS; ++col) {
+                // flipping cols and rows since we need 
+                // to transpose the thing and flip left to right
+                leds[col][Ze::NUM_COLS - 1 - row].r = ELIMINATION_COLOR.r;
+                leds[col][Ze::NUM_COLS - 1 - row].g = ELIMINATION_COLOR.g;
+                leds[col][Ze::NUM_COLS - 1 - row].b = ELIMINATION_COLOR.b;
+            }
+        }
+    }
+}
+
 void draw_tetris_board(LED leds[][Ze::NUM_COLS],
         tetris::SquareType tetris_board[][tetris::NUM_COLS],
         tetris::Tetromino* falling_tetromino) {
@@ -72,8 +95,8 @@ void tetris_setup(LED leds[][Ze::NUM_COLS],
     }
 }
 
-void tetris_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it,
-        tetris::SquareType tetris_board[][tetris::NUM_COLS],
+void handle_keyboard_input(Ze::Board* board, 
+        tetris::SquareType tetris_board[][tetris::NUM_COLS], 
         tetris::Tetromino* falling_tetromino) {
 
     if (!falling_tetromino->rushing_down) {
@@ -93,14 +116,34 @@ void tetris_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it,
             }
         }
     }
+}
+
+void tetris_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it,
+        tetris::SquareType tetris_board[][tetris::NUM_COLS],
+        tetris::Tetromino* falling_tetromino) {
+
+    handle_keyboard_input(board, tetris_board, falling_tetromino);
 
     if (falling_tetromino->rushing_down && it % RUSH_DELAY) {
         tetris::increment_rush(tetris_board, falling_tetromino);
         draw_tetris_board(leds, tetris_board, falling_tetromino);
     }
     else if (it % TETRIS_DELAY == 0) {
-        tetris::tick(tetris_board, falling_tetromino, it);
-        draw_tetris_board(leds, tetris_board, falling_tetromino);
+
+        // the rows to eliminate from the board
+        bool rows_to_eliminate[tetris::NUM_ROWS];
+
+        bool eliminate = tetris::find_rows_to_eliminate(tetris_board,
+                rows_to_eliminate);
+
+        if (eliminate) {
+            mark_rows_to_eliminate(leds, rows_to_eliminate);
+            eliminate_rows(tetris_board, rows_to_eliminate);
+            
+        } else {
+            tetris::tick(tetris_board, falling_tetromino, it);
+            draw_tetris_board(leds, tetris_board, falling_tetromino);
+        }
     }
 }
 
