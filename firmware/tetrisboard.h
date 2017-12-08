@@ -25,7 +25,9 @@ namespace tetris {
     void try_rotate(SquareType tetris_board[][NUM_COLS], 
             Tetromino* falling_tetromino, bool left);
 
-    void rush_down(SquareType tetris_board[][NUM_COLS], 
+    void rush_down(Tetromino* falling_tetromino);
+
+    void increment_rush(SquareType tetris_board[][NUM_COLS], 
             Tetromino* falling_tetromino);
 
 };

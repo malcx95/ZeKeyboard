@@ -75,23 +75,30 @@ void tetris_setup(LED leds[][Ze::NUM_COLS],
 void tetris_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it,
         tetris::SquareType tetris_board[][tetris::NUM_COLS],
         tetris::Tetromino* falling_tetromino) {
-    Ze::Key* released = board->get_just_released_keys();
 
-    for (uint8_t i = 0; i < board->get_num_released_keys(); ++i) {
-        if (released[i].code == KEY_H) {
-            tetris::try_rotate(tetris_board, falling_tetromino, true);
-        } else if (released[i].code == KEY_L) {
-            tetris::try_rotate(tetris_board, falling_tetromino, false);
-        } else if (released[i].code == KEY_J) {
-            tetris::try_move(tetris_board, falling_tetromino, false);
-        } else if (released[i].code == KEY_K) {
-            tetris::try_move(tetris_board, falling_tetromino, true);
-        } else if (released[i].code == KEY_SPACE) {
-            tetris::rush_down(tetris_board, falling_tetromino);
+    if (!falling_tetromino->rushing_down) {
+        Ze::Key* released = board->get_just_released_keys();
+
+        for (uint8_t i = 0; i < board->get_num_released_keys(); ++i) {
+            if (released[i].code == KEY_H) {
+                tetris::try_rotate(tetris_board, falling_tetromino, true);
+            } else if (released[i].code == KEY_L) {
+                tetris::try_rotate(tetris_board, falling_tetromino, false);
+            } else if (released[i].code == KEY_J) {
+                tetris::try_move(tetris_board, falling_tetromino, false);
+            } else if (released[i].code == KEY_K) {
+                tetris::try_move(tetris_board, falling_tetromino, true);
+            } else if (released[i].code == KEY_SPACE) {
+                tetris::rush_down(falling_tetromino);
+            }
         }
     }
 
-    if (it % TETRIS_DELAY == 0) {
+    if (falling_tetromino->rushing_down && it % RUSH_DELAY) {
+        tetris::increment_rush(tetris_board, falling_tetromino);
+        draw_tetris_board(leds, tetris_board, falling_tetromino);
+    }
+    else if (it % TETRIS_DELAY == 0) {
         tetris::tick(tetris_board, falling_tetromino, it);
         draw_tetris_board(leds, tetris_board, falling_tetromino);
     }

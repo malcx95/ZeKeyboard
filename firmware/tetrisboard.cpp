@@ -80,16 +80,22 @@ void tetris::try_rotate(SquareType tetris_board[][NUM_COLS],
     }
 }
 
-void tetris::rush_down(SquareType tetris_board[][NUM_COLS], 
-        Tetromino* falling_tetromino) {
+void tetris::rush_down(Tetromino* falling_tetromino) {
     if (!is_tetromino_falling(falling_tetromino)) return;
-    // TODO implement
+    falling_tetromino->rushing_down = true;
+}
+
+void tetris::increment_rush(SquareType tetris_board[][NUM_COLS],
+        Tetromino* falling_tetromino) {
+    if (can_move_to(tetris_board, falling_tetromino, 0, 1)) {
+        falling_tetromino->y += 1;
+    } else {
+        falling_tetromino->rushing_down = false;
+    }
 }
 
 void transfer_tetromino_to_board(SquareType tetris_board[][NUM_COLS], 
         Tetromino* falling_tetromino) {
-    // TODO implement
-    Serial.println("Transfer tetromino to board!");
     int8_t tx = falling_tetromino->x;
     int8_t ty = falling_tetromino->y;
     for (int8_t row = 0; row < TETROMINO_SIZE; ++row) {
@@ -143,28 +149,17 @@ bool can_move_to(SquareType tetris_board[][NUM_COLS],
     int8_t new_x = falling_tetromino->x + dx;
     int8_t new_y = falling_tetromino->y + dy;
 
-    Serial.print("New x: ");
-    Serial.println(new_x);
-    Serial.print("New y: ");
-    Serial.println(new_y);
-
     for (int8_t row = 0; row < TETROMINO_SIZE; ++row) {
         for (int8_t col = 0; col < TETROMINO_SIZE; ++col) {
             if (falling_tetromino->body[row][col] != 0) {
-                Serial.print("Checking row: ");
-                Serial.println(new_y + row);
-                Serial.print("Checking col: ");
-                Serial.println(new_x + col);
                 if (!is_within_bounds(new_y + row, new_x + col) || 
                         tetris_board[new_y + row][new_x + col] != SQUARE_EMPTY) {
-                    Serial.print("Ya cant move here");
                     return false;
                 }
             }
         }
     }
 
-    Serial.print("All clear");
     return true;
 }
 

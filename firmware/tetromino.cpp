@@ -32,6 +32,7 @@ void tetris::tetromino_copy(Tetromino* src, Tetromino* copy) {
     copy->type = src->type;
     copy->x = src->x;
     copy->y = src->y;
+    copy->rushing_down = src->rushing_down;
     body_copy(copy, src->body);
 }
 
@@ -41,6 +42,7 @@ void tetris::tetromino_init(Tetromino* t,
     t->type = type;
     t->x = 0;
     t->y = 0;
+    t->rushing_down = false;
     switch (type) {
         case TETROMINO_I:
             body_copy(t, I_BODY);

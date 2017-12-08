@@ -7,6 +7,7 @@
 #include "tetrisboard.h"
 
 const uint8_t TETRIS_DELAY = 20;
+const uint8_t RUSH_DELAY = 5;
 
 void tetris_setup(LED leds[][Ze::NUM_COLS],
         tetris::SquareType tetris_board[][tetris::NUM_COLS],

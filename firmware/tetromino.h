@@ -23,6 +23,7 @@ namespace tetris {
         int8_t y;
         TetrominoType type;
         uint8_t body[TETROMINO_SIZE][TETROMINO_SIZE];
+        bool rushing_down;
     };
 
     const uint8_t I_BODY[TETROMINO_SIZE][TETROMINO_SIZE] {
