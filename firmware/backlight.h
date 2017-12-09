@@ -83,6 +83,12 @@ class Backlight {
 
         uint8_t translate_grid_to_strip(uint8_t row, uint8_t col);
 
+        /*
+         * Counter which counts down to control
+         * the effect when the game is over.
+         */
+        uint8_t tetris_game_over_counter;
+
         tetris::SquareType tetris_board[tetris::NUM_ROWS][tetris::NUM_COLS];
 
         tetris::Tetromino falling_tetromino;

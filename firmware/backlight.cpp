@@ -57,7 +57,7 @@ void Backlight::setup(BacklightStyle style) {
             break;
         case TETRIS:
             tetris_setup(this->leds, this->tetris_board, 
-                    &this->falling_tetromino);
+                    &this->falling_tetromino, &this->tetris_game_over_counter);
             break;
     }
 }
@@ -122,7 +122,8 @@ void Backlight::update() {
             break;
         case TETRIS:
             tetris_update(this->leds, this->keyboard, 
-                    this->it, this->tetris_board, &this->falling_tetromino);
+                    this->it, this->tetris_board, &this->falling_tetromino,
+                    &this->tetris_game_over_counter);
             break;
     }
 
