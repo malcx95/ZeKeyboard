@@ -40,8 +40,8 @@ void tetris::tetromino_copy(Tetromino* src, Tetromino* copy) {
 void tetris::tetromino_init(Tetromino* t, 
         TetrominoType type) {
     t->type = type;
-    t->x = 0;
-    t->y = 0;
+    t->x = TETROMINO_START_X;
+    t->y = TETROMINO_START_Y;
     t->rushing_down = false;
     switch (type) {
         case TETROMINO_I:

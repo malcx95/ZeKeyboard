@@ -8,6 +8,9 @@ namespace tetris {
     const uint8_t NUM_TETROMINOS = 7;
     const uint8_t TETROMINO_SIZE = 4;
 
+    const int8_t TETROMINO_START_X = 0;
+    const int8_t TETROMINO_START_Y = 0;
+
     enum SquareType {
         SQUARE_EMPTY, SQUARE_I, SQUARE_L, SQUARE_J,
         SQUARE_O, SQUARE_S, SQUARE_T, SQUARE_Z

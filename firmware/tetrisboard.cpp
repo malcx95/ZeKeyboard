@@ -23,6 +23,11 @@ bool can_rotate(SquareType tetris_board[][NUM_COLS],
 bool can_move_to(SquareType tetris_board[][NUM_COLS], 
         Tetromino* falling_tetromino, int8_t dx, int8_t dy);
 
+/*
+ * Returns whether a new tetromino can be spawned.
+ */
+bool can_spawn_tetromino(SquareType tetris_board[][NUM_COLS]);
+
 bool is_within_bounds(int8_t row, int8_t col);
 
 void tetris::clear_board(SquareType tetris_board[][NUM_COLS]) {
@@ -47,16 +52,20 @@ void tetris::spawn_tetromino(Tetromino* falling_tetromino, uint64_t it) {
     tetromino_init(falling_tetromino, type);
 }
 
-void tetris::tick(SquareType tetris_board[][NUM_COLS], 
+bool tetris::tick(SquareType tetris_board[][NUM_COLS], 
         Tetromino* falling_tetromino, uint64_t it) {
     if (!is_tetromino_falling(falling_tetromino)) {
-        spawn_tetromino(falling_tetromino, it);
+        if (can_spawn_tetromino(tetris_board)) {
+            spawn_tetromino(falling_tetromino, it);
+        } else {
+            return false;
+        }
     } else if (can_move_to(tetris_board, falling_tetromino, 0, 1)) {
         falling_tetromino->y += 1;
     } else {
         transfer_tetromino_to_board(tetris_board, falling_tetromino);
     }
-
+    return true;
 }
 
 void tetris::try_move(SquareType tetris_board[][NUM_COLS], 
@@ -155,7 +164,6 @@ void tetris::eliminate_rows(SquareType tetris_board[][NUM_COLS],
     }
 }
 
-
 bool can_rotate(SquareType tetris_board[][NUM_COLS], 
         Tetromino* falling_tetromino, bool left) {
     Tetromino temp;
@@ -203,6 +211,19 @@ bool can_move_to(SquareType tetris_board[][NUM_COLS],
                         tetris_board[new_y + row][new_x + col] != SQUARE_EMPTY) {
                     return false;
                 }
+            }
+        }
+    }
+
+    return true;
+}
+
+bool can_spawn_tetromino(SquareType tetris_board[][NUM_COLS]) {
+    for (int8_t row = 0; row < TETROMINO_SIZE; ++row) {
+        for (int8_t col = 0; col < TETROMINO_SIZE; ++col) {
+            if (tetris_board[TETROMINO_START_Y + row][TETROMINO_START_X + col]
+                    != SQUARE_EMPTY) {
+                return false;
             }
         }
     }

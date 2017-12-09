@@ -5,6 +5,13 @@ void handle_keyboard_input(Ze::Board* board,
         tetris::Tetromino* falling_tetromino);
 
 /*
+ * Resets the game
+ */
+void game_over(LED leds[][Ze::NUM_COLS],
+        tetris::SquareType tetris_board[][tetris::NUM_COLS],
+        tetris::Tetromino* falling_tetromino);
+
+/*
  * Lights up the rows about to be removed
  */
 void mark_rows_to_eliminate(LED leds[][Ze::NUM_COLS],
@@ -21,6 +28,22 @@ void mark_rows_to_eliminate(LED leds[][Ze::NUM_COLS],
             }
         }
     }
+}
+
+void game_over(LED leds[][Ze::NUM_COLS],
+        tetris::SquareType tetris_board[][tetris::NUM_COLS],
+        tetris::Tetromino* falling_tetromino) {
+    tetris::clear_board(tetris_board);
+    tetris::tetromino_deinit(falling_tetromino);
+
+    for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
+        for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
+            leds[row][col].r = 1.0;
+            leds[row][col].g = 0;
+            leds[row][col].b = 0;
+        }
+    }
+    
 }
 
 void draw_tetris_board(LED leds[][Ze::NUM_COLS],
@@ -125,24 +148,32 @@ void tetris_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it,
     handle_keyboard_input(board, tetris_board, falling_tetromino);
 
     if (falling_tetromino->rushing_down && it % RUSH_DELAY) {
+
         tetris::increment_rush(tetris_board, falling_tetromino);
         draw_tetris_board(leds, tetris_board, falling_tetromino);
-    }
-    else if (it % TETRIS_DELAY == 0) {
 
-        // the rows to eliminate from the board
+    } else if (it % TETRIS_DELAY == 0) { // normal iteration
+
+        // the rows to eliminate from the board (if any)
         bool rows_to_eliminate[tetris::NUM_ROWS];
 
         bool eliminate = tetris::find_rows_to_eliminate(tetris_board,
                 rows_to_eliminate);
 
         if (eliminate) {
+
             mark_rows_to_eliminate(leds, rows_to_eliminate);
             eliminate_rows(tetris_board, rows_to_eliminate);
             
         } else {
-            tetris::tick(tetris_board, falling_tetromino, it);
-            draw_tetris_board(leds, tetris_board, falling_tetromino);
+
+            bool game_is_over = 
+                !tetris::tick(tetris_board, falling_tetromino, it);
+            if (game_is_over) {
+                game_over(leds, tetris_board, falling_tetromino);
+            } else {
+                draw_tetris_board(leds, tetris_board, falling_tetromino);
+            }
         }
     }
 }

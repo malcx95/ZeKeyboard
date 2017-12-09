@@ -16,7 +16,11 @@ namespace tetris {
 
     void spawn_tetromino(Tetromino* falling_tetromino, uint64_t it);
 
-    void tick(SquareType tetris_board[][NUM_COLS], 
+    /*
+     * Ticks one step of the game. Returns false
+     * if the game is over, true otherwise.
+     */
+    bool tick(SquareType tetris_board[][NUM_COLS], 
             Tetromino* falling_tetromino, uint64_t it);
 
     void try_move(SquareType tetris_board[][NUM_COLS], 
