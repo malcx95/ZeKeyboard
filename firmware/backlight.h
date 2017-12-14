@@ -8,6 +8,7 @@
 #include "constants.h"
 #include "standard.h"
 #include "water.h"
+#include "christmas.h"
 #include "rave.h"
 #include "tetris.h"
 #include "gameoflife.h"
@@ -82,6 +83,8 @@ class Backlight {
         uint16_t cells[Ze::NUM_ROWS];
 
         uint8_t translate_grid_to_strip(uint8_t row, uint8_t col);
+
+        uint8_t christmas_scroll;
 
         /*
          * Counter which counts down to control
