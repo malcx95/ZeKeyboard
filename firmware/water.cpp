@@ -2,6 +2,7 @@
 #include <Arduino.h>
 
 const int NUM_NEIGHBORS = 8;
+const float NEIGHBOR_DENOMINATOR = 4 + 4/sqrt(2);
 
 void get_neighbors(WaterParticle particles[][WATER_WIDTH],
         WaterParticle neighbors[NUM_NEIGHBORS / 2], int row, int col) {
@@ -40,9 +41,9 @@ void do_water_physics(WaterParticle particles[][WATER_WIDTH]) {
             int speed = 0;
             for (uint8_t i = 0; i < NUM_NEIGHBORS / 2; ++i) {
                 speed += (int)neighbors[i].prev_pos;
-                speed += (int)(corners[i].prev_pos * CORNER_DIST);
+                speed += (int)(((float)corners[i].prev_pos) * CORNER_DIST);
             }
-            speed = (speed / NUM_NEIGHBORS) - p->prev_pos;
+            speed = ((int)(((float)speed) / NEIGHBOR_DENOMINATOR)) - p->prev_pos;
             p->speed = (int16_t)(((float)(p->prev_speed + speed)) *
                     DAMPENING);
             p->pos += p->speed;
