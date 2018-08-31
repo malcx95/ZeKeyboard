@@ -1,6 +1,11 @@
 #include <Keyboard.h>
+#include "config.h"
 
-
+#ifdef SIXTY_PERCENT
+    #include "sixty_layout.h"
+#elif defined FULLSIZE
+    #include "fullsize_layout.h"
+#endif
 #include "keyboard.h"
 
 

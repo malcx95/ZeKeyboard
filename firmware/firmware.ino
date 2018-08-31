@@ -1,8 +1,10 @@
 #include "backlight.h"
 #include "keyboard.h"
 #include "constants.h"
+#include "config.h"
 #include <stdint.h>
 #include <FastLED.h>
+
 
 const int DELAY_MICROS = 16000;
 
@@ -19,6 +21,7 @@ void check_serial();
 
 void setup() {
 
+#ifndef FULLSIZE
     FastLED.addLeds<NEOPIXEL, 2>(leds, NUM_LEDS);
 
     FastLED.clear();
@@ -29,12 +32,15 @@ void setup() {
 
     FastLED.show();
     
+#endif
+
     keyboard.init();
 
+#ifndef FULLSIZE
     backlight.init(&keyboard, leds);
 
     backlight.setup(BacklightStyle::STANDARD);
-
+#endif
     Serial.begin(9600);
 
     delay(500);
@@ -47,7 +53,9 @@ void loop() {
 
     keyboard.update();
     
+#ifndef FULLSIZE
     backlight.update();
+#endif
 
     check_serial();
 
@@ -66,8 +74,6 @@ void smart_delay(unsigned long start_time) {
         Serial.print("Computing took more than 16 ms: ");
         Serial.println(elapsed);
         return;
-    } else {
-        //Serial.println(elapsed);
     }
     delayMicroseconds(DELAY_MICROS - elapsed);
 }
