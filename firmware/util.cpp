@@ -13,6 +13,18 @@ void morph(Color& from, Color& to, float amount, Color& res) {
     res.b = from.b - bdiff * amount;
 }
 
+Color Color::operator+(Color other) {
+    return Color{this->r + other.r, this->g + other.g, this->b + other.b};
+}
+
+Color Color::operator*(float scale) {
+    return Color{this->r*scale, this->g*scale, this->b*scale};
+}
+
+Color get_random_color(uint64_t seed) {
+    return Color {(seed % 256)/255, ((seed*seed) % 256)/255, ((seed*seed*seed) % 256)/255};
+}
+
 uint8_t clamp(int index, uint8_t max) {
     if (index < 0) return 0;
     else if (index > max) return max;

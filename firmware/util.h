@@ -8,6 +8,9 @@ struct Color {
     float r;
     float g;
     float b;
+
+    Color operator+(Color other);
+    Color operator*(float scale);
 };
 
 /*
@@ -22,6 +25,8 @@ void morph(Color& from, Color& to, float amount, Color& res);
  * and blue is z.
  */
 void spherical_color(double r, double phi, double theta, Color& res);
+
+Color get_random_color(uint64_t seed);
 
 uint8_t clamp(int index, uint8_t max);
 

@@ -20,6 +20,7 @@ void Backlight::init(Ze::Board* keyboard, CRGB* ledstrip) {
             l.init();
             l.port = LED_GRID[row][col];
             leds[row][col] = l;
+            keyboard_freq[row][col] = 0;
         }
     }
 }
@@ -45,6 +46,9 @@ void Backlight::setup(BacklightStyle style) {
     switch (style) {
         case STANDARD:
             standard_setup(this->leds, this->particles);
+            break;
+        case COUNT:
+            count_setup(this->leds, this->keyboard_freq);
             break;
         case WATER:
             water_setup(this->leds, this->particles);
@@ -110,6 +114,9 @@ void Backlight::update() {
     switch (style) {
         case STANDARD:
             standard_update(this->leds, this->keyboard, this->it);
+            break;
+        case COUNT:
+            count_update(this->leds, this->keyboard_freq, this->keyboard, this->it);
             break;
         case WATER:
             water_update(this->leds, this->keyboard, this->particles, this->it);

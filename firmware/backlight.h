@@ -7,6 +7,7 @@
 #include "keyboard.h"
 #include "constants.h"
 #include "standard.h"
+#include "count.h"
 #include "water.h"
 #include "rave.h"
 #include "tetris.h"
@@ -59,6 +60,8 @@ class Backlight {
          * by the effects.
          */
         LED leds[Ze::NUM_ROWS][Ze::NUM_COLS];
+
+        uint16_t keyboard_freq[Ze::NUM_ROWS][Ze::NUM_COLS];
 
         /*
          * Counter for iterating through, for example,
