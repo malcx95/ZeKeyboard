@@ -22,9 +22,14 @@ const uint8_t NUM_LEDS = 64;
 const uint8_t NUM_LEDS = 109;
 #endif
 
+#ifdef SIXTY_PERCENT
 // 4, since we don't want to use the last one
-const uint8_t NUM_STYLES = 5;
+const uint8_t NUM_STYLES = 4;
 enum BacklightStyle {STANDARD, WATER, GAMEOFLIFE, TETRIS, CHRISTMAS, RAVE};
+#elif defined FULLSIZE
+const uint8_t NUM_STYLES = 3;
+enum BacklightStyle {STANDARD, GAMEOFLIFE, TETRIS, WATER, CHRISTMAS, RAVE};
+#endif
 
 #endif /* ifndef CONSTANTS_H */
 
