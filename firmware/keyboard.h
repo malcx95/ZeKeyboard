@@ -148,11 +148,9 @@ namespace Ze {
             const uint8_t ROW_PINS[NUM_ROWS] = {26, 27, 28, 29, 30, 31};
             const uint8_t COL_PINS[NUM_COLS] = 
             {
-                4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
-                14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
-            };
+                4, 5, 6, 7, 8, 9, 10, 11, 12, 1,
+                14, 15, 16, 17, 18, 19, 20, 21, 22, 33, 34, 37 };
 #endif
-
             bool fn_pressed;
 
             bool b_inc_pressed;

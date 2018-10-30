@@ -21,7 +21,7 @@ void check_serial();
 
 void setup() {
 
-#ifndef FULLSIZE
+//#ifndef FULLSIZE
     FastLED.addLeds<NEOPIXEL, 2>(leds, NUM_LEDS);
 
     FastLED.clear();
@@ -31,33 +31,46 @@ void setup() {
     delay(50);
 
     FastLED.show();
-    
-#endif
-
+//
     keyboard.init();
-
-#ifndef FULLSIZE
-    backlight.init(&keyboard, leds);
-
-    backlight.setup(BacklightStyle::STANDARD);
-#endif
-    Serial.begin(9600);
-
+//
+//    backlight.init(&keyboard, leds);
+//
+//    backlight.setup(BacklightStyle::STANDARD);
+//    Serial.begin(9600);
+//
     delay(500);
 
 }
 
+void test_leds() {
+    for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i] = CRGB::Green;
+    }
+   // delay(500);
+   // FastLED.show();
+   // for (int i = 0; i < NUM_LEDS; i++) {
+   //     leds[i] = CRGB::Green;
+   // }
+   // delay(500);
+   // FastLED.show();
+   // for (int i = 0; i < NUM_LEDS; i++) {
+   //     leds[i] = CRGB::Blue;
+   // }
+   // delay(500);
+    FastLED.show();
+}
+
 void loop() {
+    test_leds();
 
     unsigned long start_time = micros();
 
     keyboard.update();
-    
-#ifndef FULLSIZE
-    backlight.update();
-#endif
+    // 
+    // backlight.update();
 
-    check_serial();
+    // check_serial();
 
     smart_delay(start_time);
 

@@ -16,8 +16,11 @@ namespace Ze {
 
 };
 
-// TODO add one for FULLSIZE
+#ifdef SIXTY_PERCENT
 const uint8_t NUM_LEDS = 64;
+#elif defined FULLSIZE
+const uint8_t NUM_LEDS = 114;
+#endif
 
 // 4, since we don't want to use the last one
 const uint8_t NUM_STYLES = 4;
