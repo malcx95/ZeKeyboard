@@ -2,7 +2,12 @@
 #define BACKLIGHT_H
 
 #include <Arduino.h>
-#include "leds.h"
+#include "config.h"
+#ifdef SIXTY_PERCENT
+    #include "ledssixty.h"
+#elif defined FULLSIZE
+    #include "ledsfull.h"
+#endif
 #include "led.h"
 #include "keyboard.h"
 #include "constants.h"
@@ -105,13 +110,15 @@ class Backlight {
 
 };
 
+#ifdef SIXTY_PERCENT
+
 const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
 {
 
     //******************************************
     // ROW 0
     //******************************************
-    
+
     {
         LED_ESC, 
         LED_1,
@@ -213,4 +220,185 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
         LED_VOL_UP
     }
 };
+#elif defined FULLSIZE
+
+const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
+{
+
+    //******************************************
+    // ROW 0
+    //******************************************
+
+    {
+        LED_ESC, 
+        LED_DUMMY,
+        LED_F1,
+        LED_F2,
+        LED_F3,
+        LED_F4,
+        LED_DUMMY,
+        LED_F5,
+        LED_F6,
+        LED_F7,
+        LED_F8,
+        LED_F9,
+        LED_F10,
+        LED_F11,
+        LED_F12,
+        LED_PRINTSCREEN,
+        LED_SCROLL_LOCK, 
+        LED_PAUSE,
+        LED_EXTRA1,
+        LED_EXTRA2,
+        LED_EXTRA3,
+        LED_EXTRA4
+    },
+
+    //******************************************
+    // ROW 1
+    //******************************************
+
+    {
+        LED_TILDE, 
+        LED_1,
+        LED_2,
+        LED_3,
+        LED_4,
+        LED_5,
+        LED_6,
+        LED_7,
+        LED_8,
+        LED_9,
+        LED_0,
+        LED_MINUS, 
+        LED_EQUAL,
+        LED_DUMMY,
+        LED_BACKSPACE,
+        LED_INSERT,
+        LED_HOME,
+        LED_PGUP,
+        LED_NUMLOCK,
+        LED_NUMPAD_SLASH,
+        LED_NUMPAD_ASTERISK,
+        LED_NUMPAD_MINUS
+    },
+
+    //******************************************
+    // ROW 2
+    //******************************************
+
+    {
+        LED_TAB,
+        LED_DUMMY,
+        LED_Q, 
+        LED_W,
+        LED_E, 
+        LED_R,
+        LED_T, 
+        LED_Y,
+        LED_U, 
+        LED_I,
+        LED_O, 
+        LED_P,
+        LED_LEFT_BRACE,
+        LED_RIGHT_BRACE,
+        LED_ENTER,
+        LED_DEL,
+        LED_END,
+        LED_PGDOWN,
+        LED_NUMPAD_7,
+        LED_NUMPAD_8,
+        LED_NUMPAD_9,
+        LED_NUMPAD_PLUS
+    },
+
+    //******************************************
+    // ROW 3
+    //******************************************
+    
+    {
+        LED_FN,
+        LED_DUMMY,
+        LED_A, 
+        LED_S,
+        LED_D, 
+        LED_F, 
+        LED_G, 
+        LED_H,
+        LED_J,
+        LED_K,
+        LED_L, 
+        LED_SEMICOLON, 
+        LED_QUOTE,
+        LED_BACKSLASH,
+        LED_DUMMY,
+        LED_DUMMY,
+        LED_DUMMY,
+        LED_NUMPAD_4,
+        LED_NUMPAD_5,
+        LED_NUMPAD_6,
+        LED_DUMMY
+    },
+
+    //******************************************
+    // ROW 4
+    //******************************************
+    
+    {
+        LED_LSHIFT,
+        LED_DUMMY,
+        LED_NON_US_BS,
+        LED_Z,
+        LED_X,
+        LED_C,
+        LED_V,
+        LED_B,
+        LED_N,
+        LED_M,
+        LED_COMMA,
+        LED_PERIOD,
+        LED_SLASH,
+        LED_DUMMY,
+        LED_RSHIFT,
+        LED_DUMMY,
+        LED_UP,
+        LED_DUMMY,
+        LED_NUMPAD_1,
+        LED_NUMPAD_2,
+        LED_NUMPAD_3,
+        LED_NUMPAD_ENTER
+    },
+
+    //******************************************
+    // ROW 5
+    //******************************************
+    
+    {
+        LED_LEFT_CTRL,
+        LED_DUMMY,
+        LED_LEFT_SUPER,
+        LED_ALT,
+        LED_DUMMY,
+        LED_DUMMY,
+        LED_DUMMY,
+        LED_SPACE,
+        LED_DUMMY,
+        LED_DUMMY,
+        LED_DUMMY,
+        LED_ALTGR,
+        LED_RIGHT_SUPER,
+        LED_RIGHT_FN,
+        LED_RIGHT_CTRL,
+        LED_LEFT,
+        LED_DOWN,
+        LED_RIGHT,
+        LED_DUMMY,
+        LED_NUMPAD_0,
+        LED_PERIOD,
+        LED_DUMMY
+    }
+};
+
+#endif
+
 #endif

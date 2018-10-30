@@ -1,7 +1,7 @@
+#include "config.h"
 #include "backlight.h"
 #include "keyboard.h"
 #include "constants.h"
-#include "config.h"
 #include <stdint.h>
 #include <FastLED.h>
 
@@ -21,54 +21,39 @@ void check_serial();
 
 void setup() {
 
-//#ifndef FULLSIZE
     FastLED.addLeds<NEOPIXEL, 2>(leds, NUM_LEDS);
 
     FastLED.clear();
 
+#ifdef FULLSIZE
+    FastLED.setMaxPowerInVoltsAndMilliamps(5, 800);
+#else
     FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
+#endif
+
 
     delay(50);
 
     FastLED.show();
-//
     keyboard.init();
-//
-//    backlight.init(&keyboard, leds);
-//
-//    backlight.setup(BacklightStyle::STANDARD);
-//    Serial.begin(9600);
-//
+
+    backlight.init(&keyboard, leds);
+
+    backlight.setup(BacklightStyle::STANDARD);
+    Serial.begin(9600);
+
     delay(500);
 
 }
 
-void test_leds() {
-    for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = CRGB::Green;
-    }
-   // delay(500);
-   // FastLED.show();
-   // for (int i = 0; i < NUM_LEDS; i++) {
-   //     leds[i] = CRGB::Green;
-   // }
-   // delay(500);
-   // FastLED.show();
-   // for (int i = 0; i < NUM_LEDS; i++) {
-   //     leds[i] = CRGB::Blue;
-   // }
-   // delay(500);
-    FastLED.show();
-}
 
 void loop() {
-    test_leds();
 
     unsigned long start_time = micros();
 
     keyboard.update();
-    // 
-    // backlight.update();
+     
+    backlight.update();
 
     // check_serial();
 

@@ -1,7 +1,13 @@
 #ifndef H_LED
 #define H_LED 
 
-#include "leds.h"
+#include "config.h"
+#ifdef SIXTY_PERCENT
+    #include "ledssixty.h"
+#elif defined FULLSIZE
+    #include "ledsfull.h"
+#endif
+
 #include <stdint.h>
 
 const led_t LED_DUMMY = 100;
