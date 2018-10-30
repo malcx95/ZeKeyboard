@@ -1,4 +1,4 @@
-#ifndef GAMOFLIFE_H
+#ifndef GAMEOFLIFE_H
 #define GAMEOFLIFE_H
 
 #include "constants.h"

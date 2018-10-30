@@ -23,8 +23,8 @@ const uint8_t NUM_LEDS = 109;
 #endif
 
 // 4, since we don't want to use the last one
-const uint8_t NUM_STYLES = 4;
-enum BacklightStyle {STANDARD, WATER, GAMEOFLIFE, TETRIS, RAVE};
+const uint8_t NUM_STYLES = 5;
+enum BacklightStyle {STANDARD, WATER, GAMEOFLIFE, TETRIS, CHRISTMAS, RAVE};
 
 #endif /* ifndef CONSTANTS_H */
 

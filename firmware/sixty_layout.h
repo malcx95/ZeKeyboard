@@ -12,7 +12,7 @@ namespace Ze {
         //******************************************
         
         {
-            Key(KEY_ESC, 0, 0), 
+            Key(KEY_ESC, KEY_TILDE, 0, 0), 
             Key(KEY_1, KEY_F1, 0, 1),
             Key(KEY_2, KEY_F2, 0, 2),
             Key(KEY_3, KEY_F3, 0, 3),
