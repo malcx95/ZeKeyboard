@@ -9,7 +9,7 @@ Backlight::Backlight() {
 void Backlight::init(Ze::Board* keyboard, CRGB* ledstrip) {
     this->keyboard = keyboard;
     this->ledstrip = ledstrip;
-    this->curr_brightness = 2;
+    this->curr_brightness = 3;
     this->brightness = BRIGHTNESS_VALUES[this->curr_brightness];
     this->it = 0;
     this->already_changed_bright = false;

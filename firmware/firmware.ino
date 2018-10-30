@@ -55,8 +55,6 @@ void loop() {
      
     backlight.update();
 
-    // check_serial();
-
     smart_delay(start_time);
 
 }
@@ -76,15 +74,3 @@ void smart_delay(unsigned long start_time) {
     delayMicroseconds(DELAY_MICROS - elapsed);
 }
 
-void check_serial() {
-    if (Serial.available()) {
-        char c = (char)Serial.read();
-        if (c == 'i') {
-            backlight.setup(BacklightStyle::GAMEOFLIFE);
-        } else if (c == 'v') {
-            backlight.setup(BacklightStyle::WATER);
-        } else if (c == 'n') {
-            backlight.setup(BacklightStyle::STANDARD);
-        }
-    }
-}

@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 
-const led_t LED_DUMMY = 100;
+const led_t LED_DUMMY = 125;
 const float MAX_BYTE = 255.0;
 
 struct LED {

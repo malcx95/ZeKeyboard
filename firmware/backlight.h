@@ -394,7 +394,7 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
         LED_RIGHT,
         LED_DUMMY,
         LED_NUMPAD_0,
-        LED_PERIOD,
+        LED_NUMPAD_PERIOD,
         LED_DUMMY
     }
 };
