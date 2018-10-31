@@ -27,7 +27,7 @@ const uint8_t NUM_LEDS = 109;
 const uint8_t NUM_STYLES = 4;
 enum BacklightStyle {STANDARD, WATER, GAMEOFLIFE, TETRIS, CHRISTMAS, RAVE};
 #elif defined FULLSIZE
-const uint8_t NUM_STYLES = 3;
+const uint8_t NUM_STYLES = 4;
 enum BacklightStyle {STANDARD, GAMEOFLIFE, TETRIS, WATER, CHRISTMAS, RAVE};
 #endif
 

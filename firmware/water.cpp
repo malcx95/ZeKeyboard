@@ -93,8 +93,8 @@ void map_leds(LED leds[][Ze::NUM_COLS],
 
 void water_setup(LED leds[][Ze::NUM_COLS],
         WaterParticle particles[][WATER_WIDTH]) {
-    for (int8_t row = 0; row < WATER_HEIGHT; ++row) {
-        for (int8_t col = 0; col < WATER_WIDTH; ++col) {
+    for (uint8_t row = 0; row < WATER_HEIGHT; ++row) {
+        for (uint8_t col = 0; col < WATER_WIDTH; ++col) {
             particles[row][col] = {0, 0, 0, 0, row, col};
         }
     }
@@ -112,7 +112,7 @@ void react_to_keypress(Ze::Board* board,
         for (int row = p->row - KEY_PRESS_RADIUS; row < p->row + KEY_PRESS_RADIUS; ++row) {
             for (int col = p->col - KEY_PRESS_RADIUS; col < p->col + KEY_PRESS_RADIUS; ++col) {
                 particles[clamp(row, WATER_HEIGHT - 1)]
-                    [clamp(col, WATER_WIDTH - 1)].pos = 32767;
+                    [clamp(col, WATER_WIDTH - 1)].pos = PRESS_FORCE;
             }
         }
 
