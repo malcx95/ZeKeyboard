@@ -85,7 +85,7 @@ class Backlight {
          * The grid of ceĺls in the game of life effect.
          * Each bit corresponds to a cell.
          */
-        uint16_t cells[Ze::NUM_ROWS];
+        uint32_t cells[Ze::NUM_ROWS];
 
         uint8_t translate_grid_to_strip(uint8_t row, uint8_t col);
 
@@ -334,6 +334,7 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
         LED_SEMICOLON, 
         LED_QUOTE,
         LED_BACKSLASH,
+        LED_DUMMY,
         LED_DUMMY,
         LED_DUMMY,
         LED_DUMMY,
