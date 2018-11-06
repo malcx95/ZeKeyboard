@@ -17,6 +17,7 @@
 #include "rave.h"
 #include "tetris.h"
 #include "gameoflife.h"
+#include "keysort.h"
 #include <FastLED.h>
 
 const uint8_t NUM_BRIGHTNESS_VALUES = 4;
@@ -101,6 +102,26 @@ class Backlight {
 
         tetris::Tetromino falling_tetromino;
 
+        /*
+         * Intensities in sort mode
+         */
+        uint8_t intensities[NUM_KEYS];
+
+        /*
+         * Temporary intensities in sort mode
+         */
+        uint8_t intensities_temp[NUM_KEYS];
+
+        /*
+         * The head index in the swap list
+         */
+        int swap_ptr;
+
+        /*
+         * The list of swaps done in a sort.
+         */
+        Swap swaps[NUM_KEYS*NUM_KEYS];
+
         void increase_brightness();
 
         void change_style();
@@ -110,6 +131,7 @@ class Backlight {
         void handle_brightness_change();
         
         void handle_backlight_change();
+
 
 };
 

@@ -67,8 +67,8 @@ void smart_delay(unsigned long start_time) {
 
     unsigned long elapsed = time - start_time;
     if (elapsed > DELAY_MICROS) {
-        Serial.print("Computing took more than 16 ms: ");
-        Serial.println(elapsed);
+//        Serial.print("Computing took more than 16 ms: ");
+//        Serial.println(elapsed);
         return;
     }
     delayMicroseconds(DELAY_MICROS - elapsed);
