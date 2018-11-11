@@ -25,11 +25,19 @@ namespace Ze {
     const int KEY_FN = -7;
     const int KEY_LOCK = -8;
 
+#ifdef SIXTY_PERCENT
     // Keycode for changing the backlight brightness
     const int KEY_INC_BRIGHTNESS = KEY_RSHIFT;
 
     // Keycode for changing the backlight style
     const int KEY_BACKLIGHT_STYLE = KEY_LSHIFT;
+#elif defined FULLSIZE
+    // Keycode for changing the backlight brightness
+    const int KEY_INC_BRIGHTNESS = -100;
+
+    // Keycode for changing the backlight style
+    const int KEY_BACKLIGHT_STYLE = -101;
+#endif
 
     const uint8_t NUM_MODIFIERS = 6;
 

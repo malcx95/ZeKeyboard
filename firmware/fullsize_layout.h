@@ -30,10 +30,10 @@ namespace Ze {
             Key(KEY_PRINTSCREEN, 0, 15), 
             Key(KEY_SCROLL_LOCK, 0, 16),
             Key(KEY_PAUSE, 0, 17),
-            Key(KEY_LOCK, 0, 18),
-            Key(KEY_MEDIA_MUTE, 0, 19),
-            Key(KEY_MEDIA_VOLUME_DEC, 0, 20),
-            Key(KEY_MEDIA_VOLUME_INC, 0, 21)
+            Key(KEY_MEDIA_VOLUME_DEC, KEY_MEDIA_MUTE, 0, 18),
+            Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_MUTE, 0, 19),
+            Key(KEY_INC_BRIGHTNESS, 0, 20),
+            Key(KEY_BACKLIGHT_STYLE, 0, 21)
         },
 
         //******************************************
