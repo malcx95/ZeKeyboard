@@ -11,7 +11,7 @@ void christmas_setup(LED leds[][Ze::NUM_COLS], uint8_t* scroll) {
             l->b = 0;
         }
     }
-    *scroll = TREE_HEIGHT - 1;
+    *scroll = 0;
 }
 
 void christmas_update(LED leds[][Ze::NUM_COLS], 
@@ -21,7 +21,7 @@ void christmas_update(LED leds[][Ze::NUM_COLS],
         for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
             for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
                 LED* l = &leds[row][col];
-                uint8_t val = TREE_GRID[(Ze::NUM_ROWS - row - 1) + *scroll - Ze::NUM_ROWS][col];
+                uint8_t val = TREE_GRID[*scroll][row][col];
 
                 if (val == GREEN) {
                     l->r = 0;
@@ -47,10 +47,10 @@ void christmas_update(LED leds[][Ze::NUM_COLS],
 
             }
         }
-        if (*scroll == 0) {
-            *scroll = TREE_HEIGHT - 1;
+        if (*scroll == NUM_FRAMES - 1) {
+            *scroll = 0;
         } else {
-            *scroll -= 1;
+            *scroll += 1;
         }
     
     }
