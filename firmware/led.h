@@ -6,6 +6,8 @@
     #include "ledssixty.h"
 #elif defined FULLSIZE
     #include "ledsfull.h"
+#elif defined V2
+    #include "ledsv2.h"
 #endif
 
 #include <stdint.h>

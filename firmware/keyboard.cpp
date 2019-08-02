@@ -5,6 +5,8 @@
     #include "sixty_layout.h"
 #elif defined FULLSIZE
     #include "fullsize_layout.h"
+#elif defined V2
+    #include "v2_layout.h"
 #endif
 #include "keyboard.h"
 
@@ -63,7 +65,7 @@ int Ze::Board::translate_modifier(const int modifier) const {
 bool Ze::Board::brightness_inc_pressed() {
 #ifdef FULLSIZE
     return this->b_inc_pressed;
-#elif defined SIXTY_PERCENT 
+#else 
     return this->b_inc_pressed && this->fn_pressed;
 #endif
 }
@@ -71,7 +73,7 @@ bool Ze::Board::brightness_inc_pressed() {
 bool Ze::Board::backlight_style_changed() {
 #ifdef FULLSIZE
     return this->b_style_pressed;
-#elif defined SIXTY_PERCENT
+#else
     return this->b_style_pressed && this->fn_pressed;
 #endif
 }
@@ -189,7 +191,7 @@ void Ze::Board::scan_keys() {
 
                         current_modifier |= translate_modifier(pressed.code);
 
-#ifdef SIXTY_PERCENT
+#ifndef FULLSIZE 
                         // Handle brightness change
                         if (pressed.code == KEY_INC_BRIGHTNESS) {
                             b_inc_pressed = true;

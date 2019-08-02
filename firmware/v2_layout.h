@@ -100,7 +100,7 @@ namespace Ze {
             Key(KEY_PERIOD, 3, 10),
             Key(KEY_SLASH, 3, 11),
             Key(), // dummy
-            Key(KEY_RSHIFT, 3, 13)
+            Key(KEY_RSHIFT, 3, 13),
             Key(KEYPAD_1, 3, 14),
             Key(KEYPAD_2, 3, 15),
             Key(KEYPAD_3, 3, 16),
@@ -125,7 +125,7 @@ namespace Ze {
             Key(KEY_ALTGR, 4, 10),
             Key(KEY_MEDIA_PLAY_PAUSE, 4, 11),
             Key(KEY_MEDIA_VOLUME_DEC, KEY_MEDIA_PREV_TRACK, 4, 12),
-            Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_NEXT_TRACK, 4, 13)
+            Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_NEXT_TRACK, 4, 13),
             Key(), // dummy
             Key(KEYPAD_0, 4, 15),
             Key(KEYPAD_PERIOD, 4, 16),

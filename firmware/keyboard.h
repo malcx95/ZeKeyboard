@@ -25,13 +25,13 @@ namespace Ze {
     const int KEY_FN = -7;
     const int KEY_LOCK = -8;
 
-#ifdef SIXTY_PERCENT
+#ifndef FULLSIZE 
     // Keycode for changing the backlight brightness
     const int KEY_INC_BRIGHTNESS = KEY_RSHIFT;
 
     // Keycode for changing the backlight style
     const int KEY_BACKLIGHT_STYLE = KEY_LSHIFT;
-#elif defined FULLSIZE
+#else
     // Keycode for changing the backlight brightness
     const int KEY_INC_BRIGHTNESS = -100;
 
@@ -158,6 +158,10 @@ namespace Ze {
             {
                 4, 5, 6, 7, 8, 9, 10, 11, 12, 1,
                 14, 15, 16, 17, 18, 19, 20, 21, 22, 33, 34, 37 };
+#elif defined V2
+            const uint8_t ROW_PINS[NUM_ROWS] = {32, 31, 30, 29, 28};
+            const uint8_t COL_PINS[NUM_COLS] = 
+            { 22, 23, 21, 20, 2, 0, 1, 25, 24, 12, 11, 10, 9, 8, 7, 5, 6, 4 };
 #endif
             bool fn_pressed;
 

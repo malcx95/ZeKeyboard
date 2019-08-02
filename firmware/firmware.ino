@@ -1,5 +1,5 @@
 #include "config.h"
-#include "backlight.h"
+//#include "backlight.h"
 #include "keyboard.h"
 #include "constants.h"
 #include <stdint.h>
@@ -9,9 +9,9 @@
 const int DELAY_MICROS = 16000;
 
 Ze::Board keyboard;
-Backlight backlight;
+//Backlight backlight;
 
-CRGB leds[NUM_LEDS];
+//CRGB leds[NUM_LEDS];
 
 uint8_t count;
 
@@ -21,25 +21,29 @@ void check_serial();
 
 void setup() {
 
-    FastLED.addLeds<NEOPIXEL, 2>(leds, NUM_LEDS);
-
-    FastLED.clear();
-
-#ifdef FULLSIZE
-    FastLED.setMaxPowerInVoltsAndMilliamps(5, 800);
-#else
-    FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
-#endif
-
+//#ifdef V2 
+//    FastLED.addLeds<NEOPIXEL, 3>(leds, NUM_LEDS);
+//#else
+//    FastLED.addLeds<NEOPIXEL, 2>(leds, NUM_LEDS);
+//#endif
+//
+//    FastLED.clear();
+//
+//#ifdef FULLSIZE
+//    FastLED.setMaxPowerInVoltsAndMilliamps(5, 800);
+//#else
+//    FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
+//#endif
+//
 
     delay(50);
 
-    FastLED.show();
+    // FastLED.show();
     keyboard.init();
 
-    backlight.init(&keyboard, leds);
+    // backlight.init(&keyboard, leds);
 
-    backlight.setup(BacklightStyle::STANDARD);
+    // backlight.setup(BacklightStyle::STANDARD);
     Serial.begin(9600);
 
     delay(500);
@@ -53,7 +57,7 @@ void loop() {
 
     keyboard.update();
      
-    backlight.update();
+//    backlight.update();
 
     smart_delay(start_time);
 

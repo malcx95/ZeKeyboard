@@ -18,6 +18,9 @@ const uint8_t WATER_WIDTH = 90;
 #elif defined FULLSIZE
 const uint8_t WATER_HEIGHT = 40;
 const uint8_t WATER_WIDTH = 160;
+#elif defined V2 //  TODO UPDATE
+const uint8_t WATER_HEIGHT = 40;
+const uint8_t WATER_WIDTH = 160;
 #endif
 const float WIDTH_UNIT = WATER_WIDTH / Ze::NUM_COLS;
 const float HEIGHT_UNIT = WATER_HEIGHT / Ze::NUM_ROWS;
@@ -42,7 +45,7 @@ struct WaterParticle {
 #ifdef SIXTY_PERCENT
     int8_t row;
     int8_t col;
-#elif defined FULLSIZE
+#else
     int16_t row;
     int16_t col;
 #endif
@@ -77,6 +80,8 @@ const float KEY_WIDTHS[Ze::NUM_ROWS][Ze::NUM_COLS] = {
     {1.25, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 4.25, 0, 2.5, 0, 1, 1, 1, 1},
     {1.25, 0, 1.25, 1.25, 0, 0, 0, 6.25, 0, 0, 0, 1.25, 1.25, 1.25, 1.75, 1, 1, 1.5, 0, 2, 1, 0}
 };
+#elif defined V2 
+const float KEY_WIDTHS[Ze::NUM_ROWS][Ze::NUM_COLS] = {}; // TODO UPDATE
 #endif
 
 #endif /* ifndef WATER_H */

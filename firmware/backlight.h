@@ -403,6 +403,138 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
     }
 };
 
+#elif defined V2 
+
+const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
+{
+
+
+    //******************************************
+    // ROW 0
+    //******************************************
+
+    {
+        LED_TILDE, 
+        LED_1,
+        LED_2,
+        LED_3,
+        LED_4,
+        LED_5,
+        LED_6,
+        LED_7,
+        LED_8,
+        LED_9,
+        LED_0,
+        LED_MINUS, 
+        LED_EQUAL,
+        LED_BACKSPACE,
+        LED_NUMLOCK,
+        LED_NUMPAD_SLASH,
+        LED_NUMPAD_ASTERISK,
+        LED_NUMPAD_MINUS
+    },
+
+    //******************************************
+    // ROW 2
+    //******************************************
+
+    {
+        LED_TAB,
+        LED_Q, 
+        LED_W,
+        LED_E, 
+        LED_R,
+        LED_T, 
+        LED_Y,
+        LED_U, 
+        LED_I,
+        LED_O, 
+        LED_P,
+        LED_LEFT_BRACE,
+        LED_RIGHT_BRACE,
+        LED_ENTER,
+        LED_NUMPAD_7,
+        LED_NUMPAD_8,
+        LED_NUMPAD_9,
+        LED_NUMPAD_PLUS
+    },
+
+    //******************************************
+    // ROW 3
+    //******************************************
+    
+    {
+        LED_FN,
+        LED_DUMMY,
+        LED_A, 
+        LED_S,
+        LED_D, 
+        LED_F, 
+        LED_G, 
+        LED_H,
+        LED_J,
+        LED_K,
+        LED_L, 
+        LED_SEMICOLON, 
+        LED_QUOTE,
+        LED_BACKSLASH,
+        LED_NUMPAD_4,
+        LED_NUMPAD_5,
+        LED_NUMPAD_6,
+        LED_DUMMY
+    },
+
+    //******************************************
+    // ROW 4
+    //******************************************
+    
+    {
+        LED_LSHIFT,
+        LED_DUMMY,
+        LED_Z,
+        LED_X,
+        LED_C,
+        LED_V,
+        LED_B,
+        LED_N,
+        LED_M,
+        LED_COMMA,
+        LED_PERIOD,
+        LED_SLASH,
+        LED_DUMMY,
+        LED_RSHIFT,
+        LED_NUMPAD_1,
+        LED_NUMPAD_2,
+        LED_NUMPAD_3,
+        LED_NUMPAD_ENTER
+    },
+
+    //******************************************
+    // ROW 5
+    //******************************************
+    
+    {
+        LED_LEFT_CTRL,
+        LED_DUMMY,
+        LED_LEFT_SUPER,
+        LED_ALT,
+        LED_DUMMY,
+        LED_DUMMY,
+        LED_DUMMY,
+        LED_SPACE,
+        LED_DUMMY,
+        LED_DUMMY,
+        LED_DUMMY,
+        LED_ALTGR,
+        LED_RIGHT_SUPER,
+        LED_RIGHT_FN,
+        LED_RIGHT_CTRL,
+        LED_NUMPAD_0,
+        LED_NUMPAD_PERIOD,
+        LED_DUMMY
+    }
+};
+
 #endif
 
 #endif
