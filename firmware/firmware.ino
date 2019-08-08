@@ -11,7 +11,7 @@ const int DELAY_MICROS = 16000;
 Ze::Board keyboard;
 //Backlight backlight;
 
-//CRGB leds[NUM_LEDS];
+CRGB leds[NUM_LEDS];
 
 uint8_t count;
 
@@ -21,24 +21,26 @@ void check_serial();
 
 void setup() {
 
-//#ifdef V2 
-//    FastLED.addLeds<NEOPIXEL, 3>(leds, NUM_LEDS);
-//#else
-//    FastLED.addLeds<NEOPIXEL, 2>(leds, NUM_LEDS);
-//#endif
-//
-//    FastLED.clear();
-//
-//#ifdef FULLSIZE
-//    FastLED.setMaxPowerInVoltsAndMilliamps(5, 800);
-//#else
-//    FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
-//#endif
-//
+#ifdef V2 
+    FastLED.addLeds<NEOPIXEL, 3>(leds, NUM_LEDS);
+#else
+    FastLED.addLeds<NEOPIXEL, 2>(leds, NUM_LEDS);
+#endif
+
+    FastLED.clear();
+
+#ifdef FULLSIZE
+    FastLED.setMaxPowerInVoltsAndMilliamps(5, 800);
+#elif defined V2 
+    FastLED.setMaxPowerInVoltsAndMilliamps(5, 900);
+#else
+    FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
+#endif
+
 
     delay(50);
 
-    // FastLED.show();
+    FastLED.show();
     keyboard.init();
 
     // backlight.init(&keyboard, leds);
@@ -52,14 +54,36 @@ void setup() {
 
 
 void loop() {
+    for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i] = 0xff0000;
+    }
+    FastLED.show();
+    delay(500);
+    for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i] = 0x00ff00;
+    }
+    FastLED.show();
+    delay(500);
+    for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i] = 0x0000ff;
+    }
+    FastLED.show();
+    delay(500);
+    for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i] = 0x0fff02;
+        FastLED.show();
+        delay(50);
+    }
+    delay(500);
 
-    unsigned long start_time = micros();
+    //unsigned long start_time = micros();
 
-    keyboard.update();
+    //keyboard.update();
      
 //    backlight.update();
 
-    smart_delay(start_time);
+    //smart_delay(start_time);
+
 
 }
 
