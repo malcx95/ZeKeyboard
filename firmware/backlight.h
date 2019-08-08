@@ -414,7 +414,7 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
     //******************************************
 
     {
-        LED_TILDE, 
+        LED_ESC, 
         LED_1,
         LED_2,
         LED_3,
@@ -435,7 +435,7 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
     },
 
     //******************************************
-    // ROW 2
+    // ROW 1
     //******************************************
 
     {
@@ -452,7 +452,7 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
         LED_P,
         LED_LEFT_BRACE,
         LED_RIGHT_BRACE,
-        LED_ENTER,
+        LED_BACKSLASH,
         LED_NUMPAD_7,
         LED_NUMPAD_8,
         LED_NUMPAD_9,
@@ -460,12 +460,11 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
     },
 
     //******************************************
-    // ROW 3
+    // ROW 2
     //******************************************
     
     {
         LED_FN,
-        LED_DUMMY,
         LED_A, 
         LED_S,
         LED_D, 
@@ -477,7 +476,8 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
         LED_L, 
         LED_SEMICOLON, 
         LED_QUOTE,
-        LED_BACKSLASH,
+        LED_DUMMY,
+        LED_ENTER,
         LED_NUMPAD_4,
         LED_NUMPAD_5,
         LED_NUMPAD_6,
@@ -485,7 +485,7 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
     },
 
     //******************************************
-    // ROW 4
+    // ROW 3
     //******************************************
     
     {
@@ -510,25 +510,25 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
     },
 
     //******************************************
-    // ROW 5
+    // ROW 4
     //******************************************
     
     {
-        LED_LEFT_CTRL,
-        LED_DUMMY,
-        LED_LEFT_SUPER,
+        LED_CTRL,
+        LED_SUPER,
         LED_ALT,
         LED_DUMMY,
         LED_DUMMY,
-        LED_DUMMY,
-        LED_SPACE,
-        LED_DUMMY,
+        LED_SPACE_LEFT,
+        LED_SPACE_MAIN,
+        LED_SPACE_RIGHT,
         LED_DUMMY,
         LED_DUMMY,
         LED_ALTGR,
-        LED_RIGHT_SUPER,
-        LED_RIGHT_FN,
-        LED_RIGHT_CTRL,
+        LED_PLAY_PAUSE,
+        LED_VOL_DOWN,
+        LED_VOL_UP,
+        LED_DUMMY,
         LED_NUMPAD_0,
         LED_NUMPAD_PERIOD,
         LED_DUMMY

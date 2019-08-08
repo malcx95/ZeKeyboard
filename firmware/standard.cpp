@@ -57,7 +57,7 @@ void standard_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it) {
         
         ((WaterParticle*)leds[k->row][k->col].aux)->pos = INITIAL_VALUE;
 
-#ifdef SIXTY_PERCENT
+#ifndef FULLSIZE 
         if (pressed[i].code == KEY_SPACE) {
             // Light up the left and right leds of the space bar
             

@@ -1,5 +1,5 @@
 #include "config.h"
-//#include "backlight.h"
+#include "backlight.h"
 #include "keyboard.h"
 #include "constants.h"
 #include <stdint.h>
@@ -9,7 +9,7 @@
 const int DELAY_MICROS = 16000;
 
 Ze::Board keyboard;
-//Backlight backlight;
+Backlight backlight;
 
 CRGB leds[NUM_LEDS];
 
@@ -43,9 +43,9 @@ void setup() {
     FastLED.show();
     keyboard.init();
 
-    // backlight.init(&keyboard, leds);
+    backlight.init(&keyboard, leds);
 
-    // backlight.setup(BacklightStyle::STANDARD);
+    backlight.setup(BacklightStyle::STANDARD);
     Serial.begin(9600);
 
     delay(500);
@@ -54,35 +54,35 @@ void setup() {
 
 
 void loop() {
-    for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = 0xff0000;
-    }
-    FastLED.show();
-    delay(500);
-    for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = 0x00ff00;
-    }
-    FastLED.show();
-    delay(500);
-    for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = 0x0000ff;
-    }
-    FastLED.show();
-    delay(500);
-    for (int i = 0; i < NUM_LEDS; i++) {
-        leds[i] = 0x0fff02;
-        FastLED.show();
-        delay(50);
-    }
-    delay(500);
+    // for (int i = 0; i < NUM_LEDS; i++) {
+    //     leds[i] = 0xff0000;
+    // }
+    // FastLED.show();
+    // delay(500);
+    // for (int i = 0; i < NUM_LEDS; i++) {
+    //     leds[i] = 0x00ff00;
+    // }
+    // FastLED.show();
+    // delay(500);
+    // for (int i = 0; i < NUM_LEDS; i++) {
+    //     leds[i] = 0x0000ff;
+    // }
+    // FastLED.show();
+    // delay(500);
+    // for (int i = 0; i < NUM_LEDS; i++) {
+    //     leds[i] = 0x0fff02;
+    //     FastLED.show();
+    //     delay(50);
+    // }
+    // delay(500);
 
-    //unsigned long start_time = micros();
+    unsigned long start_time = micros();
 
-    //keyboard.update();
+    keyboard.update();
      
-//    backlight.update();
+    backlight.update();
 
-    //smart_delay(start_time);
+    smart_delay(start_time);
 
 
 }
