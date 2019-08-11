@@ -24,7 +24,7 @@ const uint8_t NUM_LEDS = 64;
 #elif defined FULLSIZE
 const uint8_t NUM_LEDS = 109;
 #elif defined V2
-const uint8_t NUM_LEDS = 80; // TODO update
+const uint8_t NUM_LEDS = 81; // TODO update
 #endif
 
 #ifdef SIXTY_PERCENT

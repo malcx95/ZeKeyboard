@@ -109,5 +109,6 @@ const led_t LED_VOL_UP =      76;
 const led_t LED_NUMPAD_0 = 77;
 const led_t LED_NUMPAD_PERIOD = 78;
 const led_t LED_NUMPAD_ENTER = 79;
+const led_t LED_LOGO = 80;
 
 #endif

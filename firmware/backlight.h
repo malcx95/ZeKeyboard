@@ -522,7 +522,7 @@ const led_t LED_GRID[Ze::NUM_ROWS][Ze::NUM_COLS] =
         LED_SPACE_LEFT,
         LED_SPACE_MAIN,
         LED_SPACE_RIGHT,
-        LED_DUMMY,
+        LED_LOGO,
         LED_DUMMY,
         LED_ALTGR,
         LED_PLAY_PAUSE,
