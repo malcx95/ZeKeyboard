@@ -54,27 +54,6 @@ void setup() {
 
 
 void loop() {
-    // for (int i = 0; i < NUM_LEDS; i++) {
-    //     leds[i] = 0xff0000;
-    // }
-    // FastLED.show();
-    // delay(500);
-    // for (int i = 0; i < NUM_LEDS; i++) {
-    //     leds[i] = 0x00ff00;
-    // }
-    // FastLED.show();
-    // delay(500);
-    // for (int i = 0; i < NUM_LEDS; i++) {
-    //     leds[i] = 0x0000ff;
-    // }
-    // FastLED.show();
-    // delay(500);
-    // for (int i = 0; i < NUM_LEDS; i++) {
-    //     leds[i] = 0x0fff02;
-    //     FastLED.show();
-    //     delay(50);
-    // }
-    // delay(500);
 
     unsigned long start_time = micros();
 
@@ -95,8 +74,8 @@ void smart_delay(unsigned long start_time) {
 
     unsigned long elapsed = time - start_time;
     if (elapsed > DELAY_MICROS) {
-        Serial.print("Computing took more than 16 ms: ");
-        Serial.println(elapsed);
+        // Serial.print("Computing took more than 16 ms: ");
+        // Serial.println(elapsed);
         return;
     }
     delayMicroseconds(DELAY_MICROS - elapsed);
