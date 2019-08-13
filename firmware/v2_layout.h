@@ -26,7 +26,7 @@ namespace Ze {
             Key(KEY_MINUS, 0, 11), 
             Key(KEY_EQUAL, 0, 12),
             Key(KEY_BACKSPACE, 0, 13),
-            Key(KEY_NUM_LOCK, 0, 14),
+            Key(KEY_BACKLIGHT_STYLE, 0, 14),
             Key(KEYPAD_SLASH, 0, 15),
             Key(KEYPAD_ASTERIX, 0, 16),
             Key(KEYPAD_MINUS, 0, 17)

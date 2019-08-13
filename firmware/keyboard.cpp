@@ -71,7 +71,7 @@ bool Ze::Board::brightness_inc_pressed() {
 }
 
 bool Ze::Board::backlight_style_changed() {
-#ifdef FULLSIZE
+#ifndef SIXTY_PERCENT 
     return this->b_style_pressed;
 #else
     return this->b_style_pressed && this->fn_pressed;
@@ -183,6 +183,8 @@ void Ze::Board::scan_keys() {
                     else if (pressed.code == KEY_INC_BRIGHTNESS) {
                         b_inc_pressed = true;
                     }
+#endif
+#ifndef SIXTY_PERCENT 
                     else if (pressed.code == KEY_BACKLIGHT_STYLE) {
                         b_style_pressed = true;
                     }
@@ -191,7 +193,7 @@ void Ze::Board::scan_keys() {
 
                         current_modifier |= translate_modifier(pressed.code);
 
-#ifndef FULLSIZE 
+#ifdef SIXTY_PERCENT 
                         // Handle brightness change
                         if (pressed.code == KEY_INC_BRIGHTNESS) {
                             b_inc_pressed = true;
@@ -219,6 +221,16 @@ void Ze::Board::scan_keys() {
         }
         digitalWrite(ROW_PINS[row], HIGH);
     }
+
+#ifdef V2
+    // Special code to handle brightness and style change on V2
+    if (b_style_pressed && fn_pressed) {
+        // The second function of the style button should be to change
+        // brightness
+        b_style_pressed = false;
+        b_inc_pressed = true;
+    }
+#endif
 }
 
 void Ze::Board::remove_released_keys() {
