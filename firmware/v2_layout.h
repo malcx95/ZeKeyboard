@@ -51,9 +51,9 @@ namespace Ze {
             Key(KEY_LEFT_BRACE, 1, 11),
             Key(KEY_RIGHT_BRACE, 1, 12),
             Key(KEY_BACKSLASH, 1, 13),
-            Key(KEYPAD_7, 1, 14),
-            Key(KEYPAD_8, 1, 15),
-            Key(KEYPAD_9, 1, 16),
+            Key(KEY_7, 1, 14),
+            Key(KEY_8, 1, 15),
+            Key(KEY_9, 1, 16),
             Key(KEYPAD_PLUS, 1, 17)
         },
 
@@ -76,9 +76,9 @@ namespace Ze {
             Key(KEY_QUOTE, 2, 11),
             Key(), // dummy
             Key(KEY_ENTER, 2, 13),
-            Key(KEYPAD_4, 2, 14),
-            Key(KEYPAD_5, 2, 15),
-            Key(KEYPAD_6, 2, 16),
+            Key(KEY_4, 2, 14),
+            Key(KEY_5, 2, 15),
+            Key(KEY_6, 2, 16),
             Key() // dummy
         },
 
@@ -101,9 +101,9 @@ namespace Ze {
             Key(KEY_SLASH, 3, 11),
             Key(), // dummy
             Key(KEY_RSHIFT, 3, 13),
-            Key(KEYPAD_1, 3, 14),
-            Key(KEYPAD_2, 3, 15),
-            Key(KEYPAD_3, 3, 16),
+            Key(KEY_1, 3, 14),
+            Key(KEY_2, 3, 15),
+            Key(KEY_3, 3, 16),
             Key(KEYPAD_ENTER, 3, 17)
         },
 
