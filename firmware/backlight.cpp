@@ -9,7 +9,7 @@ Backlight::Backlight() {
 void Backlight::init(Ze::Board* keyboard, CRGB* ledstrip) {
     this->keyboard = keyboard;
     this->ledstrip = ledstrip;
-    this->curr_brightness = 2;
+    this->curr_brightness = 3;
     this->brightness = BRIGHTNESS_VALUES[this->curr_brightness];
     this->it = 0;
     this->already_changed_bright = false;
@@ -55,9 +55,12 @@ void Backlight::setup(BacklightStyle style) {
         case GAMEOFLIFE:
             gameoflife_setup(this->leds, this->cells);
             break;
+        case CHRISTMAS:
+            christmas_setup(this->leds, &this->christmas_scroll);
+            break;
         case TETRIS:
             tetris_setup(this->leds, this->tetris_board, 
-                    &this->falling_tetromino);
+                    &this->falling_tetromino, &this->tetris_game_over_counter);
             break;
     }
 }
@@ -120,9 +123,13 @@ void Backlight::update() {
         case GAMEOFLIFE:
             gameoflife_update(this->leds, this->keyboard, this->cells, this->it);
             break;
+        case CHRISTMAS:
+            christmas_update(this->leds, this->keyboard, this->it, &this->christmas_scroll);
+            break;
         case TETRIS:
             tetris_update(this->leds, this->keyboard, 
-                    this->it, this->tetris_board, &this->falling_tetromino);
+                    this->it, this->tetris_board, &this->falling_tetromino,
+                    &this->tetris_game_over_counter);
             break;
     }
 

@@ -1,4 +1,5 @@
 #include "standard.h"
+#include "config.h"
 #include <Arduino.h>
 
 void standard_setup(LED leds[][Ze::NUM_COLS], WaterParticle particles[][WATER_WIDTH]) {
@@ -56,14 +57,15 @@ void standard_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it) {
         
         ((WaterParticle*)leds[k->row][k->col].aux)->pos = INITIAL_VALUE;
 
+#ifndef FULLSIZE 
         if (pressed[i].code == KEY_SPACE) {
             // Light up the left and right leds of the space bar
-            // Only light these up a third as much
             
             ((WaterParticle*)leds[k->row][k->col - 1].aux)->pos = INITIAL_VALUE;
             ((WaterParticle*)leds[k->row][k->col + 1].aux)->pos = INITIAL_VALUE;
 
         }
+#endif
     }
 }
 

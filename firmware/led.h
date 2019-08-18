@@ -1,10 +1,18 @@
 #ifndef H_LED
 #define H_LED 
 
-#include "leds.h"
+#include "config.h"
+#ifdef SIXTY_PERCENT
+    #include "ledssixty.h"
+#elif defined FULLSIZE
+    #include "ledsfull.h"
+#elif defined V2
+    #include "ledsv2.h"
+#endif
+
 #include <stdint.h>
 
-const led_t LED_DUMMY = 100;
+const led_t LED_DUMMY = 125;
 const float MAX_BYTE = 255.0;
 
 struct LED {

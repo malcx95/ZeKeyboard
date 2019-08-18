@@ -9,7 +9,10 @@ void handle_keyboard_input(Ze::Board* board,
  */
 void game_over(LED leds[][Ze::NUM_COLS],
         tetris::SquareType tetris_board[][tetris::NUM_COLS],
-        tetris::Tetromino* falling_tetromino);
+        tetris::Tetromino* falling_tetromino,
+        uint8_t* game_over_counter);
+
+void increment_game_over(LED leds[][Ze::NUM_COLS], uint8_t* game_over_counter);
 
 /*
  * Lights up the rows about to be removed
@@ -32,18 +35,29 @@ void mark_rows_to_eliminate(LED leds[][Ze::NUM_COLS],
 
 void game_over(LED leds[][Ze::NUM_COLS],
         tetris::SquareType tetris_board[][tetris::NUM_COLS],
-        tetris::Tetromino* falling_tetromino) {
+        tetris::Tetromino* falling_tetromino,
+        uint8_t* game_over_counter) {
+
     tetris::clear_board(tetris_board);
     tetris::tetromino_deinit(falling_tetromino);
 
+    *game_over_counter = GAME_OVER_COUNTER_VALUE;
+    
+}
+
+void increment_game_over(LED leds[][Ze::NUM_COLS], uint8_t* game_over_counter) {
+
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
-            leds[row][col].r = 1.0;
+            float val = ((float)(*game_over_counter - 1)) /
+                ((float)GAME_OVER_COUNTER_VALUE);
+            leds[row][col].r = val;
             leds[row][col].g = 0;
             leds[row][col].b = 0;
         }
     }
-    
+
+    *game_over_counter -= 1;
 }
 
 void draw_tetris_board(LED leds[][Ze::NUM_COLS],
@@ -78,19 +92,6 @@ void draw_tetris_board(LED leds[][Ze::NUM_COLS],
 
     }
 
-    // for debugging
-    Serial.println("................");
-    for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
-        Serial.print(".");
-        for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
-            Serial.print(tetris::squaretype_to_char(rendered_board[row][col]));
-        }
-        Serial.print(".");
-        Serial.println("");
-    }
-    Serial.println("................");
-    Serial.println("");
-
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
             Color c = tetris::square_type_to_color(
@@ -104,8 +105,11 @@ void draw_tetris_board(LED leds[][Ze::NUM_COLS],
 
 void tetris_setup(LED leds[][Ze::NUM_COLS], 
         tetris::SquareType tetris_board[][tetris::NUM_COLS],
-        tetris::Tetromino* falling_tetromino) {
+        tetris::Tetromino* falling_tetromino,
+        uint8_t* game_over_counter) {
     
+    *game_over_counter = 0;
+
     tetris::clear_board(tetris_board);
     tetris::tetromino_deinit(falling_tetromino);
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
@@ -143,14 +147,21 @@ void handle_keyboard_input(Ze::Board* board,
 
 void tetris_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it,
         tetris::SquareType tetris_board[][tetris::NUM_COLS],
-        tetris::Tetromino* falling_tetromino) {
+        tetris::Tetromino* falling_tetromino,
+        uint8_t* game_over_counter) {
 
-    handle_keyboard_input(board, tetris_board, falling_tetromino);
+    // only take inputs if the game isn't over
+    if (*game_over_counter == 0) {
+        handle_keyboard_input(board, tetris_board, falling_tetromino);
+    } else {
+        // otherwise we need to increment the game over effect and return
+        increment_game_over(leds, game_over_counter);
+        return;
+    }
 
     if (falling_tetromino->rushing_down && it % RUSH_DELAY) {
 
         tetris::increment_rush(tetris_board, falling_tetromino);
-        draw_tetris_board(leds, tetris_board, falling_tetromino);
 
     } else if (it % TETRIS_DELAY == 0) { // normal iteration
 
@@ -164,17 +175,19 @@ void tetris_update(LED leds[][Ze::NUM_COLS], Ze::Board* board, uint64_t it,
 
             mark_rows_to_eliminate(leds, rows_to_eliminate);
             eliminate_rows(tetris_board, rows_to_eliminate);
+            return;
             
         } else {
 
             bool game_is_over = 
                 !tetris::tick(tetris_board, falling_tetromino, it);
             if (game_is_over) {
-                game_over(leds, tetris_board, falling_tetromino);
-            } else {
-                draw_tetris_board(leds, tetris_board, falling_tetromino);
+                game_over(leds, tetris_board, 
+                        falling_tetromino, game_over_counter);
+                return;
             }
         }
     }
+    draw_tetris_board(leds, tetris_board, falling_tetromino);
 }
 

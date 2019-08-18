@@ -20,15 +20,24 @@ namespace Ze {
     const int KEY_SUPER = -5;
     const int KEY_RSHIFT = -6;
 
-    // Again, this keycode is not sent, but used
+    // Again, these keycodes are not sent, but used
     // to control behavior of other keys
     const int KEY_FN = -7;
+    const int KEY_LOCK = -8;
 
+#ifdef SIXTY_PERCENT 
     // Keycode for changing the backlight brightness
     const int KEY_INC_BRIGHTNESS = KEY_RSHIFT;
 
     // Keycode for changing the backlight style
     const int KEY_BACKLIGHT_STYLE = KEY_LSHIFT;
+#else
+    // Keycode for changing the backlight brightness
+    const int KEY_INC_BRIGHTNESS = -100;
+
+    // Keycode for changing the backlight style
+    const int KEY_BACKLIGHT_STYLE = -101;
+#endif
 
     const uint8_t NUM_MODIFIERS = 6;
 
@@ -137,12 +146,23 @@ namespace Ze {
 
             };
 
+#ifdef SIXTY_PERCENT
             const uint8_t ROW_PINS[NUM_ROWS] = {0, 4, 5, 6, 7};
             const uint8_t COL_PINS[NUM_COLS] = 
             {
                 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22
             };
-
+#elif defined FULLSIZE
+            const uint8_t ROW_PINS[NUM_ROWS] = {26, 27, 28, 29, 30, 31};
+            const uint8_t COL_PINS[NUM_COLS] = 
+            {
+                4, 5, 6, 7, 8, 9, 10, 11, 12, 1,
+                14, 15, 16, 17, 18, 19, 20, 21, 22, 33, 34, 37 };
+#elif defined V2
+            const uint8_t ROW_PINS[NUM_ROWS] = {32, 31, 30, 29, 28};
+            const uint8_t COL_PINS[NUM_COLS] = 
+            { 22, 23, 21, 20, 2, 0, 1, 25, 24, 12, 11, 10, 9, 8, 7, 5, 6, 4 };
+#endif
             bool fn_pressed;
 
             bool b_inc_pressed;
@@ -233,114 +253,6 @@ namespace Ze {
 
             void send_keys();
     
-    };
-
-    const Key KEYS[NUM_ROWS][NUM_COLS] = {
-
-        //******************************************
-        // ROW 0
-        //******************************************
-        
-        {
-            Key(KEY_ESC, 0, 0), 
-            Key(KEY_1, KEY_F1, 0, 1),
-            Key(KEY_2, KEY_F2, 0, 2),
-            Key(KEY_3, KEY_F3, 0, 3),
-            Key(KEY_4, KEY_F4, 0, 4), 
-            Key(KEY_5, KEY_F5, 0, 5),
-            Key(KEY_6, KEY_F6, 0, 6), 
-            Key(KEY_7, KEY_F7, 0, 7),
-            Key(KEY_8, KEY_F8, 0, 8),
-            Key(KEY_9, KEY_F9, 0, 9),
-            Key(KEY_0, KEY_F10, 0, 10), 
-            Key(KEY_MINUS, 0, 11), 
-            Key(KEY_EQUAL, 0, 12),
-            Key(KEY_BACKSPACE, 0, 13)
-        },
-
-        //******************************************
-        // ROW 1
-        //******************************************
-
-        {
-            Key(KEY_TAB, 1, 0),
-            Key(KEY_Q, 1, 1), 
-            Key(KEY_W, 1, 2),
-            Key(KEY_E, 1, 3), 
-            Key(KEY_R, 1, 4),
-            Key(KEY_T, 1, 5), 
-            Key(KEY_Y, 1, 6),
-            Key(KEY_U, 1, 7), 
-            Key(KEY_I, 1, 8),
-            Key(KEY_O, 1, 9), 
-            Key(KEY_P, 1, 10),
-            Key(KEY_LEFT_BRACE, 1, 11),
-            Key(KEY_RIGHT_BRACE, 1, 12),
-            Key(KEY_BACKSLASH, 1, 13)
-        },
-
-        //******************************************
-        // ROW 2
-        //******************************************
-        
-        {
-            Key(KEY_FN, 2, 0),
-            Key(KEY_A, 2, 1),
-            Key(KEY_S, 2, 2),
-            Key(KEY_D, 2, 3), 
-            Key(KEY_F, 2, 4), 
-            Key(KEY_G, 2, 5), 
-            Key(KEY_H, KEY_LEFT, 2, 6),
-            Key(KEY_J, KEY_DOWN, 2, 7),
-            Key(KEY_K, KEY_UP, 2, 8),
-            Key(KEY_L, KEY_RIGHT, 2, 9),
-            Key(KEY_SEMICOLON, 2, 10),
-            Key(KEY_QUOTE, 2, 11),
-            Key(), // dummy
-            Key(KEY_ENTER, 2, 13)
-        },
-
-        //******************************************
-        // ROW 3
-        //******************************************
-        
-        {
-            Key(KEY_LSHIFT, 3, 0),
-            Key(KEY_NON_US_BS, 3, 1),
-            Key(KEY_Z, 3, 2),
-            Key(KEY_X, 3, 3),
-            Key(KEY_C, 3, 4),
-            Key(KEY_V, 3, 5),
-            Key(KEY_B, 3, 6),
-            Key(KEY_N, 3, 7),
-            Key(KEY_M, 3, 8),
-            Key(KEY_COMMA, 3, 9),
-            Key(KEY_PERIOD, 3, 10),
-            Key(KEY_SLASH, 3, 11),
-            Key(), // dummy
-            Key(KEY_RSHIFT, 3, 13)
-        },
-
-        //******************************************
-        // ROW 4
-        //******************************************
-        
-        {
-            Key(KEY_CTRL, 4, 0),
-            Key(KEY_SUPER, 4, 1),
-            Key(KEY_ALT, 4, 2),
-            Key(), // dummy
-            Key(), // dummy
-            Key(), // dummy
-            Key(KEY_SPACE, 4, 6),
-            Key(), // dummy
-            Key(), // dummy
-            Key(), // dummy
-            Key(KEY_ALTGR, 4, 10),
-            Key(KEY_MEDIA_PLAY_PAUSE, 4, 11),
-            Key(KEY_MEDIA_VOLUME_DEC, KEY_MEDIA_PREV_TRACK, 4, 12),
-            Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_NEXT_TRACK, 4, 13)
-        }
     };
 
 };

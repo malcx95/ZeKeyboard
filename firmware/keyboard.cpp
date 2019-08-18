@@ -1,6 +1,13 @@
 #include <Keyboard.h>
+#include "config.h"
 
-
+#ifdef SIXTY_PERCENT
+    #include "sixty_layout.h"
+#elif defined FULLSIZE
+    #include "fullsize_layout.h"
+#elif defined V2
+    #include "v2_layout.h"
+#endif
 #include "keyboard.h"
 
 
@@ -56,11 +63,19 @@ int Ze::Board::translate_modifier(const int modifier) const {
 }
 
 bool Ze::Board::brightness_inc_pressed() {
+#ifdef FULLSIZE
+    return this->b_inc_pressed;
+#else 
     return this->b_inc_pressed && this->fn_pressed;
+#endif
 }
 
 bool Ze::Board::backlight_style_changed() {
+#ifndef SIXTY_PERCENT 
+    return this->b_style_pressed;
+#else
     return this->b_style_pressed && this->fn_pressed;
+#endif
 }
 
 void Ze::Board::init() {
@@ -163,10 +178,22 @@ void Ze::Board::scan_keys() {
 
                         this->fn_pressed = true;
 
-                    } else if (pressed.is_modifier()) {
+                    } 
+#ifdef FULLSIZE
+                    else if (pressed.code == KEY_INC_BRIGHTNESS) {
+                        b_inc_pressed = true;
+                    }
+#endif
+#ifndef SIXTY_PERCENT 
+                    else if (pressed.code == KEY_BACKLIGHT_STYLE) {
+                        b_style_pressed = true;
+                    }
+#endif
+                    else if (pressed.is_modifier()) {
 
                         current_modifier |= translate_modifier(pressed.code);
 
+#ifdef SIXTY_PERCENT 
                         // Handle brightness change
                         if (pressed.code == KEY_INC_BRIGHTNESS) {
                             b_inc_pressed = true;
@@ -174,8 +201,10 @@ void Ze::Board::scan_keys() {
                         if (pressed.code == KEY_BACKLIGHT_STYLE) {
                             b_style_pressed = true;
                         }
+#endif
 
-                    } else if (pressed.is_media()) {
+                    }
+                    else if (pressed.is_media()) {
                         
                         pressed_media = pressed;
 
@@ -192,6 +221,16 @@ void Ze::Board::scan_keys() {
         }
         digitalWrite(ROW_PINS[row], HIGH);
     }
+
+#ifdef V2
+    // Special code to handle brightness and style change on V2
+    if (b_style_pressed && fn_pressed) {
+        // The second function of the style button should be to change
+        // brightness
+        b_style_pressed = false;
+        b_inc_pressed = true;
+    }
+#endif
 }
 
 void Ze::Board::remove_released_keys() {

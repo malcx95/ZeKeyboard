@@ -1,13 +1,13 @@
 #include "gameoflife.h"
 #include <Arduino.h>
 
-bool is_cell_alive(uint16_t cells[Ze::NUM_ROWS], uint8_t row, uint8_t col) {
-    uint16_t r = cells[row];
-    uint16_t mask = (1 << col);
+bool is_cell_alive(uint32_t cells[Ze::NUM_ROWS], uint8_t row, uint8_t col) {
+    uint32_t r = cells[row];
+    uint32_t mask = (1 << col);
     return (mask & r) != 0;
 }
 
-void set_cell(uint16_t cells[Ze::NUM_ROWS], uint8_t row, uint8_t col, bool alive) {
+void set_cell(uint32_t cells[Ze::NUM_ROWS], uint8_t row, uint8_t col, bool alive) {
     if (alive) {
         cells[row] |= (1 << col);
     } else {
@@ -15,7 +15,7 @@ void set_cell(uint16_t cells[Ze::NUM_ROWS], uint8_t row, uint8_t col, bool alive
     }
 }
 
-uint8_t count_alive_neighbors(uint16_t cells[Ze::NUM_ROWS], int8_t row, int8_t col) {
+uint8_t count_alive_neighbors(uint32_t cells[Ze::NUM_ROWS], int8_t row, int8_t col) {
     uint8_t res = 0;
     for (int8_t i = -1; i < 2; ++i) {
         for (int8_t j = -1; j < 2; ++j) {
@@ -30,8 +30,8 @@ uint8_t count_alive_neighbors(uint16_t cells[Ze::NUM_ROWS], int8_t row, int8_t c
     return res;
 }
 
-void update_cells(uint16_t cells[Ze::NUM_ROWS]) {
-    uint16_t copy[Ze::NUM_ROWS];
+void update_cells(uint32_t cells[Ze::NUM_ROWS]) {
+    uint32_t copy[Ze::NUM_ROWS];
     for (uint8_t i = 0; i < Ze::NUM_ROWS; ++i) {
         copy[i] = cells[i];
     }
@@ -52,7 +52,7 @@ void update_cells(uint16_t cells[Ze::NUM_ROWS]) {
     }
 }
 
-void print_cells(uint16_t cells[Ze::NUM_ROWS]) {
+void print_cells(uint32_t cells[Ze::NUM_ROWS]) {
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
             if (is_cell_alive(cells, row, col)) {
@@ -68,7 +68,7 @@ void print_cells(uint16_t cells[Ze::NUM_ROWS]) {
     Serial.println("");
 }
 
-void gameoflife_setup(LED leds[][Ze::NUM_COLS], uint16_t cells[Ze::NUM_ROWS]) {
+void gameoflife_setup(LED leds[][Ze::NUM_COLS], uint32_t cells[Ze::NUM_ROWS]) {
     for (uint8_t row = 0; row < Ze::NUM_ROWS; ++row) {
         for (uint8_t col = 0; col < Ze::NUM_COLS; ++col) {
             LED* l = &leds[row][col];
@@ -91,7 +91,7 @@ void gameoflife_setup(LED leds[][Ze::NUM_COLS], uint16_t cells[Ze::NUM_ROWS]) {
 }
 
 void gameoflife_update(LED leds[][Ze::NUM_COLS], 
-        Ze::Board* board, uint16_t cells[Ze::NUM_ROWS], uint64_t it) {
+        Ze::Board* board, uint32_t cells[Ze::NUM_ROWS], uint64_t it) {
 
     if (it % DELAY == 0) {
         update_cells(cells);

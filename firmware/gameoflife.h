@@ -1,4 +1,4 @@
-#ifndef GAMOFLIFE_H
+#ifndef GAMEOFLIFE_H
 #define GAMEOFLIFE_H
 
 #include "constants.h"
@@ -31,9 +31,9 @@ const Color CELL_COLORS[9] = {
     {1.0, 0.0, 0.0}
 };
 
-void gameoflife_setup(LED leds[][Ze::NUM_COLS], uint16_t cells[Ze::NUM_ROWS]);
+void gameoflife_setup(LED leds[][Ze::NUM_COLS], uint32_t cells[Ze::NUM_ROWS]);
 
 void gameoflife_update(LED leds[][Ze::NUM_COLS], 
-        Ze::Board* board, uint16_t cells[Ze::NUM_ROWS], uint64_t it);
+        Ze::Board* board, uint32_t cells[Ze::NUM_ROWS], uint64_t it);
 
 #endif
