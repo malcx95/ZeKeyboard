@@ -108,6 +108,12 @@ void Ze::Board::init() {
         all_pressed_keys[i] = Key();
     }
 
+    for (uint8_t row = 0; row < NUM_ROWS; ++row) {
+        for (uint8_t col = 0; col < NUM_COLS; ++col) {
+            is_just_pressed[row][col] = false;
+            been_pressed[row][col] = false;
+        }
+    }
 }
 
 void Ze::Board::reset_pressed_keys() {
@@ -169,6 +175,9 @@ void Ze::Board::scan_keys() {
                 
                 if (digitalRead(COL_PINS[col]) == LOW) {
                     // non dummy key is pressed
+
+                    is_just_pressed[row][col] = !been_pressed[row][col];
+                    been_pressed[row][col] = true;
                     
                     Key pressed = KEYS[row][col];
                     all_pressed_keys[tot_num_keys_pressed] = pressed;
@@ -216,6 +225,9 @@ void Ze::Board::scan_keys() {
                         }
                         num_keys_pressed++;
                     }
+                } else {
+                    is_just_pressed[row][col] = false;
+                    been_pressed[row][col] = false;
                 }
             }
         }

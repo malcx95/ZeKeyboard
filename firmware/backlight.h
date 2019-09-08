@@ -102,9 +102,7 @@ class Backlight {
 
         tetris::Tetromino falling_tetromino;
 
-        uint8_t count_map[Ze::NUM_ROWS][Ze::NUM_COLS];
-        bool previously_pressed[Ze::NUM_ROWS][Ze::NUM_COLS];
-
+        uint32_t count_map[Ze::NUM_ROWS][Ze::NUM_COLS][Ze::NUM_ROWS][Ze::NUM_COLS];
         void increase_brightness();
 
         void change_style();

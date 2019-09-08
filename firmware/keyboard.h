@@ -133,7 +133,11 @@ namespace Ze {
 
             bool backlight_style_changed();
 
+            bool is_just_pressed[NUM_ROWS][NUM_COLS];
+
         private:
+
+            bool been_pressed[NUM_ROWS][NUM_COLS];
 
             const int MODIFIER_MAP[NUM_MODIFIERS] = {
 
