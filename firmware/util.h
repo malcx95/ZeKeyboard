@@ -27,5 +27,6 @@ uint8_t clamp(int index, uint8_t max);
 
 uint8_t wrap_around(int index, uint8_t max);
 
+void jet_color_map(uint8_t val, Color& to);
 
 #endif /* ifndef UTIL_H */

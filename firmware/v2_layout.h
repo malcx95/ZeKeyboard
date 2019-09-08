@@ -127,8 +127,8 @@ namespace Ze {
             Key(KEY_MEDIA_VOLUME_DEC, KEY_MEDIA_PREV_TRACK, 4, 12),
             Key(KEY_MEDIA_VOLUME_INC, KEY_MEDIA_NEXT_TRACK, 4, 13),
             Key(), // dummy
-            Key(KEYPAD_0, 4, 15),
-            Key(KEYPAD_PERIOD, 4, 16),
+            Key(KEY_0, 4, 15),
+            Key(KEY_PERIOD, 4, 16),
             Key() // dummy
         }
     };

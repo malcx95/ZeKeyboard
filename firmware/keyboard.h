@@ -44,7 +44,7 @@ namespace Ze {
     const uint8_t READ_DELAY = 5;
 
     struct Key {
-        
+
         /*
          * Initializes dummy key.
          */

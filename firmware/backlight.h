@@ -14,6 +14,7 @@
 #include "standard.h"
 #include "water.h"
 #include "christmas.h"
+#include "heatmap.h"
 #include "rave.h"
 #include "tetris.h"
 #include "gameoflife.h"

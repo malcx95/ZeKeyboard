@@ -62,6 +62,9 @@ void Backlight::setup(BacklightStyle style) {
             tetris_setup(this->leds, this->tetris_board, 
                     &this->falling_tetromino, &this->tetris_game_over_counter);
             break;
+        case HEATMAP:
+            heatmap_setup(this->leds, this->count_map, this->previously_pressed);
+            break;
     }
 }
 
@@ -130,6 +133,10 @@ void Backlight::update() {
             tetris_update(this->leds, this->keyboard, 
                     this->it, this->tetris_board, &this->falling_tetromino,
                     &this->tetris_game_over_counter);
+            break;
+        case HEATMAP:
+            heatmap_update(this->leds, this->count_map, this->previously_pressed,
+                    this->keyboard, this->it);
             break;
     }
 
