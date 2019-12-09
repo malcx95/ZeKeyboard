@@ -34,8 +34,8 @@ enum BacklightStyle {STANDARD, WATER, GAMEOFLIFE, TETRIS, CHRISTMAS, RAVE};
 const uint8_t NUM_STYLES = 4;
 enum BacklightStyle {STANDARD, GAMEOFLIFE, TETRIS, WATER, CHRISTMAS, RAVE};
 #elif defined V2
-const uint8_t NUM_STYLES = 6;
-enum BacklightStyle {STANDARD, WATER, GAMEOFLIFE, TETRIS, CHRISTMAS, HEATMAP, RAVE};
+const uint8_t NUM_STYLES = 7;
+enum BacklightStyle {STANDARD, WATER, GAMEOFLIFE, TETRIS, CHRISTMAS, HEATMAP, SNAKE, RAVE};
 #endif
 
 #endif /* ifndef CONSTANTS_H */

@@ -65,6 +65,9 @@ void Backlight::setup(BacklightStyle style) {
         case HEATMAP:
             heatmap_setup(this->leds, &this->previously_pressed, this->count_map);
             break;
+        case SNAKE:
+            snake_setup(this->leds, this->snake, &this->food);
+            break;
     }
 }
 
@@ -137,6 +140,9 @@ void Backlight::update() {
         case HEATMAP:
             heatmap_update(this->leds, this->count_map, &this->previously_pressed,
                     this->keyboard, this->it);
+            break;
+        case SNAKE:
+            snake_update(this->leds, this->snake, this->keyboard, this->it, &this->food);
             break;
     }
 

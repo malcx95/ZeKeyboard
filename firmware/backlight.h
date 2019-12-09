@@ -18,6 +18,7 @@
 #include "rave.h"
 #include "tetris.h"
 #include "gameoflife.h"
+#include "snake.h"
 #include <FastLED.h>
 
 const uint8_t NUM_BRIGHTNESS_VALUES = 4;
@@ -104,6 +105,10 @@ class Backlight {
 
         uint32_t count_map[Ze::NUM_ROWS][Ze::NUM_COLS][Ze::NUM_ROWS][Ze::NUM_COLS];
         Position previously_pressed;
+
+        SnakeSegment snake[Ze::NUM_COLS*Ze::NUM_ROWS];
+
+        SnakeSegment food;
 
         void increase_brightness();
 
