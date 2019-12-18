@@ -12,6 +12,7 @@
 #include "keyboard.h"
 #include "constants.h"
 #include "standard.h"
+#include "att.h"
 #include "water.h"
 #include "christmas.h"
 #include "heatmap.h"
@@ -104,6 +105,8 @@ class Backlight {
 
         uint32_t count_map[Ze::NUM_ROWS][Ze::NUM_COLS][Ze::NUM_ROWS][Ze::NUM_COLS];
         Position previously_pressed;
+
+        uint8_t att_data[Ze::NUM_ROWS][Ze::NUM_COLS];
 
         void increase_brightness();
 

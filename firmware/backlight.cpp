@@ -43,6 +43,9 @@ void Backlight::print_grid() {
 void Backlight::setup(BacklightStyle style) {
     this->style = style;
     switch (style) {
+        case ATT:
+            att_setup(this->leds, this->att_data);
+            break;
         case STANDARD:
             standard_setup(this->leds, this->particles);
             break;
@@ -114,6 +117,9 @@ void Backlight::update() {
 
     this->it++;
     switch (style) {
+        case ATT:
+            att_update(this->leds, this->att_data, this->keyboard, this->it);
+            break;
         case STANDARD:
             standard_update(this->leds, this->keyboard, this->it);
             break;
