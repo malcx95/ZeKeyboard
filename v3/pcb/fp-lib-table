@@ -1,4 +1,6 @@
 (fp_lib_table
   (lib (name "Switch_Keyboard_Cherry_MX")(type "KiCad")(uri "${KICAD6_3RD_PARTY}/footprints/com_github_perigoso_keyswitch-kicad-library/Switch_Keyboard_Cherry_MX.pretty")(options "")(descr ""))
   (lib (name "info")(type "KiCad")(uri "/home/malcolm/Programming/teensy.pretty/.git/info")(options "")(descr ""))
+  (lib (name "prettylib")(type "KiCad")(uri "/home/malcolm/Programming/yayaemk_pcb/PCB/prettylib")(options "")(descr ""))
+  (lib (name "info2")(type "KiCad")(uri "/home/malcolm/Programming/Keebio-Parts.pretty/.git/info")(options "")(descr ""))
 )
