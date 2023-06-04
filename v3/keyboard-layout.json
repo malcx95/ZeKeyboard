@@ -1,218 +1,228 @@
 [
   [
-    "Esc",
+    {
+      "y": 0.25
+    },
+    "Esc\n\n\n\n\n\ncol0",
     {
       "x": 1
     },
-    "F1",
-    "F2",
-    "F3",
-    "F4",
+    "F1\n\n\n\n\n\ncol2",
+    "F2\n\n\n\n\n\ncol3",
+    "F3\n\n\n\n\n\ncol4",
+    "F4\n\n\n\n\n\ncol5",
     {
       "x": 0.5
     },
-    "F5",
-    "F6",
-    "F7",
-    "F8",
+    "F5\n\n\n\n\n\ncol6",
+    "F6\n\n\n\n\n\ncol7",
+    "F7\n\n\n\n\n\ncol8",
+    "F8\n\n\n\n\n\ncol9",
     {
       "x": 0.5
     },
-    "F9",
-    "F10",
-    "F11",
-    "F12"
+    "F9\n\n\n\n\n\ncol11",
+    "F10\n\n\n\n\n\ncol12",
+    "F11\n\n\n\n\n\ncol13",
+    "F12\n\n\n\n\n\ncol14"
   ],
   [
     {
-      "y": 0.5
+      "y": 0.25
     },
-    "~\n`",
-    "!\n1",
-    "@\n2",
-    "#\n3",
-    "$\n4",
-    "%\n5",
-    "^\n6",
-    "&\n7",
-    "*\n8",
-    "(\n9",
-    ")\n0",
-    "_\n-",
-    "+\n=",
+    "~\n`\n\n\n\n\ncol0",
+    "!\n1\n\n\n\n\ncol1",
+    "@\n2\n\n\n\n\ncol2",
+    "#\n3\n\n\n\n\ncol3",
+    "$\n4\n\n\n\n\ncol4",
+    "%\n5\n\n\n\n\ncol5",
+    "^\n6\n\n\n\n\ncol6",
+    "&\n7\n\n\n\n\ncol7",
+    "*\n8\n\n\n\n\ncol8",
+    "(\n9\n\n\n\n\ncol9",
+    ")\n0\n\n\n\n\ncol10",
+    "_\n-\n\n\n\n\ncol11",
+    "+\n=\n\n\n\n\ncol12",
     {
       "w": 2
     },
-    "Backspace",
+    "Backspace\n\n\n\n\n\ncol13",
     {
       "x": 0.25,
-      "a": 7
+      "a": 6
     },
-    "",
+    "col14",
     {
       "x": 0.25
     },
-    "",
+    "col15",
     {
       "a": 4
     },
-    "/",
-    "*",
-    "-"
+    "/\n\n\n\n\n\ncol16",
+    "*\n\n\n\n\n\ncol17",
+    "-\n\n\n\n\n\ncol18"
   ],
   [
     {
       "w": 1.5
     },
-    "Tab",
-    "Q",
-    "W",
-    "E",
-    "R",
-    "T",
-    "Y",
-    "U",
-    "I",
-    "O",
-    "P",
-    "{\n[",
-    "}\n]",
+    "Tab\n\n\n\n\n\ncol0",
+    "Q\n\n\n\n\n\ncol1",
+    "W\n\n\n\n\n\ncol2",
+    "E\n\n\n\n\n\ncol3",
+    "R\n\n\n\n\n\ncol4",
+    "T\n\n\n\n\n\ncol5",
+    "Y\n\n\n\n\n\ncol6",
+    "U\n\n\n\n\n\ncol7",
+    "I\n\n\n\n\n\ncol8",
+    "O\n\n\n\n\n\ncol9",
+    "P\n\n\n\n\n\ncol10",
+    "{\n[\n\n\n\n\ncol11",
+    "}\n]\n\n\n\n\ncol12",
     {
       "w": 1.5
     },
-    "|\n\\",
+    "|\n\\\n\n\n\n\ncol13",
     {
       "x": 0.25,
-      "a": 7
+      "a": 6
     },
-    "",
+    "col14",
     {
       "x": 0.25,
       "a": 4
     },
-    "7\nHome",
-    "8\n↑",
-    "9\nPgUp",
+    "7\nHome\n\n\n\n\ncol15",
+    "8\n↑\n\n\n\n\ncol16",
+    "9\nPgUp\n\n\n\n\ncol17",
     {
       "h": 2
     },
-    "+"
+    "+\n\n\n\n\n\ncol18"
   ],
   [
     {
       "w": 1.75
     },
-    "Caps Lock",
-    "A",
-    "S",
-    "D",
-    "F",
-    "G",
-    "H",
-    "J",
-    "K",
-    "L",
-    ":\n;",
-    "\"\n'",
+    "Fn\n\n\n\n\n\ncol0",
+    "A\n\n\n\n\n\ncol1",
+    "S\n\n\n\n\n\ncol2",
+    "D\n\n\n\n\n\ncol3",
+    "F\n\n\n\n\n\ncol4",
+    "G\n\n\n\n\n\ncol5",
+    "H\n\n\n\n\n\ncol6",
+    "J\n\n\n\n\n\ncol7",
+    "K\n\n\n\n\n\ncol8",
+    "L\n\n\n\n\n\ncol9",
+    ":\n;\n\n\n\n\ncol10",
+    "\"\n'\n\n\n\n\ncol11",
     {
       "w": 2.25
     },
-    "Enter",
+    "Enter\n\n\n\n\n\ncol13",
     {
       "x": 0.25,
-      "a": 7
+      "a": 6
     },
-    "",
+    "col14",
     {
       "x": 0.25,
       "a": 4
     },
-    "4\n←",
-    "5",
-    "6\n→"
+    "4\n←\n\n\n\n\ncol15",
+    "5\n\n\n\n\n\ncol16",
+    "6\n→\n\n\n\n\ncol17"
   ],
   [
     {
-      "w": 2.25
+      "w": 1.25
     },
-    "Shift",
-    "Z",
-    "X",
-    "C",
-    "V",
-    "B",
-    "N",
-    "M",
-    "<\n,",
-    ">\n.",
-    "?\n/",
+    "Shift\n\n\n\n\n\ncol0",
+    "<>\n\n\n\n\n\ncol1",
+    "Z\n\n\n\n\n\ncol2",
+    "X\n\n\n\n\n\ncol3",
+    "C\n\n\n\n\n\ncol4",
+    "V\n\n\n\n\n\ncol5",
+    "B\n\n\n\n\n\ncol6",
+    "N\n\n\n\n\n\ncol7",
+    "M\n\n\n\n\n\ncol8",
+    "<\n,\n\n\n\n\ncol9",
+    ">\n.\n\n\n\n\ncol10",
+    "?\n/\n\n\n\n\ncol11",
     {
-      "w": 2.75
+      "x": 0.375
     },
-    "Shift",
+    "Up\n\n\n\n\n\ncol12",
+    {
+      "x": 0.375
+    },
+    "Down\n\n\n\n\n\ncol13",
     {
       "x": 0.25,
-      "a": 7
+      "a": 6
     },
-    "",
+    "col14",
     {
       "x": 0.25,
       "a": 4
     },
-    "1\nEnd",
-    "2\n↓",
-    "3\nPgDn",
+    "1\nEnd\n\n\n\n\ncol15",
+    "2\n↓\n\n\n\n\ncol16",
+    "3\nPgDn\n\n\n\n\ncol17",
     {
       "h": 2
     },
-    "Enter"
+    "Enter\n\n\n\n\n\ncol18"
   ],
   [
     {
       "w": 1.25
     },
-    "Ctrl",
+    "Ctrl\n\n\n\n\n\ncol0",
     {
       "w": 1.25
     },
-    "Win",
+    "Win\n\n\n\n\n\ncol1",
     {
       "w": 1.25
     },
-    "Alt",
+    "Alt\n\n\n\n\n\ncol2",
     {
-      "a": 7,
-      "w": 6.25
+      "w": 2.25
     },
-    "",
+    "Space\n\n\n\n\n\ncol4",
+    {
+      "w": 1.75
+    },
+    "Fn\n\n\n\n\n\ncol6",
+    {
+      "a": 6,
+      "w": 2.25
+    },
+    "col8",
     {
       "a": 4,
       "w": 1.25
     },
-    "Alt",
+    "Alt\n\n\n\n\n\ncol10",
     {
-      "w": 1.25
+      "x": 0.375
     },
-    "Win",
+    "Win\n\n\n\n\n\ncol11",
+    "Menu\n\n\n\n\n\ncol12",
+    "Ctrl\n\n\n\n\n\ncol13",
     {
-      "w": 1.25
+      "x": 0.625,
+      "a": 6
     },
-    "Menu",
-    {
-      "w": 1.25
-    },
-    "Ctrl",
-    {
-      "x": 0.25,
-      "a": 7
-    },
-    "",
+    "col14",
     {
       "x": 0.25,
       "a": 4,
       "w": 2
     },
-    "0\nIns",
-    ".\nDel"
+    "0\nIns\n\n\n\n\ncol15",
+    ".\nDel\n\n\n\n\ncol17"
   ]
 ]
