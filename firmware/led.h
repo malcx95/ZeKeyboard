@@ -8,6 +8,8 @@
     #include "ledsfull.h"
 #elif defined V2
     #include "ledsv2.h"
+#elif defined V3
+    #include "ledsv3.h"
 #endif
 
 #include <stdint.h>

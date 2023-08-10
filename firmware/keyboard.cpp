@@ -7,6 +7,8 @@
     #include "fullsize_layout.h"
 #elif defined V2
     #include "v2_layout.h"
+#elif defined V3
+    #include "v3_layout.h"
 #endif
 #include "keyboard.h"
 

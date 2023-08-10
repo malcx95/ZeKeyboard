@@ -14,6 +14,9 @@ namespace Ze {
 #elif defined V2
     const uint8_t NUM_ROWS = 5;
     const uint8_t NUM_COLS = 18; 
+#elif defined V3
+    const uint8_t NUM_ROWS = 6;
+    const uint8_t NUM_COLS = 19; 
 #endif
     const uint8_t MAX_NUM_KEYS = 6;
 
@@ -24,7 +27,9 @@ const uint8_t NUM_LEDS = 64;
 #elif defined FULLSIZE
 const uint8_t NUM_LEDS = 109;
 #elif defined V2
-const uint8_t NUM_LEDS = 81; // TODO update
+const uint8_t NUM_LEDS = 81;
+#elif defined V3
+const uint8_t NUM_LEDS = 101;
 #endif
 
 #ifdef SIXTY_PERCENT
@@ -34,6 +39,9 @@ enum BacklightStyle {STANDARD, WATER, GAMEOFLIFE, TETRIS, CHRISTMAS, RAVE};
 const uint8_t NUM_STYLES = 4;
 enum BacklightStyle {STANDARD, GAMEOFLIFE, TETRIS, WATER, CHRISTMAS, RAVE};
 #elif defined V2
+const uint8_t NUM_STYLES = 6;
+enum BacklightStyle {STANDARD, WATER, GAMEOFLIFE, TETRIS, CHRISTMAS, HEATMAP, RAVE};
+#elif defined V3
 const uint8_t NUM_STYLES = 6;
 enum BacklightStyle {STANDARD, WATER, GAMEOFLIFE, TETRIS, CHRISTMAS, HEATMAP, RAVE};
 #endif

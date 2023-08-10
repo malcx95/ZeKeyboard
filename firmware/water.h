@@ -21,6 +21,9 @@ const uint8_t WATER_WIDTH = 160;
 #elif defined V2 //  TODO UPDATE
 const uint8_t WATER_HEIGHT = 40;
 const uint8_t WATER_WIDTH = 160;
+#elif defined V3 //  TODO UPDATE
+const uint8_t WATER_HEIGHT = 40;
+const uint8_t WATER_WIDTH = 160;
 #endif
 const float WIDTH_UNIT = WATER_WIDTH / Ze::NUM_COLS;
 const float HEIGHT_UNIT = WATER_HEIGHT / Ze::NUM_ROWS;
@@ -87,6 +90,14 @@ const float KEY_WIDTHS[Ze::NUM_ROWS][Ze::NUM_COLS] = {
     {1.7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2.3, 1, 1, 2, 0},
     {2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2.75, 1, 1, 1, 1},
     {1.25, 1.25, 1.25, 0, 0, 2, 2.25, 2, 0, 0, 1.25, 1.25, 1.25, 1.25, 0, 2, 1, 0}
+};
+#elif defined V3 
+const float KEY_WIDTHS[Ze::NUM_ROWS][Ze::NUM_COLS] = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1},
+    {1.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.5, 1},
+    {1.7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2.3, 1},
+    {2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2.75, 1},
+    {1.25, 1.25, 1.25, 0, 0, 2, 2.25, 2, 0, 0, 1.25, 1.25, 1.25, 1.25, 0}
 };
 #endif
 

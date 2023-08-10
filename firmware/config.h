@@ -2,5 +2,6 @@
 
 //#define SIXTY_PERCENT
 //#define FULLSIZE
-#define V2
+//#define V2
+#define V3
 

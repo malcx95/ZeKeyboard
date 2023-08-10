@@ -39,6 +39,16 @@ namespace Ze {
     const int KEY_BACKLIGHT_STYLE = -101;
 #endif
 
+#ifdef V3
+    const int KEY_EXTRA = -102;
+
+    const int KEY_MACRO1 = -103;
+    const int KEY_MACRO2 = -104;
+    const int KEY_MACRO3 = -105;
+    const int KEY_MACRO4 = -106;
+    const int KEY_MACRO5 = -107;
+#endif
+
     const uint8_t NUM_MODIFIERS = 6;
 
     const uint8_t READ_DELAY = 5;
@@ -166,6 +176,10 @@ namespace Ze {
             const uint8_t ROW_PINS[NUM_ROWS] = {32, 31, 30, 29, 28};
             const uint8_t COL_PINS[NUM_COLS] = 
             { 22, 23, 21, 20, 2, 0, 1, 25, 24, 12, 11, 10, 9, 8, 7, 5, 6, 4 };
+#elif defined V3
+            const uint8_t ROW_PINS[NUM_ROWS] = {5, 4, 3, 2, 1, 0};
+            const uint8_t COL_PINS[NUM_COLS] = 
+            { 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 12, 11, 10, 9, 8, 7, 6 };
 #endif
             bool fn_pressed;
 
