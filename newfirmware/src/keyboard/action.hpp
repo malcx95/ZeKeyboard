@@ -8,7 +8,7 @@ enum class ActionType
 
 struct Action
 {
-    ActionType action;
+    ActionType type;
 
     int code;
 

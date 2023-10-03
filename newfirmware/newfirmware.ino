@@ -1,9 +1,11 @@
-#include "src/keyboard/keyboard.h"
+#include "src/firmware.hpp"
+
+Firmware firmware;
 
 void setup() {
-    Serial.begin(9600);
+    firmware.setup();
 }
 
 void loop() {
-
+    firmware.update();
 }
