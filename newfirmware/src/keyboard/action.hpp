@@ -1,3 +1,6 @@
+#pragma once
+
+
 namespace keyboard
 {
 
@@ -8,6 +11,9 @@ enum class ActionType
 
 struct Action
 {
+    Action(int code);
+    Action(char* string);
+
     ActionType type;
 
     int code;

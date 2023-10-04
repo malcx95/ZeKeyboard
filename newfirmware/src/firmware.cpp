@@ -1,4 +1,5 @@
 #include "firmware.hpp"
+#include "Keyboard.h"
 
 Firmware::Firmware()
 {

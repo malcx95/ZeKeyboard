@@ -9,7 +9,7 @@ ARDUINO_USER_DIR    = os.environ['HOME']+'/Arduino'
 LOCAL_LIBRARIES_DIR = None
 
 # Libraries to include
-LIBRARIES = ['SoftwareSerial']
+LIBRARIES = os.listdir(ARDUINO_USER_DIR + "/libraries")
 
 ARDUINO_CORES_DIR   = ARDUINO_DIR+'/hardware/arduino/'
 # Uncomment this line if you are using Arch Linux.
@@ -38,12 +38,12 @@ for lib in LIBRARIES:
                      ]
 
     for lib_candidate in lib_candidates:
-        if pathlib.Path(lib_candidate).is_dir:
-            INCLUDE_DIRS += [lib_candidate]
+        if pathlib.Path(lib_candidate + "/src").is_dir():
+            INCLUDE_DIRS += [lib_candidate + "/src"]
             break
-    else:
-        print("Library {} not found.".format(lib))
-        exit(-1)
+    # else:
+    #     print("Library {} not found.".format(lib))
+    #     exit(-1)
 
 
 def FlagsForFile(filename, **kwargs):
