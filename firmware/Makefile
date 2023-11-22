@@ -16,6 +16,8 @@ CXX = $(TEENSY_COMPILE)/arm-none-eabi-g++
 CC = $(TEENSY_COMPILE)/arm-none-eabi-gcc
 AR = $(TEENSY_COMPILE)/arm-none-eabi-gcc-ar
 PRECOMPILE_HELPER = $(TEENSY_TOOLS)/teensy-tools/1.58.0/precompile_helper
+OBJCOPY = $(TEENSY_COMPILE)/arm-none-eabi-objcopy
+POST_COMPILE = $(TEENSY_TOOLS)/teensy-tools/1.58.0/teensy_post_compile
 
 PRECOMPILE_FLAGS = -x c++-header -O2 -g -Wall -ffunction-sections -fdata-sections -nostdlib -MMD -std=gnu++14 -fno-exceptions -fpermissive -fno-rtti -fno-threadsafe-statics -felide-constructors -Wno-error=narrowing -mthumb -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -D__IMXRT1062__ -DTEENSYDUINO=158 -DARDUINO=10607 -DARDUINO_TEENSY41 -DF_CPU=600000000 -DUSB_SERIAL_HID -DLAYOUT_US_ENGLISH -I$(TEENSY4_CORE)
 
@@ -24,6 +26,8 @@ LINK_FLAGS = -O2 -Wl,--gc-sections,--relax -T$(TEENSY_HARDWARE)/avr/1.58.1/cores
 CXX_FLAGS = -c -O2 -g -Wall -ffunction-sections -fdata-sections -nostdlib -MMD -std=gnu++14 -fno-exceptions -fpermissive -fno-rtti -fno-threadsafe-statics -felide-constructors -Wno-error=narrowing -mthumb -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -D__IMXRT1062__ -DTEENSYDUINO=158 -DARDUINO=10607 -DARDUINO_TEENSY41 -DF_CPU=600000000 -DUSB_SERIAL_HID -DLAYOUT_US_ENGLISH
 
 CC_FLAGS = -c -O2 -g -Wall -ffunction-sections -fdata-sections -nostdlib -MMD -mthumb -mcpu=cortex-m7 -mfloat-abi=hard -mfpu=fpv5-d16 -D__IMXRT1062__ -DTEENSYDUINO=158 -DARDUINO=10607 -DARDUINO_TEENSY41 -DF_CPU=600000000 -DUSB_SERIAL_HID -DLAYOUT_US_ENGLISH
+
+OBJCOPY_FLAGS = -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0
 
 LIB_SRC = FastLED/src SPI OctoWS2811
 
@@ -48,7 +52,7 @@ CORE_C_SOURCES = $(wildcard $(TEENSY4_CORE)/*.c)
 LIB_SOURCES = $(FASTLED_SOURCES) $(SPI_SOURCES) $(OCTOWS2811_SOURCES)
 SOURCES = $(wildcard *.cpp)
 
-all: firmware.elf
+all: build/firmware.hex
 
 build/pch/Arduino.h.gch:
 	mkdir -p $(@D)
@@ -78,8 +82,14 @@ build/%.o: %.cpp $(HEADERS) build/pch/Arduino.h.gch
 
 TARGETS = $(patsubst %.cpp,build/%.o,$(SOURCES)) $(patsubst %.cpp,build/libraries/%.o,$(LIB_SOURCES)) build/core/core.a
 
-firmware.elf: $(TARGETS)
+build/firmware.elf: $(TARGETS)
 	$(CC) $(LINK_FLAGS) -o $@ $(TARGETS) build/core/core.a -Lbuild/ -larm_cortexM7lfsp_math -lm -lstdc++
+
+build/firmware.hex: build/firmware.elf
+	$(OBJCOPY) -O ihex -R .eeprom $< $@
+
+upload: build/firmware.hex
+	teensy_loader_cli --mcu=TEENSY41 -w build/firmware.hex
 
 clean:
 	rm -rf build/
