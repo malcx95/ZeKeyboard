@@ -61,16 +61,15 @@ build/pch/Arduino.h.gch:
 build/core/%.cpp.o: %.cpp $(CORE_HEADERS)
 	mkdir -p $(@D)
 	$(CXX) $(CXX_FLAGS) $(INCLUDE_LIBS) -c $< -o $@
-	$(AR) rcs build/core/core.a $@
 
 build/core/%.c.o: %.c $(CORE_HEADERS)
 	mkdir -p $(@D)
 	$(CC) $(CC_FLAGS) -I$(TEENSY4_CORE) -c $< -o $@
-	$(AR) rcs build/core/core.a $@
 
 CORE_C_TARGETS =  $(patsubst %.c,build/core/%.c.o,$(CORE_C_SOURCES))
 CORE_CPP_TARGETS =  $(patsubst %.cpp,build/core/%.cpp.o,$(CORE_CPP_SOURCES))
 build/core/core.a: $(CORE_CPP_TARGETS) $(CORE_C_TARGETS)
+	$(AR) rcs $@ $(CORE_CPP_TARGETS) $(CORE_C_TARGETS)
 
 build/libraries/%.o: %.cpp $(LIB_HEADERS) build/pch/Arduino.h.gch
 	mkdir -p $(@D)
